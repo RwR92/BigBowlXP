@@ -2,15 +2,17 @@ services:
   db:
     restart: unless-stopped
     container_name: big_bowl_db
-    image: mysql:8.0
+    image: mysql:8.4
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 
-    expose:
-      - "3306"
+#    expose:
+#      - "3306"
+    ports:
+      - "127.0.0.1:3307:3306"
     networks:
       - spring-mysql
     volumes:
