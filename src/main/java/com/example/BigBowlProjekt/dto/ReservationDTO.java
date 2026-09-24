@@ -1,6 +1,7 @@
 package com.example.BigBowlProjekt.dto;
 
 import com.example.BigBowlProjekt.model.Lane;
+import com.example.BigBowlProjekt.model.Reservation;
 import com.example.BigBowlProjekt.model.ReservationType;
 
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ public record ReservationDTO(
     ReservationType type,
     LocalDateTime startTime,
     LocalDateTime endTime,
+    List<Reservation> reservations,
     List<Lane> lanes,
     Integer guests
 ) {}

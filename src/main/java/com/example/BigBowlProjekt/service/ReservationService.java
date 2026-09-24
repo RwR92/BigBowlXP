@@ -40,6 +40,11 @@ public class ReservationService {
     }
 
     public List<ReservationDTO> getAllReservations() {
+        List<Reservation> reservations = reservationRepository.findAll();
+        List<ReservationDTO> reservationDTOs = new ArrayList<>();
+        for (Reservation reservation : reservations) {
+            reservationDTOs.add()
+        }
     }
 
     @Transactional
