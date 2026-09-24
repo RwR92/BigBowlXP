@@ -1,5 +1,6 @@
 package com.example.BigBowlProjekt.service;
 
+import com.example.BigBowlProjekt.model.Employee;
 import com.example.BigBowlProjekt.model.WorkingShift;
 import com.example.BigBowlProjekt.repository.EmployeeRepository;
 import com.example.BigBowlProjekt.repository.WorkingShiftRepository;
@@ -17,12 +18,12 @@ public class WorkingShiftService {
         this.workingShiftRepository = workingShiftRepository;
     }
 
-    public WorkingShift getAllWorkingShiftsByWeek(LocalDate date) {
-        return WorkingShiftRepository.getAllWorkingShiftsByWeek(date);
+    public List<WorkingShift> getAllWorkingShifts() {
+        return workingShiftRepository.getAllWorkingShifts();
     }
 
-    public List<WorkingShift> getAllWorkingShifts() {
-        return WorkingShiftRepository.getAllWorkingShifts();
+    public List<Employee> getAllWorkingShiftsByWeek() {
+        return workingShiftRepository.getAllWorkingShiftsByWeek(workingShiftId);
     }
 
 }

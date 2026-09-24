@@ -6,6 +6,7 @@ import com.example.BigBowlProjekt.service.EmployeeService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -16,12 +17,12 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    public Employee getEmployeesByEmployeeId(Long employeeId) {
-        return EmployeeRepository.getEmployeesByEmployeeId();
+    public List<Employee> getEmployeesByEmployeeId(Long employeeId) {
+        return employeeRepository.getEmployeesByEmployeeId(employeeId);
     }
 
     public List<Employee> getAllEmployees() {
-        return EmployeeRepository.getAllEmployees();
+        return employeeRepository.getAllEmployees();
     }
 
 }

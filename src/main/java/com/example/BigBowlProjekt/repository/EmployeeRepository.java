@@ -1,20 +1,15 @@
 package com.example.BigBowlProjekt.repository;
 
 import com.example.BigBowlProjekt.model.Employee;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class EmployeeRepository {
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
-    public Employee getEmployeesByEmployeeId(){
+    List<Employee> getEmployeesByEmployeeId(Long employeeId);
 
-        return employee;
-    }
-
-    public List<Employee> getAllEmployees() {
-
-        return List<Employee>;
-    }
+    List<Employee> getAllEmployees();
 }
