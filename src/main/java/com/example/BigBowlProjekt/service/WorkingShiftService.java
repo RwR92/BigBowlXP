@@ -22,8 +22,8 @@ public class WorkingShiftService {
         return workingShiftRepository.getAllWorkingShifts();
     }
 
-    public List<Employee> getAllWorkingShiftsByWeek() {
-        return workingShiftRepository.getAllWorkingShiftsByWeek(workingShiftId);
+    public List<WorkingShift> getAllWorkingShiftsByWeek(Long workingShiftId, LocalDate date) {
+        return workingShiftRepository.getAllWorkingShiftsByWeek(workingShiftId, date);
     }
 
 }
