@@ -1,16 +1,17 @@
 package com.example.BigBowlProjekt.dto;
 
 import com.example.BigBowlProjekt.model.Lane;
+import com.example.BigBowlProjekt.model.Reservation;
+import com.example.BigBowlProjekt.model.ReservationType;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record Reservation(
+public record ReservationDTO(
     Long id,
-    List<Lane> lanes,
+    ReservationType type,
     LocalDateTime startTime,
     LocalDateTime endTime,
-    Integer guest
-) {
-}
+    List<Lane> lanes,
+    Integer guests
+) {}
