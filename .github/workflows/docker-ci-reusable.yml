@@ -1,4 +1,28 @@
-name: docker-ci-reusable.yml
+name: Docker CI reusable
+
 on:
+  workflow_call:
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Test container
+        run: |
+          # Run the container in detached mode
+          docker compose up -d
+          
+          # Wait for a few seconds to ensure the container is up and running
+          sleep 40
+          
+          # Test the application endpoint 
+          curl -f http://localhost:3307/actuator/health || exit 1
+          
+          # Stop and remove the container
+          docker compose down
