@@ -1,6 +1,7 @@
 package com.example.BigBowlProjekt.service;
 
 import com.example.BigBowlProjekt.dto.ReservationDTO;
+import com.example.BigBowlProjekt.mapper.ReservationMapper;
 import com.example.BigBowlProjekt.model.Customer;
 import com.example.BigBowlProjekt.model.Lane;
 import com.example.BigBowlProjekt.model.Reservation;
@@ -42,9 +43,12 @@ public class ReservationService {
     public List<ReservationDTO> getAllReservations() {
         List<Reservation> reservations = reservationRepository.findAll();
         List<ReservationDTO> reservationDTOs = new ArrayList<>();
+
         for (Reservation reservation : reservations) {
-            reservationDTOs.add()
+            reservationDTOs.add(ReservationMapper.toDTO(reservation));
         }
+
+        return reservationDTOs;
     }
 
     @Transactional

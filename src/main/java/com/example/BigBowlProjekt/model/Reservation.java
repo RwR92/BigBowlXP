@@ -28,7 +28,6 @@ public class Reservation {
             inverseJoinColumns = @JoinColumn(name = "lane_id")
     )
 
-    private List<Reservation> reservations = new ArrayList<>();
     private List<Lane> lanes = new ArrayList<>();
     private Integer guests;
 
@@ -39,12 +38,11 @@ public class Reservation {
     public  Reservation() {
 
 }
-    public Reservation(ReservationType type, LocalDateTime startTime, LocalDateTime endTime, List<Reservation> reservations,
+    public Reservation(ReservationType type, LocalDateTime startTime, LocalDateTime endTime,
                        List<Lane> lanes, Integer guests) {
         this.type = type;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.reservations = reservations;
         this.lanes = lanes;
         this.guests = guests;
     }
@@ -89,14 +87,6 @@ public class Reservation {
     }
     public void setId(long id) {
         this.id = id;
-    }
-
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
     }
 }
 

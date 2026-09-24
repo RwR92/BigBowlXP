@@ -12,7 +12,6 @@ public record ReservationDTO(
     ReservationType type,
     LocalDateTime startTime,
     LocalDateTime endTime,
-    List<Reservation> reservations,
     List<Lane> lanes,
     Integer guests
 ) {}
