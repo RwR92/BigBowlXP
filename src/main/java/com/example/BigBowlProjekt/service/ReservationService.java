@@ -5,6 +5,7 @@ import com.example.BigBowlProjekt.model.Lane;
 import com.example.BigBowlProjekt.model.Reservation;
 import com.example.BigBowlProjekt.model.ReservationType;
 import com.example.BigBowlProjekt.repository.CustomerRepository;
+import com.example.BigBowlProjekt.repository.LaneRepository;
 import com.example.BigBowlProjekt.repository.ReservationRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -39,21 +40,52 @@ public class ReservationService {
     }
 
     @Transactional
-    public Reservation createReservation(ReservationType reservationType, List<long> laneIds,
-                                         LocalDateTime startTime, int hours) {
+    public Reservation createResevation(ReservationType type, List<Long> laneIds,
+                                 LocalDateTime startTime, int hours) {
+
         validateLaneCount(laneIds);
         validateDuration(hours);
 
-        LocalDateTime endtime = startTime.plusHours(hours);
 
-        List<Lane> lanes = laneRepository.findAllByID(laneIds);
+        LocalDateTime endTime = startTime.plusHours(hours);
+
+        List<Lane> lanes = laneRepository.findAllById(laneIds);
         if (lanes.size() != laneIds.size()) {
             throw new IllegalArgumentException("En eller flere baner findes ikke.");
-
         }
-        private void validateLaneCount(List<Long> laneIds){
-            if (laneIds == null || laneIds.size() < MIN_LANES || laneIds.size() > MAX_LANES) {
-                throw new IllegalArgumentException("Du kan booke mellem 1 eller 4 baner. ");
+        validateNoOverlap(laneIds, startTime, endTime);
+        Reservation reservation = new Reservation(type, startTime, endTime, lanes, null);
+        return reservationRepository.save(reservation);
+    }
+
+
+    private void validateLaneCount(List<Long> laneIds) {
+        if (laneIds == null || laneIds.size() < MIN_LANES || laneIds.size() > MAX_LANES) {
+            throw new IllegalArgumentException("Du kan booke mellem 1 og 4 baner.");
+        }
+    }
+
+    private void validateDuration(int hours) {
+        if (hours < MIN_HOURS || hours > MAX_HOURS) {
+            throw new IllegalArgumentException("Du kan booke i 1 eller 2 timer.");
+        }
+    }
+    private void validateNoOverlap(List<Long> laneIds, LocalDateTime startTime, LocalDateTime endTime) {
+        List<Reservation> allReservations = reservationRepository.findAll();
+
+        for (Reservation existing : allReservations) {
+
+            // Overlapper tidsrummet?
+            if (!existing.overlaps(startTime, endTime)) {
+                continue;
+            }
+
+            // Bruger den eksisterende reservation en af de samme baner?
+            for (Lane lane : existing.getLanes()) {
+                if (laneIds.contains(lane.getId())) {
+                    throw new IllegalArgumentException("Bane " + lane.getLaneNumber()
+                            + " er allerede booket i tidsrummet.");
+                }
             }
         }
     }
