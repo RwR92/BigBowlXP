@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.BigBowlProjekt.model.Employee;
-import com.example.BigBowlProjekt.repository.EmployeeRepsitory;
+import com.example.BigBowlProjekt.repository.EmployeeRepository;
 import com.example.BigBowlProjekt.service.EmployeeService;
 import com.example.BigBowlProjekt.service.WorkingShiftService;
 import java.util.List;
@@ -15,9 +15,11 @@ import java.util.List;
 public class AdminEmployeeController {
 
     private final EmployeeService employeeService;
+    private final WorkingShiftService workingShiftService;
 
-    public AdminEmployeeController(EmployeeService employeeService){
+    public AdminEmployeeController(EmployeeService employeeService, WorkingShiftService workingShiftService){
         this.employeeService = employeeService;
+        this.workingShiftService = workingShiftService;
     }
     
 
@@ -28,7 +30,7 @@ public class AdminEmployeeController {
 
     @GetMapping("/working-shift/display")
     public List<WorkingShift> showAllWorkingShifts() {
-        return WorkingShiftService.getAllWorkingShifts();
+        return workingShiftService.getAllWorkingShifts();
     }
 
 }   

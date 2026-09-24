@@ -10,12 +10,18 @@ import java.util.List;
 @Service
 public class EmployeeService {
 
-    public Employee getAllEmployeesByEmployeeId(Long employeeId) {
-        return EmployeeRepository.getAllEmployeesByEmployeeId(employee);
+    private final EmployeeRepository employeeRepository;
+
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
+
+    public Employee getEmployeesByEmployeeId(Long employeeId) {
+        return EmployeeRepository.getEmployeesByEmployeeId();
     }
 
     public List<Employee> getAllEmployees() {
-        return EmployeeRepository.getAllEmployees(Employee);
+        return EmployeeRepository.getAllEmployees();
     }
 
 }
