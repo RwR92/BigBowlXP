@@ -16,7 +16,7 @@ jobs:
       - name: Test container
         run: |
           # Run the container in detached mode
-          docker compose up -d
+          docker compose -f compose.test.yml up -d
           
           # Wait for a few seconds to ensure the container is up and running
           sleep 40
