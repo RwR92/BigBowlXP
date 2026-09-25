@@ -1,32 +1,16 @@
 package com.example.BigBowlProjekt.service;
 
-import com.example.BigBowlProjekt.model.Employee;
-import com.example.BigBowlProjekt.repository.EmployeeRepository;
-import com.example.BigBowlProjekt.service.EmployeeService;
+import com.example.BigBowlProjekt.dto.EmployeeDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeService {
+public interface EmployeeService {
 
-    private final EmployeeRepository employeeRepository;
+    List<EmployeeDTO> getAllEmployees();
 
-    public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
-
-    public List<Employee> getEmployeesByEmployeeId(Long employeeId) {
-        return employeeRepository.getEmployeesByEmployeeId(employeeId);
-    }
-
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.getAllEmployees();
-    }
-
-    public List<Employee> getEmployeeByRole(String role){
-        return employeeRepository.getEmployeeByRole(role);
-    }
+    Optional<EmployeeDTO> getEmployeeByRole();
 
 }

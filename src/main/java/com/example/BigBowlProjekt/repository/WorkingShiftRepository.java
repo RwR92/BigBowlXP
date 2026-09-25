@@ -12,8 +12,6 @@ import java.util.List;
 @Repository
 public interface WorkingShiftRepository extends JpaRepository<WorkingShift, Long> {
 
-    List<WorkingShift> getAllWorkingShifts();
-
     List<WorkingShift> getAllWorkingShiftsByWeek(Long workingShiftId, LocalDate date);
 
 }

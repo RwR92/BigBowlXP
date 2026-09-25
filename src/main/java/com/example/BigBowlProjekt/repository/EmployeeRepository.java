@@ -9,9 +9,9 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
-    List<Employee> getEmployeesByEmployeeId(Long employeeId);
+    //der skal kun laves metoder for ikke-standart java metoder
 
-    List<Employee> getAllEmployees();
+    List<Employee> getEmployeeByEmployeeId(Long employeeId);
 
     List<Employee> getEmployeeByRole(String role);
 }

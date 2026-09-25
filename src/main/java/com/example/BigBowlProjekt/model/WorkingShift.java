@@ -1,41 +1,41 @@
 package com.example.BigBowlProjekt.model;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+@Entity
+@JsonPropertyOrder({"id, date, startTime, endTime"})
 public class WorkingShift {
 
-    private Long WorkingShiftId;
-    private Long employeeId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
 
-
-    // Read
-    public WorkingShift(Long workingShiftId, Long employeeId, LocalDate date, LocalTime startTime, LocalTime endTime) {
-        this.WorkingShiftId = workingShiftId;
-        this.employeeId = employeeId;
+    public WorkingShift(LocalDate date, LocalTime startTime, LocalTime endTime) {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
-    } 
-    // Create
-    public WorkingShift(Long employeeId, LocalDate date, LocalTime startTime, LocalTime endTime) {
-        this.employeeId = employeeId;
-        this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
-    } 
-
-
-    public Long getWorkingShiftId() {
-        return WorkingShiftId;
     }
 
-    public Long getEmployeeId() {
-        return employeeId;
+    public WorkingShift() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDate getDate() {
