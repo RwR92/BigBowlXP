@@ -3,13 +3,10 @@ package com.example.BigBowlProjekt.dto;
 import com.example.BigBowlProjekt.model.ReservationType;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-public record ReservationDTO(
+public record ReservationSummaryDTO(
         Long id,
         ReservationType type,
         LocalDateTime startTime,
-        LocalDateTime endTime,
-        List<LaneSummaryDTO> lanes,
-        Integer guests
+        LocalDateTime endTime
 ) {}

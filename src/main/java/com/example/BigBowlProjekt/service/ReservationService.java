@@ -1,26 +1,26 @@
 package com.example.BigBowlProjekt.service;
 
+import com.example.BigBowlProjekt.dto.LaneSummaryDTO;
 import com.example.BigBowlProjekt.dto.ReservationDTO;
 import com.example.BigBowlProjekt.mapper.ReservationMapper;
-import com.example.BigBowlProjekt.model.Customer;
 import com.example.BigBowlProjekt.model.Lane;
 import com.example.BigBowlProjekt.model.Reservation;
-import com.example.BigBowlProjekt.model.ReservationType;
 import com.example.BigBowlProjekt.repository.CustomerRepository;
 import com.example.BigBowlProjekt.repository.LaneRepository;
 import com.example.BigBowlProjekt.repository.ReservationRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
 
 @Service
 public class ReservationService {
+
     private static final int MIN_LANES = 1;
     private static final int MAX_LANES = 4;
     private static final int MIN_HOURS = 1;
@@ -52,25 +52,40 @@ public class ReservationService {
         return reservationDTOs;
     }
 
+    public Optional<ReservationDTO> getReservationById(Long id) {
+        return reservationRepository.findById(id).map(ReservationMapper::toDTO);
+    }
+
     @Transactional
-    public Reservation createReservation(ReservationType type, List<Long> laneIds,
-                                        LocalDateTime startTime, int hours) {
+    public ReservationDTO createReservation(ReservationDTO dto) {
+        List<Long> laneIds = extractLaneIds(dto.lanes());
 
         validateLaneCount(laneIds);
-        validateDuration(hours);
-
-
-        LocalDateTime endTime = startTime.plusHours(hours);
+        validateDuration(dto.startTime(), dto.endTime());
 
         List<Lane> lanes = laneRepository.findAllById(laneIds);
         if (lanes.size() != laneIds.size()) {
             throw new IllegalArgumentException("En eller flere baner findes ikke.");
         }
-        validateNoOverlap(laneIds, startTime, endTime);
-        Reservation reservation = new Reservation(type, startTime, endTime, lanes, null);
-        return reservationRepository.save(reservation);
+
+        validateNoOverlap(laneIds, dto.startTime(), dto.endTime());
+
+        Reservation reservation = new Reservation(dto.type(), dto.startTime(), dto.endTime(), lanes, dto.guests());
+        Reservation saved = reservationRepository.save(reservation);
+        return ReservationMapper.toDTO(saved);
     }
 
+    public void deleteReservation(Long id) {
+        reservationRepository.deleteById(id);
+    }
+
+    private List<Long> extractLaneIds(List<LaneSummaryDTO> laneSummaries) {
+        List<Long> ids = new ArrayList<>();
+        for (LaneSummaryDTO summary : laneSummaries) {
+            ids.add(summary.id());
+        }
+        return ids;
+    }
 
     private void validateLaneCount(List<Long> laneIds) {
         if (laneIds == null || laneIds.size() < MIN_LANES || laneIds.size() > MAX_LANES) {
@@ -78,8 +93,13 @@ public class ReservationService {
         }
     }
 
-    private void validateDuration(int hours) {
-        if (hours < MIN_HOURS || hours > MAX_HOURS) {
+    private void validateDuration(LocalDateTime startTime, LocalDateTime endTime) {
+        if (startTime == null || endTime == null || !endTime.isAfter(startTime)) {
+            throw new IllegalArgumentException("Sluttid skal ligge efter starttid.");
+        }
+
+        long minutes = Duration.between(startTime, endTime).toMinutes();
+        if (minutes != MIN_HOURS * 60 && minutes != MAX_HOURS * 60) {
             throw new IllegalArgumentException("Du kan booke i 1 eller 2 timer.");
         }
     }
@@ -89,20 +109,18 @@ public class ReservationService {
 
         for (Reservation existing : allReservations) {
 
-            //tester im tiden overlapper
+            // Tester om tiden overlapper
             if (!existing.overlaps(startTime, endTime)) {
                 continue;
-
             }
 
-                // Bruger den eksisterende reservation en af de samme baner?
-                for (Lane lane : existing.getLanes()) {
-                    if (laneIds.contains(lane.getId())) {
-                        throw new IllegalArgumentException("Bane " + lane.getLaneNumber()
-                                + " er allerede booket i tidsrummet.");
-                    }
+            // Bruger den eksisterende reservation en af de samme baner?
+            for (Lane lane : existing.getLanes()) {
+                if (laneIds.contains(lane.getId())) {
+                    throw new IllegalArgumentException("Bane " + lane.getLaneNumber()
+                            + " er allerede booket i tidsrummet.");
                 }
             }
         }
     }
-
+}

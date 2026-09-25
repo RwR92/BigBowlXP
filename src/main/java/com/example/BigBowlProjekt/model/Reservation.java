@@ -31,10 +31,6 @@ public class Reservation {
     private List<Lane> lanes = new ArrayList<>();
     private Integer guests;
 
- //   @ManyToMany
-   // @JoinColumn(name = "booking_id")
-   // private Booking booking;
-
     public  Reservation() {
 
 }
@@ -50,41 +46,16 @@ public class Reservation {
         return startTime.isBefore(otherEnd) && endTime.isAfter(otherStart);
     }
 
-    public Integer getGuests() {
-        return guests;
-    }
-    public void setGuests(Integer guests) {
-        this.guests = guests;
-    }
-    public List<Lane> getLanes() {
-        return lanes;
-    }
-    public void setLanes(List<Lane> lanes) {
-        this.lanes = lanes;
-    }
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
-    }
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-    public ReservationType getType() {
-        return type;
-    }
-    public void setType(ReservationType type) {
-        this.type = type;
-    }
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
-}
+    public Long getId() {return id;}
+    public void setId(Long id) {this.id = id;}
+    public ReservationType getType() {return type;}
+    public void setType(ReservationType type) {this.type = type;}
+    public LocalDateTime getStartTime() {return startTime;}
+    public void setStartTime(LocalDateTime startTime) {this.startTime = startTime;}
+    public LocalDateTime getEndTime() {return endTime;}
+    public void setEndTime(LocalDateTime endTime) {this.endTime = endTime;}
+    public List<Lane> getLanes() {return lanes;}
+    public void setLanes(List<Lane> lanes) {this.lanes = lanes;}
+    public Integer getGuests() {return guests;}
+    public void setGuests(Integer guests) {this.guests = guests;}}
 

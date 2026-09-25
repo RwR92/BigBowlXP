@@ -1,9 +1,6 @@
 package com.example.BigBowlProjekt.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -12,46 +9,29 @@ public class Lane {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String number;
-    private String type;
     private int laneNumber;
+    @Enumerated(EnumType.STRING)
+    private LaneType type;
+    private boolean childFriendly;
 
 
     // Default constructor required by JPA
     public Lane() {}
 
     // Constructor with fields
-    public Lane(Long id, String number, String type) {
-        this.id = id;
-        this.number = number;
+    public Lane(int laneNumber, LaneType type, boolean childFriendly) {
+        this.laneNumber = laneNumber;
         this.type = type;
+        this.childFriendly = childFriendly;
+
+
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public int getLaneNumber() { return  laneNumber; }
-
-    public void setLaneNumber(int laneNumber) { this.laneNumber = laneNumber; }
+    public Long getId() {return id;}
+    public void setId(Long id) {this.id = id;}
+    public int getLaneNumber() {return laneNumber;}
+    public void setLaneNumber(int laneNumber) {this.laneNumber = laneNumber;    }
+    public LaneType getType() {return type;}
+    public void setType(LaneType type) {this.type = type;}
+    public boolean isChildFriendly() {return childFriendly;}
+    public void setChildFriendly(boolean childFriendly) {this.childFriendly = childFriendly;}
 }
