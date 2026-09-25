@@ -53,8 +53,8 @@ public class ReservationService {
     }
 
     @Transactional
-    public Reservation createResevation(ReservationType type, List<Long> laneIds,
-                                 LocalDateTime startTime, int hours) {
+    public Reservation createReservation(ReservationType type, List<Long> laneIds,
+                                        LocalDateTime startTime, int hours) {
 
         validateLaneCount(laneIds);
         validateDuration(hours);
@@ -83,23 +83,26 @@ public class ReservationService {
             throw new IllegalArgumentException("Du kan booke i 1 eller 2 timer.");
         }
     }
+
     private void validateNoOverlap(List<Long> laneIds, LocalDateTime startTime, LocalDateTime endTime) {
         List<Reservation> allReservations = reservationRepository.findAll();
 
         for (Reservation existing : allReservations) {
 
-            // Overlapper tidsrummet?
+            //tester im tiden overlapper
             if (!existing.overlaps(startTime, endTime)) {
                 continue;
+
             }
 
-            // Bruger den eksisterende reservation en af de samme baner?
-            for (Lane lane : existing.getLanes()) {
-                if (laneIds.contains(lane.getId())) {
-                    throw new IllegalArgumentException("Bane " + lane.getLaneNumber()
-                            + " er allerede booket i tidsrummet.");
+                // Bruger den eksisterende reservation en af de samme baner?
+                for (Lane lane : existing.getLanes()) {
+                    if (laneIds.contains(lane.getId())) {
+                        throw new IllegalArgumentException("Bane " + lane.getLaneNumber()
+                                + " er allerede booket i tidsrummet.");
+                    }
                 }
             }
         }
     }
-}
+

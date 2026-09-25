@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class Lane {
     @Id
@@ -12,6 +14,8 @@ public class Lane {
     private Long id;
     private String number;
     private String type;
+    private int laneNumber;
+
 
     // Default constructor required by JPA
     public Lane() {}
@@ -46,4 +50,8 @@ public class Lane {
     public void setType(String type) {
         this.type = type;
     }
+
+    public int getLaneNumber() { return  laneNumber; }
+
+    public void setLaneNumber(int laneNumber) { this.laneNumber = laneNumber; }
 }

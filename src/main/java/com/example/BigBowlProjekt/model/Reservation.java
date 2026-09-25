@@ -46,11 +46,9 @@ public class Reservation {
         this.lanes = lanes;
         this.guests = guests;
     }
-
- //   public Booking getBooking() {
- //       return booking;
- //   public void setBooking(Booking booking) {
-//this.booking = booking;
+    public boolean overlaps(LocalDateTime otherStart, LocalDateTime otherEnd) {
+        return startTime.isBefore(otherEnd) && endTime.isAfter(otherStart);
+    }
 
     public Integer getGuests() {
         return guests;
