@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservations</title>
+</head>
+<body>
+
+<h1>Reservations</h1>
+
+<!-- Reservations table -->
+<div class="reservations">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Guests</th>
+            <th>Type</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="reservation : ${reservations}">
+            <td th:text="${reservation.id}"></td>
+            <td th:text="${reservation.startTime}"></td>
+            <td th:text="${reservation.endTime}"></td>
+            <td th:text="${reservation.guests}"></td>
+            <td th:text="${reservation.type}"></td>
+        </tr>
+
+        <tr th:if="${#lists.isEmpty(reservations)}">
+            <td colspan="5">No reservations found.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Add reservation form -->
+<div class="reservation-form">
+
+    <h2>Add Reservation</h2>
+
+    <form th:action="@{/reservations}" method="post">
+
+        <div>
+            <label for="startTime">Start Time</label>
+            <input
+                    type="datetime-local"
+                    id="startTime"
+                    name="startTime"
+                    required>
+        </div>
+
+        <div>
+            <label for="endTime">End Time</label>
+            <input
+                    type="datetime-local"
+                    id="endTime"
+                    name="endTime"
+                    required>
+        </div>
+
+        <div>
+            <label for="guests">Guests</label>
+            <input
+                    type="number"
+                    id="guests"
+                    name="guests"
+                    min="1"
+                    required>
+        </div>
+
+        <div>
+            <label for="type">Type</label>
+            <input
+                    type="text"
+                    id="type"
+                    name="type"
+                    required>
+        </div>
+
+        <button type="submit">Add Reservation</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
