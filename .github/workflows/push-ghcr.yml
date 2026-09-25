@@ -3,7 +3,7 @@ name: push to GHCR
 
 on:
   push:
-    branches: [main]
+    branches: [main, GitHub-actions] # Fjern GitHub-actions fra ved merge til main
   workflow_dispatch:
 
 
