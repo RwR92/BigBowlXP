@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
-@JsonPropertyOrder({"id, date, startTime, endTime"})
+@JsonPropertyOrder({"id", "date", "startTime", "endTime"})
 public class WorkingShift {
 
     @Id

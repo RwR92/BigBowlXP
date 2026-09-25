@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-@JsonPropertyOrder({"id, firstName, lastName, phoneNumber, role"})
+@JsonPropertyOrder({"id", "firstName", "lastName", "phoneNumber", "role"})
 public class Employee {
 
     @Id
