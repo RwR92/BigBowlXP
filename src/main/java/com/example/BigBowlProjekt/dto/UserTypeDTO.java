@@ -1,4 +1,4 @@
 package com.example.BigBowlProjekt.dto;
 
-public record UserTypeDTO(String type) {
+public record UserTypeDTO(String userType) {
 }

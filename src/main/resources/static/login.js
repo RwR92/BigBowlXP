@@ -15,23 +15,24 @@ async function handleLoginSubmit(e) {
 
     const formData = {username, password};
 
-    const userType = tryLogin(formData);
-    console.log(userType.toString())
-    if(userType.toString() === "admin"){
+    const response = await tryLogin(formData);
+    console.log(response)
+    console.log(response.userType);
+    if(response.userType === "admin"){
         window.location.href = "test-user-page.html";
-    } else if (userType.toString() === "employee"){
+    } else if (response === "employee"){
         window.location.href = "login.html";
     }
+    console.log(response+" "+ response.userType);
 }
 
 async function tryLogin(loginInfo){
     const response= await fetch(BASE_URL_LOGIN, {
-        method: "GET",
+        method: "POST",
         headers: {
             "Content-type": "application/json"
         },
         body:   JSON.stringify(loginInfo)
     });
     return await response.json();
-
 }

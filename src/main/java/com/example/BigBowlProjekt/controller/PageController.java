@@ -23,7 +23,7 @@ public class PageController {
     } */
 
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public UserTypeDTO login(@RequestBody LoginInfoDTO loginInfo){
         return loginService.login(loginInfo);
     }
