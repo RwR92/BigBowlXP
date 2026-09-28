@@ -2,9 +2,11 @@ package com.example.BigBowlProjekt.service;
 
 import com.example.BigBowlProjekt.dto.WorkingShiftDTO;
 import com.example.BigBowlProjekt.repository.WorkingShiftRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class WorkingShiftImpl implements WorkingShiftService {
 
     private final WorkingShiftRepository workingShiftRepository;

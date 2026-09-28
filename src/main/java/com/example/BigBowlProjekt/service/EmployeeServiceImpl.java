@@ -1,11 +1,14 @@
 package com.example.BigBowlProjekt.service;
 
 import com.example.BigBowlProjekt.dto.EmployeeDTO;
+import com.example.BigBowlProjekt.model.Employee;
 import com.example.BigBowlProjekt.repository.EmployeeRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
@@ -15,8 +18,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<EmployeeDTO> getAllEmployees() {
-        return List.of();
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
     }
 
     @Override
