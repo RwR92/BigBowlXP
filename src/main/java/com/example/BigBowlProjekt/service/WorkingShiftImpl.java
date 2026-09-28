@@ -1,6 +1,7 @@
 package com.example.BigBowlProjekt.service;
 
 import com.example.BigBowlProjekt.dto.WorkingShiftDTO;
+import com.example.BigBowlProjekt.model.WorkingShift;
 import com.example.BigBowlProjekt.repository.WorkingShiftRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class WorkingShiftImpl implements WorkingShiftService {
     }
 
     @Override
-    public List<WorkingShiftDTO> getAllWorkingShifts() {
+    public List<WorkingShift> getAllWorkingShifts() {
         return List.of();
     }
 }

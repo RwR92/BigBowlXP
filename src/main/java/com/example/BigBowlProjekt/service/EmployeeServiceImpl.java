@@ -23,7 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Optional<EmployeeDTO> getEmployeeByRole() {
+    public Optional<Employee> getEmployeeByRole() {
         return Optional.empty();
     }
 }

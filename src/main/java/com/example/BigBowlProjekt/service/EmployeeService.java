@@ -12,6 +12,6 @@ public interface EmployeeService {
 
     List<Employee> getAllEmployees();
 
-    Optional<EmployeeDTO> getEmployeeByRole();
+    Optional<Employee> getEmployeeByRole();
 
 }
