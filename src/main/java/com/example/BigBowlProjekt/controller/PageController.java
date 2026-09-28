@@ -16,14 +16,14 @@ public class PageController {
         this.loginService = loginService;
     }
 
-    @GetMapping
+    /*@GetMapping
     public String loginPage(){
 
         return "login";
-    }
+    } */
 
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public UserTypeDTO login(@RequestBody LoginInfoDTO loginInfo){
         return loginService.login(loginInfo);
     }

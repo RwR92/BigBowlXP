@@ -16,6 +16,7 @@ async function handleLoginSubmit(e) {
     const formData = {username, password};
 
     const userType = tryLogin(formData);
+    console.log(userType.toString())
     if(userType.toString() === "admin"){
         window.location.href = "test-user-page.html";
     } else if (userType.toString() === "employee"){
