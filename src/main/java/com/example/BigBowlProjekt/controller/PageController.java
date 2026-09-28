@@ -1,6 +1,9 @@
 package com.example.BigBowlProjekt.controller;
 
+import com.example.BigBowlProjekt.dto.LoginInfoDTO;
+import com.example.BigBowlProjekt.dto.UserTypeDTO;
 import com.example.BigBowlProjekt.service.LoginService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,8 +24,7 @@ public class PageController {
 
 
     @PostMapping("/login")
-    public String login(@RequestParam String username,
-                        @RequestParam String password){
-        return loginService.login(username, password);
+    public UserTypeDTO login(@RequestBody LoginInfoDTO loginInfo){
+        return loginService.login(loginInfo);
     }
 }
