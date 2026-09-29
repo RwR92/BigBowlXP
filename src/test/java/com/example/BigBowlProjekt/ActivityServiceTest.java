@@ -1,25 +1,21 @@
 package com.example.BigBowlProjekt;
 
 import com.example.BigBowlProjekt.dto.LaneSummaryDTO;
-import com.example.BigBowlProjekt.dto.ReservationDTO;
+import com.example.BigBowlProjekt.dto.ActivityDTO;
 import com.example.BigBowlProjekt.model.Lane;
 import com.example.BigBowlProjekt.model.LaneType;
-import com.example.BigBowlProjekt.model.Reservation;
-import com.example.BigBowlProjekt.model.ReservationType;
+import com.example.BigBowlProjekt.model.ActivityType;
 import com.example.BigBowlProjekt.repository.CustomerRepository;
 import com.example.BigBowlProjekt.repository.LaneRepository;
-import com.example.BigBowlProjekt.repository.ReservationRepository;
-import com.example.BigBowlProjekt.service.ReservationService;
-import com.mysql.cj.xdevapi.AddStatement;
+import com.example.BigBowlProjekt.repository.ActivityRepository;
+import com.example.BigBowlProjekt.service.ActivityService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import com.mysql.cj.xdevapi.AddStatement;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.DayOfWeek;
@@ -28,10 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
-class ReservationServiceTest {
+class ActivityServiceTest {
 
     @Mock
-    private ReservationRepository reservationRepository;
+    private ActivityRepository activityRepository;
 
     @Mock
     private CustomerRepository customerRepository;
@@ -40,7 +36,7 @@ class ReservationServiceTest {
     private LaneRepository laneRepository;
 
     @InjectMocks
-    private ReservationService reservationService;
+    private ActivityService activityService;
 
     private Lane lane1;
     private Lane lane2;
@@ -62,12 +58,12 @@ class ReservationServiceTest {
         lane5.setId(5L);
     }
 
-    private ReservationDTO buildDto(List<Lane> lanes, LocalDateTime startDate, LocalDateTime endDate) {
+    private ActivityDTO buildDto(List<Lane> lanes, LocalDateTime startDate, LocalDateTime endDate) {
         List<LaneSummaryDTO> laneSummeries = new ArrayList<>();
         for (Lane lane : lanes) {
             laneSummeries.add(new LaneSummaryDTO(lane.getId(), lane.getLaneNumber(), lane.getType()));
         }
-        return new ReservationDTO(null, ReservationType.BOWLING, startDate, endDate, laneSummeries, null);
+        return new ActivityDTO(null, ActivityType.BOWLING, startDate, endDate, laneSummeries, null);
     }
 
     // hjælpe metode til test
@@ -86,10 +82,10 @@ class ReservationServiceTest {
         LocalDateTime start = nextSaturday().withHour(18).withMinute(0);
         LocalDateTime end = start.plusHours(1);
 
-        ReservationDTO dto = buildDto(fiveLanes, start, end);
+        ActivityDTO dto = buildDto(fiveLanes, start, end);
 
         try {
-            reservationService.createReservation(dto);
+            activityService.createReservation(dto);
             fail("Forventede en IllegalArgumentException, men der blev ikke kastet nogen.");
         } catch (IllegalArgumentException exception) {
             assertEquals("Du kan booke mellem 1 og 4 baner.", exception.getMessage());
@@ -102,9 +98,9 @@ class ReservationServiceTest {
         LocalDateTime start = nextSaturday().withHour(18).withMinute(0);
         LocalDateTime end = start.plusHours(3);
 
-        ReservationDTO dto = buildDto(oneLanes, start, end);
+        ActivityDTO dto = buildDto(oneLanes, start, end);
         try {
-            reservationService.createReservation(dto);
+            activityService.createReservation(dto);
             fail("Forventede en IllegalArgumentException, men der blev ikke kastet nogen.");
         }catch (IllegalArgumentException exception){
             assertEquals("Du kan booke i 1 eller 2 timer.", exception.getMessage());
