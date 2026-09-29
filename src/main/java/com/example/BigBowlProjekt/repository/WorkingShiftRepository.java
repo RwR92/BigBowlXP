@@ -9,8 +9,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface WorkingShiftRepository extends JpaRepository<WorkingShiftDTO, Long> {
+public interface WorkingShiftRepository extends JpaRepository<WorkingShift, Long> {
 
-    List<WorkingShiftDTO> getAllWorkingShiftsByWeek(LocalDate startDate, LocalDate endDate);
+    List<WorkingShift> getAllWorkingShiftsByWeek(LocalDate startDate, LocalDate endDate);
 
 }

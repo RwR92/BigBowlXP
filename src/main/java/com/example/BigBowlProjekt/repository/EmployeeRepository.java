@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<EmployeeDTO, Long> {
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     //der skal kun laves metoder for ikke-standart java metoder
 
-    List<EmployeeDTO> getEmployeeByEmployeeId(Long employeeId);
+    List<Employee> getEmployeeByEmployeeId(Long employeeId);
 
-    List<EmployeeDTO> getEmployeeByRole(String role);
+    List<Employee> getEmployeeByRole(String role);
 }
