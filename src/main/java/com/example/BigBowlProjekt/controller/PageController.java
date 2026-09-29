@@ -4,6 +4,7 @@ import com.example.BigBowlProjekt.dto.LoginInfoDTO;
 import com.example.BigBowlProjekt.dto.UserTypeDTO;
 import com.example.BigBowlProjekt.service.LoginService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,8 +37,6 @@ public class PageController {
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(HttpSession currsession) {
         HttpSession session = currsession;
-        String userRole = session.getAttribute("user").toString();
-        String user = HttpHelper.authUser(userRole);
         if (session != null) {
             session.invalidate();
         }
@@ -47,7 +46,8 @@ public class PageController {
     @GetMapping("/auth")
     public ResponseEntity<UserTypeDTO> auth(HttpSession session) {
         UserTypeDTO user = (UserTypeDTO) session.getAttribute("user");
-
-        return ResponseEntity.ok(user);
+        UserTypeDTO newUser = new UserTypeDTO(HttpHelper.authUser(user));
+        System.out.println(newUser);
+        return ResponseEntity.status(HttpStatus.OK).body(newUser);
     }
 }

@@ -6,12 +6,25 @@ async function initApp() {
 }
 
 async function handleRoute(){
-   const response = await fetch("api/auth", {
+   const response = await fetch("/api/auth", {
        method: "GET",
        headers: {
            "Content-type": "application/json"
        },
        body: JSON.stringify()
    })
-    window.location.href = "login.html";
+
+    const user = await response.json();
+   console.log(user);
+
+    if(response.ok){
+        if(user.userType === "admin"){
+            window.location.href = "test-user-page.html";
+        } else if (user.userType === "employee"){
+            window.location.href = "login.html";
+        } else {
+            window.location.href = "login.html";
+        }
+    }
+
 }

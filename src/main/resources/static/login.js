@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", initApp);
 const BASE_URL_LOGIN = "/api/login";
-console.log(sessionStorage.getItem("user"))
 const formData = [];
 
 async function initApp() {

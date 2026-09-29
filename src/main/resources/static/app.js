@@ -10,7 +10,3 @@ const response = await fetch(BASE_URL_LOGOUT,{ method: "POST"});
 
 return window.location.href = "login.html";
 }
-
-async function authUser(){
-
-}
