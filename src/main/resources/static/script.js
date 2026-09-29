@@ -1,4 +1,5 @@
 const API_DATABASE = "/api/employees";
+let employees = []
 
 document.addEventListener("DOMContentLoaded", initApp);
 
@@ -38,10 +39,64 @@ function displayEmployees(employees) {
 async function initApp() {
 
     try {
-        const employees = await fetchEmployees();
+        employees = await fetchEmployees();
         displayEmployees(employees);
 
     } catch (error) {
         console.error("Could not load employees", error);
+
+
     }
+    document.querySelector("#employeeTableHeader").addEventListener("click", handleClick);
+
+    document.querySelector("#filterByRole").addEventListener("change", handleDropdown);
+
+}
+
+
+function handleClick(employee) {
+
+    const tableBody = employee.target.closest("th");
+
+    const key = tableBody.getAttribute("data-sort-key");
+
+    if (key === "role") {
+        console.log(key);
+        filterByRole(employees);
+    } else {
+        console.log("not a role");
+    }
+
+}
+
+function handleDropdown(event) {
+    const select = event.target;
+    const key = select.value;
+
+    if (key !== "all") {
+
+        refreshEmployeesAfterSort(checkByRole(employees, key));
+    } else {
+
+        displayEmployees(employees);
+    }
+}
+
+function refreshEmployeesAfterSort(employees) {
+    displayEmployees(employees);
+}
+
+
+function checkByRole(employees, role) {
+
+    const employeeFilterList = [];
+
+    for (const employee of employees) {
+        if (employee.role === role) {
+            employeeFilterList.push(employee);
+
+
+        }
+    }
+    return employeeFilterList;
 }
