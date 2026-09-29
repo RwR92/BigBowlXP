@@ -14,7 +14,7 @@ import java.time.LocalTime;
 public class WorkingShift {
 
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long workingShiftId;
 
     private LocalDate date;
