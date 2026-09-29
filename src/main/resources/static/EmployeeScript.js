@@ -3,6 +3,23 @@ let employees = []
 
 document.addEventListener("DOMContentLoaded", initApp);
 
+async function initApp() {
+
+    try {
+        employees = await fetchEmployees();
+        displayEmployees(employees);
+
+    } catch (error) {
+        console.error("Could not load employees", error);
+
+
+    }
+    document.querySelector("#employeeTableHeader").addEventListener("click", handleClick);
+
+    document.querySelector("#filterByRole").addEventListener("change", handleDropdown);
+
+}
+
 async function fetchEmployees() {
 
     const response = await fetch(`${API_DATABASE}`);
@@ -35,24 +52,6 @@ function displayEmployees(employees) {
 
     });
 }
-
-async function initApp() {
-
-    try {
-        employees = await fetchEmployees();
-        displayEmployees(employees);
-
-    } catch (error) {
-        console.error("Could not load employees", error);
-
-
-    }
-    document.querySelector("#employeeTableHeader").addEventListener("click", handleClick);
-
-    document.querySelector("#filterByRole").addEventListener("change", handleDropdown);
-
-}
-
 
 function handleClick(employee) {
 
