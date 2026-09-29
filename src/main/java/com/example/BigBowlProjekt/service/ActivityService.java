@@ -1,13 +1,13 @@
 package com.example.BigBowlProjekt.service;
 
 import com.example.BigBowlProjekt.dto.LaneSummaryDTO;
-import com.example.BigBowlProjekt.dto.ReservationDTO;
-import com.example.BigBowlProjekt.mapper.ReservationMapper;
+import com.example.BigBowlProjekt.dto.ActivityDTO;
+import com.example.BigBowlProjekt.mapper.ActivityMapper;
+import com.example.BigBowlProjekt.model.Activity;
 import com.example.BigBowlProjekt.model.Lane;
-import com.example.BigBowlProjekt.model.Reservation;
 import com.example.BigBowlProjekt.repository.CustomerRepository;
 import com.example.BigBowlProjekt.repository.LaneRepository;
-import com.example.BigBowlProjekt.repository.ReservationRepository;
+import com.example.BigBowlProjekt.repository.ActivityRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ReservationService {
+public class ActivityService {
 
     private static final int MIN_LANES = 1;
     private static final int MAX_LANES = 4;
@@ -31,33 +31,33 @@ public class ReservationService {
     private static final LocalTime CLUB_END_TIME = LocalTime.of(17, 0);
 
     private final CustomerRepository customerRepository;
-    private final ReservationRepository reservationRepository;
+    private final ActivityRepository activityRepository;
     private final LaneRepository laneRepository;
 
-    public ReservationService(CustomerRepository customerRepository, ReservationRepository reservationRepository,
-                              LaneRepository laneRepository) {
+    public ActivityService(CustomerRepository customerRepository, ActivityRepository activityRepository,
+                           LaneRepository laneRepository) {
         this.customerRepository = customerRepository;
-        this.reservationRepository = reservationRepository;
+        this.activityRepository = activityRepository;
         this.laneRepository = laneRepository;
     }
 
-    public List<ReservationDTO> getAllReservations() {
-        List<Reservation> reservations = reservationRepository.findAll();
-        List<ReservationDTO> reservationDTOs = new ArrayList<>();
+    public List<ActivityDTO> getAllActivities() {
+        List<Activity> activities = activityRepository.findAll();
+        List<ActivityDTO> activityDTOS = new ArrayList<>();
 
-        for (Reservation reservation : reservations) {
-            reservationDTOs.add(ReservationMapper.toDTO(reservation));
+        for (Activity activity : activities) {
+            activityDTOS.add(ActivityMapper.toDTO(activity));
         }
 
-        return reservationDTOs;
+        return activityDTOS;
     }
 
-    public Optional<ReservationDTO> getReservationById(Long id) {
-        return reservationRepository.findById(id).map(ReservationMapper::toDTO);
+    public Optional<ActivityDTO> getActivityById(Long id) {
+        return activityRepository.findById(id).map(ActivityMapper::toDTO);
     }
 
     @Transactional
-    public ReservationDTO createReservation(ReservationDTO dto) {
+    public ActivityDTO createActivity(ActivityDTO dto) {
         List<Long> laneIds = extractLaneIds(dto.lanes());
 
         validateLaneCount(laneIds);
@@ -70,13 +70,13 @@ public class ReservationService {
 
         validateNoOverlap(laneIds, dto.startTime(), dto.endTime());
 
-        Reservation reservation = new Reservation(dto.type(), dto.startTime(), dto.endTime(), lanes, dto.guests());
-        Reservation saved = reservationRepository.save(reservation);
-        return ReservationMapper.toDTO(saved);
+        Activity activity = new Activity(dto.type(), dto.startTime(), dto.endTime(), lanes, dto.guests());
+        Activity saved = activityRepository.save(activity);
+        return ActivityMapper.toDTO(saved);
     }
 
-    public void deleteReservation(Long id) {
-        reservationRepository.deleteById(id);
+    public void deleteActivity(Long id) {
+        activityRepository.deleteById(id);
     }
 
     private List<Long> extractLaneIds(List<LaneSummaryDTO> laneSummaries) {
@@ -105,16 +105,16 @@ public class ReservationService {
     }
 
     private void validateNoOverlap(List<Long> laneIds, LocalDateTime startTime, LocalDateTime endTime) {
-        List<Reservation> allReservations = reservationRepository.findAll();
+        List<Activity> allActivities = activityRepository.findAll();
 
-        for (Reservation existing : allReservations) {
+        for (Activity existing : allActivities) {
 
             // Tester om tiden overlapper
             if (!existing.overlaps(startTime, endTime)) {
                 continue;
             }
 
-            // Bruger den eksisterende reservation en af de samme baner?
+            // Bruger den eksisterende aktivitet en af de samme baner?
             for (Lane lane : existing.getLanes()) {
                 if (laneIds.contains(lane.getId())) {
                     throw new IllegalArgumentException("Bane " + lane.getLaneNumber()

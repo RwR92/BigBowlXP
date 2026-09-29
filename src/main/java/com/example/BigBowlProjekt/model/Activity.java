@@ -2,40 +2,43 @@ package com.example.BigBowlProjekt.model;
 
 
 import jakarta.persistence.*;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Reservation {
+public class Activity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private ReservationType type;
+    private ActivityType type;
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
     @ManyToMany
     @JoinTable(
-            name = "reservation_lane",
-            joinColumns = @JoinColumn(name = "reservation_id"),
+            name = "activity_lane",
+            joinColumns = @JoinColumn(name = "activity_id"),
             inverseJoinColumns = @JoinColumn(name = "lane_id")
+
     )
 
     private List<Lane> lanes = new ArrayList<>();
     private Integer guests;
+    @ManyToOne
+    @JoinColumn (name = "reservation_id")
+    private Reservation reservation;
 
-    public  Reservation() {
+    public Activity() {
 
 }
-    public Reservation(ReservationType type, LocalDateTime startTime, LocalDateTime endTime,
-                       List<Lane> lanes, Integer guests) {
+    public Activity(ActivityType type, LocalDateTime startTime, LocalDateTime endTime,
+                    List<Lane> lanes, Integer guests) {
         this.type = type;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -48,8 +51,8 @@ public class Reservation {
 
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
-    public ReservationType getType() {return type;}
-    public void setType(ReservationType type) {this.type = type;}
+    public ActivityType getType() {return type;}
+    public void setType(ActivityType type) {this.type = type;}
     public LocalDateTime getStartTime() {return startTime;}
     public void setStartTime(LocalDateTime startTime) {this.startTime = startTime;}
     public LocalDateTime getEndTime() {return endTime;}

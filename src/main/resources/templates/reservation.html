@@ -9,7 +9,7 @@
 <h1>Reservations</h1>
 
 <!-- Reservations table -->
-<div class="reservations">
+<div class="activities">
     <table>
         <thead>
         <tr>
@@ -22,28 +22,28 @@
         </thead>
 
         <tbody>
-        <tr th:each="reservation : ${reservations}">
-            <td th:text="${reservation.id}"></td>
-            <td th:text="${reservation.startTime}"></td>
-            <td th:text="${reservation.endTime}"></td>
-            <td th:text="${reservation.guests}"></td>
-            <td th:text="${reservation.type}"></td>
+        <tr th:each="activity : ${activities}">
+            <td th:text="${activity.id}"></td>
+            <td th:text="${activity.startTime}"></td>
+            <td th:text="${activity.endTime}"></td>
+            <td th:text="${activity.guests}"></td>
+            <td th:text="${activity.type}"></td>
         </tr>
 
-        <tr th:if="${#lists.isEmpty(reservations)}">
-            <td colspan="5">No reservations found.</td>
+        <tr th:if="${#lists.isEmpty(activities)}">
+            <td colspan="5">No activities found.</td>
         </tr>
         </tbody>
     </table>
 </div>
 
 
-<!-- Add reservation form -->
-<div class="reservation-form">
+<!-- Add activity form -->
+<div class="activity-form">
 
     <h2>Add Reservation</h2>
 
-    <form th:action="@{/reservations}" method="post">
+    <form th:action="@{/activities}" method="post">
 
         <div>
             <label for="startTime">Start Time</label>
