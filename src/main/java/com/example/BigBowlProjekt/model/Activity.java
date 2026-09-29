@@ -60,5 +60,8 @@ public class Activity {
     public List<Lane> getLanes() {return lanes;}
     public void setLanes(List<Lane> lanes) {this.lanes = lanes;}
     public Integer getGuests() {return guests;}
-    public void setGuests(Integer guests) {this.guests = guests;}}
+    public void setGuests(Integer guests) {this.guests = guests;}
+    public Reservation getReservation() {return reservation;
+    }public void setReservation(Reservation reservation) { this.reservation = reservation;
+    }}
 
