@@ -1,10 +1,15 @@
 package com.example.BigBowlProjekt.controller;
 
 import com.example.BigBowlProjekt.dto.ActivityDTO;
+import com.example.BigBowlProjekt.dto.TimeSlot;
+import com.example.BigBowlProjekt.model.LaneType;
 import com.example.BigBowlProjekt.service.ActivityService;
+import com.example.BigBowlProjekt.service.AvailabilityService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,9 +18,12 @@ import java.util.Optional;
 public class ActivityController {
 
     private final ActivityService activityService;
+    private final AvailabilityService availabilityService;
 
-    public ActivityController(ActivityService activityService) {
+    public ActivityController(ActivityService activityService,
+                              AvailabilityService availabilityService) {
         this.activityService = activityService;
+        this.availabilityService = availabilityService;
     }
 
     @GetMapping
@@ -31,6 +39,14 @@ public class ActivityController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/availability")
+    public List<TimeSlot> getDayAvailability(
+            @RequestParam LaneType type,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+
+        return availabilityService.getDayAvailability(type, date);
     }
 
     @PostMapping
@@ -49,4 +65,3 @@ public class ActivityController {
         return ResponseEntity.notFound().build();
     }
 }
-
