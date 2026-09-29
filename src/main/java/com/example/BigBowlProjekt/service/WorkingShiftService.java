@@ -9,6 +9,6 @@ import java.util.List;
 @Service
 public interface WorkingShiftService {
 
- List<WorkingShift> getAllWorkingShifts();
+ List<WorkingShiftDTO> getAllWorkingShifts();
 
 }

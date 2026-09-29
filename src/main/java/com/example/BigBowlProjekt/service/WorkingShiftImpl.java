@@ -18,7 +18,7 @@ public class WorkingShiftImpl implements WorkingShiftService {
     }
 
     @Override
-    public List<WorkingShift> getAllWorkingShifts() {
+    public List<WorkingShiftDTO> getAllWorkingShifts() {
         return List.of();
     }
 }

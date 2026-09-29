@@ -10,7 +10,7 @@ import java.util.Optional;
 @Service
 public interface EmployeeService {
 
-    List<Employee> getAllEmployees();
+    List<EmployeeDTO> getAllEmployees();
 
     Optional<Employee> getEmployeeByRole();
 

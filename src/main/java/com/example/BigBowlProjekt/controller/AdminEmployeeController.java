@@ -38,7 +38,7 @@ public class AdminEmployeeController {
 
     @GetMapping("/api/employees")
     @ResponseBody
-    public List<Employee> getAllEmployees() {
+    public List<EmployeeDTO> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
 
@@ -48,8 +48,8 @@ public class AdminEmployeeController {
     }
 
     @GetMapping("/working-shift/display")
-    public ResponseEntity<List<WorkingShift>> showAllWorkingShifts() {
-        List<WorkingShift> workingShiftList = workingShiftService.getAllWorkingShifts();
+    public ResponseEntity<List<WorkingShiftDTO>> showAllWorkingShifts() {
+        List<WorkingShiftDTO> workingShiftList = workingShiftService.getAllWorkingShifts();
 
         if (workingShiftList == null) {
             return ResponseEntity.notFound().build();
