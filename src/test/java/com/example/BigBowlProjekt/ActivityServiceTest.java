@@ -85,7 +85,7 @@ class ActivityServiceTest {
         ActivityDTO dto = buildDto(fiveLanes, start, end);
 
         try {
-            activityService.createReservation(dto);
+            activityService.createActivity(dto);
             fail("Forventede en IllegalArgumentException, men der blev ikke kastet nogen.");
         } catch (IllegalArgumentException exception) {
             assertEquals("Du kan booke mellem 1 og 4 baner.", exception.getMessage());
@@ -100,7 +100,7 @@ class ActivityServiceTest {
 
         ActivityDTO dto = buildDto(oneLanes, start, end);
         try {
-            activityService.createReservation(dto);
+            activityService.createActivity(dto);
             fail("Forventede en IllegalArgumentException, men der blev ikke kastet nogen.");
         }catch (IllegalArgumentException exception){
             assertEquals("Du kan booke i 1 eller 2 timer.", exception.getMessage());
