@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", initApp);
 const BASE_URL_LOGIN = "/api/login";
 const formData = [];
-
+import {handleRoute} from "./script.js"
 async function initApp() {
-    sessionStorage.removeItem("user");
     document.querySelector("#loginForm").addEventListener("submit", handleLoginSubmit)
 }
 
@@ -19,8 +18,8 @@ async function handleLoginSubmit(e) {
     const response = await tryLogin(formData);
     if(response.userType === "admin"){
         window.location.href = "test-user-page.html";
-    } else if (response === "employee"){
-        window.location.href = "login.html";
+    } else if (response.userType === "employee"){
+        window.location.href = "test-employee-page.html";
     }
 }
 
