@@ -13,6 +13,7 @@ import java.util.List;
 
 // program kan nu køre uanset port
 @CrossOrigin(origins = "*")
+
 @RestController
 public class AdminEmployeeController {
 

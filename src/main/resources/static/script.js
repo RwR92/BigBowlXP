@@ -1,8 +1,10 @@
-const API_BASE = "http://localhost:8080";
+const API_DATABASE = "/api/employees";
+
+document.addEventListener("DOMContentLoaded", initApp);
 
 async function fetchEmployees() {
 
-    const response = await fetch(`${API_BASE}/employees/display`);
+    const response = await fetch(`${API_DATABASE}`);
 
     if (!response.ok) {
         throw new Error('Failed to fetch employees: ${response.status}');
@@ -43,5 +45,3 @@ async function initApp() {
         console.error("Could not load employees", error);
     }
 }
-
-initApp();
