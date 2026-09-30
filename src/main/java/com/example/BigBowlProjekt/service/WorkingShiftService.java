@@ -8,15 +8,4 @@ public interface WorkingShiftService {
 
     List<WorkingShiftDTO> getAllWorkingShifts();
 
-//    Optional<WorkingShiftFormDTO> getWorkingShiftById(Long id);
-//
-//    WorkingShiftFormDTO createWorkingShift (WorkingShiftFormDTO dto);
-//
-//    Optional<WorkingShiftFormDTO> updateWorkingShift(Long id, WorkingShiftFormDTO dto);
-//
-//    boolean deleteWorkingShift(Long id);
-
-
 }
-
-

@@ -1,7 +1,6 @@
 package com.example.BigBowlProjekt.controller;
 
 import com.example.BigBowlProjekt.dto.WorkingShiftDTO;
-import com.example.BigBowlProjekt.dto.WorkingShiftDTO;
 import com.example.BigBowlProjekt.dto.WorkingShiftRequest;
 import com.example.BigBowlProjekt.service.AdminShiftService;
 import org.springframework.http.ResponseEntity;
