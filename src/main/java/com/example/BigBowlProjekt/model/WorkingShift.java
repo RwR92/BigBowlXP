@@ -1,16 +1,13 @@
 package com.example.BigBowlProjekt.model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
-@JsonPropertyOrder({"id", "date", "startTime", "endTime"})
+@JsonPropertyOrder({"id", "date", "startTime", "endTime", "employee"})
 public class WorkingShift {
 
     @Id
@@ -21,10 +18,15 @@ public class WorkingShift {
     private LocalTime startTime;
     private LocalTime endTime;
 
-    public WorkingShift(LocalDate date, LocalTime startTime, LocalTime endTime) {
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
+    public WorkingShift(LocalDate date, LocalTime startTime, LocalTime endTime, Employee employee) {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.employee = employee;
     }
 
     public WorkingShift() {
@@ -48,5 +50,13 @@ public class WorkingShift {
 
     public LocalTime getEndTime() {
         return endTime;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

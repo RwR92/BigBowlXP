@@ -12,7 +12,8 @@ public class WorkingShiftMapper {
                 workingShift.getWorkingShiftId(),
                 workingShift.getDate(),
                 workingShift.getStartTime(),
-                workingShift.getEndTime()
+                workingShift.getEndTime(),
+                workingShift.getEmployee()
         );
 
     }

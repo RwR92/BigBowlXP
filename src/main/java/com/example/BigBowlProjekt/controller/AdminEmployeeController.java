@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import com.example.BigBowlProjekt.service.EmployeeService;
 import com.example.BigBowlProjekt.service.WorkingShiftService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 // program kan nu køre uanset port
 @CrossOrigin(origins = "*")
 
+@RequestMapping("/api")
 @RestController
 public class AdminEmployeeController {
 
@@ -37,7 +39,7 @@ public class AdminEmployeeController {
 //        }
 //    }
 
-    @GetMapping("/api/employees")
+    @GetMapping("/employees")
     @ResponseBody
     public List<EmployeeDTO> getAllEmployees() {
         return employeeService.getAllEmployees();
@@ -48,7 +50,16 @@ public class AdminEmployeeController {
         return "employee-overview";
     }
 
-    @GetMapping("/working-shift/display")
+    @GetMapping("/working-shift")
+    public ResponseEntity<List<WorkingShiftDTO>> get(@PathVariable int givenDate) {
+        int day = givenDate%100;
+        int month = (givenDate%10000)/100;
+        int year = givenDate/10000;
+        List list = workingShiftService.getAllWorkingShiftWeekAhead(LocalDate.of(year, month, day));
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/working-shift")
     public ResponseEntity<List<WorkingShiftDTO>> showAllWorkingShifts() {
         List<WorkingShiftDTO> workingShiftList = workingShiftService.getAllWorkingShifts();
 

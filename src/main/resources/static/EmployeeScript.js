@@ -1,4 +1,4 @@
-const API_DATABASE = "/api/employees";
+const API_DATABASE = "http://localhost:8080/api/employees";
 let employees = []
 
 document.addEventListener("DOMContentLoaded", initApp);
@@ -11,7 +11,6 @@ async function initApp() {
 
     } catch (error) {
         console.error("Could not load employees", error);
-
 
     }
     document.querySelector("#employeeTableHeader").addEventListener("click", handleClick);
@@ -27,7 +26,7 @@ async function fetchEmployees() {
     if (!response.ok) {
         throw new Error('Failed to fetch employees: ${response.status}');
     }
-
+console.log("Fired");
     return await response.json();
 
 }
