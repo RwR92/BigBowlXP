@@ -39,7 +39,11 @@ public class WorkingShiftService {
     public List<WorkingShiftDTO> getAllWorkingShiftWeekAhead(LocalDate givenDate) {
         List weekList = new ArrayList<>();
         for  (WorkingShiftDTO shift : getAllWorkingShifts()) {
-            if (shift.date().isBefore(givenDate.plusDays(7)) && shift.date().isAfter(givenDate)) {
+            if (
+                    shift.date().isBefore(givenDate.plusDays(7))
+                    && shift.date().isAfter(givenDate)
+                    || shift.date().equals(givenDate)
+            ) {
                 weekList.add(shift);
             }
         }

@@ -50,7 +50,7 @@ public class AdminEmployeeController {
         return "employee-overview";
     }
 
-    @GetMapping("/working-shift")
+    @GetMapping("/working-shift/{givenDate}")
     public ResponseEntity<List<WorkingShiftDTO>> get(@PathVariable int givenDate) {
         int day = givenDate%100;
         int month = (givenDate%10000)/100;
