@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 @Entity
 public class Lane {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

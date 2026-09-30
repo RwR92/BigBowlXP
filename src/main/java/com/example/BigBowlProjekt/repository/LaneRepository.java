@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface LaneRepository extends JpaRepository<Lane, Long> {
     List<Lane> findByType(LaneType type);
+
 }
