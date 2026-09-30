@@ -45,7 +45,7 @@
 
 <script>
 
-    const API_URL = "/api/activities/availability";
+  const API_URL = "/api/activities/availability";
 
   async function loadAvailability() {
 
@@ -88,12 +88,10 @@
       const count = slot.availableLaneNumbers.length;
 
       row.innerHTML = `
-               <td>${startTime} - ${endTime}</td>
-                <td class="${count > 0 ? 'available' : 'unavailable'}">${count}</td>
-                <td>${slot.availableLaneNumbers.join(", ") || "Ingen ledige"}</td>
-
-
-
+        <td>${startTime} - ${endTime}</td>
+        <td class="${count > 0 ? 'available' : 'unavailable'}">${count}</td>
+        <td>${slot.availableLaneNumbers.join(", ") || "Ingen ledige"}</td>
+      `;
 
       tableBody.appendChild(row);
     });
