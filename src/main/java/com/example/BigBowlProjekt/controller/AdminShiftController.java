@@ -1,6 +1,8 @@
 package com.example.BigBowlProjekt.controller;
 
-import com.example.BigBowlProjekt.dto.WorkingShiftFormDTO;
+import com.example.BigBowlProjekt.dto.WorkingShiftDTO;
+import com.example.BigBowlProjekt.dto.WorkingShiftDTO;
+import com.example.BigBowlProjekt.dto.WorkingShiftRequest;
 import com.example.BigBowlProjekt.service.AdminShiftService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +18,8 @@ public class AdminShiftController {
     }
 
     @PostMapping("/working-shifts")
-    public ResponseEntity<WorkingShiftFormDTO> createWorkingShift(
-            @RequestBody WorkingShiftFormDTO dto) {
+    public ResponseEntity<WorkingShiftDTO> createWorkingShift(
+            @RequestBody WorkingShiftRequest dto) {
 
         return ResponseEntity.ok(
                 adminShiftService.createWorkingShift(dto)
@@ -25,9 +27,9 @@ public class AdminShiftController {
     }
 
     @PutMapping("/working-shifts/{id}")
-    public ResponseEntity<WorkingShiftFormDTO> updateWorkingShift(
+    public ResponseEntity<WorkingShiftDTO> updateWorkingShift(
             @PathVariable Long id,
-            @RequestBody WorkingShiftFormDTO dto) {
+            @RequestBody WorkingShiftDTO dto) {
 
         return adminShiftService.updateWorkingShift(id, dto)
                 .map(ResponseEntity::ok)

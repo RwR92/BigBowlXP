@@ -1,14 +1,16 @@
 package com.example.BigBowlProjekt.service;
 
-import com.example.BigBowlProjekt.dto.WorkingShiftFormDTO;
+import com.example.BigBowlProjekt.dto.WorkingShiftDTO;
+import com.example.BigBowlProjekt.dto.WorkingShiftDTO;
+import com.example.BigBowlProjekt.dto.WorkingShiftRequest;
 
 import java.util.Optional;
 
 public interface AdminShiftService {
 
-    WorkingShiftFormDTO createWorkingShift(WorkingShiftFormDTO dto);
+    WorkingShiftDTO createWorkingShift(WorkingShiftRequest dto);
 
-    Optional<WorkingShiftFormDTO> updateWorkingShift(Long id, WorkingShiftFormDTO dto);
+    Optional<WorkingShiftDTO> updateWorkingShift(Long id, WorkingShiftDTO dto);
 
     boolean deleteWorkingShift(Long id);
 }

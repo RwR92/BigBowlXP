@@ -1,6 +1,7 @@
 package com.example.BigBowlProjekt.service;
 
-import com.example.BigBowlProjekt.dto.WorkingShiftFormDTO;
+import com.example.BigBowlProjekt.dto.WorkingShiftDTO;
+import com.example.BigBowlProjekt.dto.WorkingShiftRequest;
 import com.example.BigBowlProjekt.model.WorkingShift;
 import com.example.BigBowlProjekt.repository.AdminShiftRepository;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,9 @@ public class AdminShiftServiceImpl implements AdminShiftService {
     }
 
     @Override
-    public WorkingShiftFormDTO createWorkingShift(WorkingShiftFormDTO dto) {
+    public WorkingShiftDTO createWorkingShift(WorkingShiftRequest dto) {
 
         WorkingShift workingShift = new WorkingShift(
-                dto.employeeId(),
                 dto.date(),
                 dto.startTime(),
                 dto.endTime()
@@ -28,9 +28,8 @@ public class AdminShiftServiceImpl implements AdminShiftService {
 
         WorkingShift saved = adminShiftRepository.save(workingShift);
 
-        return new WorkingShiftFormDTO(
+        return new WorkingShiftDTO(
                 saved.getWorkingShiftId(),
-                saved.getEmployeeId(),
                 saved.getDate(),
                 saved.getStartTime(),
                 saved.getEndTime()
@@ -38,22 +37,22 @@ public class AdminShiftServiceImpl implements AdminShiftService {
     }
 
     @Override
-    public Optional<WorkingShiftFormDTO> updateWorkingShift(
+    public Optional<WorkingShiftDTO> updateWorkingShift(
             Long id,
-            WorkingShiftFormDTO dto) {
+            WorkingShiftDTO dto) {
 
         return adminShiftRepository.findById(id).map(workingShift -> {
 
-            workingShift.setEmployeeId(dto.employeeId());
+            //workingShift.setEmployeeId(dto.employeeId());
             workingShift.setDate(dto.date());
             workingShift.setStartTime(dto.startTime());
             workingShift.setEndTime(dto.endTime());
 
             WorkingShift saved = adminShiftRepository.save(workingShift);
 
-            return new WorkingShiftFormDTO(
+            return new WorkingShiftDTO(
                     saved.getWorkingShiftId(),
-                    saved.getEmployeeId(),
+                    //saved.getEmployeeId(),
                     saved.getDate(),
                     saved.getStartTime(),
                     saved.getEndTime()
