@@ -39,7 +39,7 @@ export async function handleRoute(dataRole) {
 }
 
 // API URL
-const API_URL = "/api/reservations";
+const API_URL = "/api/activities";
 
 
 // Load reservations when page opens
