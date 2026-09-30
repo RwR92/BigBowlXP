@@ -15,10 +15,8 @@ public class Lane {
     private boolean childFriendly;
 
 
-    // Default constructor required by JPA
     public Lane() {}
 
-    // Constructor with fields
     public Lane(int laneNumber, LaneType type, boolean childFriendly) {
         this.laneNumber = laneNumber;
         this.type = type;
