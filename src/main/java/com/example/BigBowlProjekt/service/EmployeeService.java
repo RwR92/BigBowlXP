@@ -26,9 +26,9 @@ public class EmployeeService {
 
         for (Employee emp : employees) {
 
-             EmployeeDTO empDTO = EmployeeMapper.toDTO(emp);
+            EmployeeDTO empDTO = EmployeeMapper.toDTO(emp);
 
-             employeeDTOList.add(empDTO);
+            employeeDTOList.add(empDTO);
         }
 
         return employeeDTOList;

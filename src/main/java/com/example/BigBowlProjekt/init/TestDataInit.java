@@ -76,7 +76,7 @@ public class TestDataInit implements CommandLineRunner {
                     LocalTime.of(8, 0),
                     LocalTime.of(16, 0),
                     employee1
-                    );
+            );
 
             WorkingShift shift2 = new WorkingShift(
                     LocalDate.of(2026, 9, 28),

@@ -6,7 +6,7 @@ import com.example.BigBowlProjekt.model.Employee;
 public class EmployeeMapper {
 
     public static EmployeeDTO toDTO(Employee employee) {
-        return new EmployeeDTO (
+        return new EmployeeDTO(
                 employee.getEmployeeId(),
                 employee.getFirstName(),
                 employee.getLastName(),

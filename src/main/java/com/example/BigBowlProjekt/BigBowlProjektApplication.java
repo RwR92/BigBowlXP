@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class BigBowlProjektApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BigBowlProjektApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BigBowlProjektApplication.class, args);
+    }
 
 }

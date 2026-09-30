@@ -26,7 +26,7 @@ async function fetchEmployees() {
     if (!response.ok) {
         throw new Error('Failed to fetch employees: ${response.status}');
     }
-console.log("Fired");
+    console.log("Fired");
     return await response.json();
 
 }

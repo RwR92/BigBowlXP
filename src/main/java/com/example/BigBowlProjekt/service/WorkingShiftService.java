@@ -3,6 +3,7 @@ package com.example.BigBowlProjekt.service;
 import com.example.BigBowlProjekt.dto.WorkingShiftDTO;
 import com.example.BigBowlProjekt.mapper.WorkingShiftMapper;
 import com.example.BigBowlProjekt.repository.WorkingShiftRepository;
+import com.example.BigBowlProjekt.model.WorkingShift;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,11 +23,11 @@ public class WorkingShiftService {
 
     public List<WorkingShiftDTO> getAllWorkingShifts() {
 
-        List<com.example.BigBowlProjekt.model.WorkingShift> workingShifts = workingShiftRepository.findAll();
+        List<WorkingShift> workingShifts = workingShiftRepository.findAll();
 
         List<WorkingShiftDTO> workingShiftDTOList = new ArrayList<>();
 
-        for (com.example.BigBowlProjekt.model.WorkingShift shifts : workingShifts) {
+        for (WorkingShift shifts : workingShifts) {
 
             WorkingShiftDTO shiftDTO = WorkingShiftMapper.toDTO(shifts);
 
@@ -37,12 +38,12 @@ public class WorkingShiftService {
     }
 
     public List<WorkingShiftDTO> getAllWorkingShiftWeekAhead(LocalDate givenDate) {
-        List weekList = new ArrayList<>();
-        for  (WorkingShiftDTO shift : getAllWorkingShifts()) {
+        List<WorkingShiftDTO> weekList = new ArrayList<>();
+        for (WorkingShiftDTO shift : getAllWorkingShifts()) {
             if (
                     shift.date().isBefore(givenDate.plusDays(7))
-                    && shift.date().isAfter(givenDate)
-                    || shift.date().equals(givenDate)
+                            && shift.date().isAfter(givenDate)
+                            || shift.date().equals(givenDate)
             ) {
                 weekList.add(shift);
             }

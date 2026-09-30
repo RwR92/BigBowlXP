@@ -52,9 +52,9 @@ public class AdminEmployeeController {
 
     @GetMapping("/working-shift/{givenDate}")
     public ResponseEntity<List<WorkingShiftDTO>> get(@PathVariable int givenDate) {
-        int day = givenDate%100;
-        int month = (givenDate%10000)/100;
-        int year = givenDate/10000;
+        int day = givenDate % 100;
+        int month = (givenDate % 10000) / 100;
+        int year = givenDate / 10000;
         List list = workingShiftService.getAllWorkingShiftWeekAhead(LocalDate.of(year, month, day));
         return ResponseEntity.ok(list);
     }

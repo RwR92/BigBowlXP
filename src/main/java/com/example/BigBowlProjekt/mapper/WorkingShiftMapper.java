@@ -8,7 +8,7 @@ import com.example.BigBowlProjekt.model.WorkingShift;
 public class WorkingShiftMapper {
 
     public static WorkingShiftDTO toDTO(WorkingShift workingShift) {
-        return new WorkingShiftDTO (
+        return new WorkingShiftDTO(
                 workingShift.getWorkingShiftId(),
                 workingShift.getDate(),
                 workingShift.getStartTime(),
