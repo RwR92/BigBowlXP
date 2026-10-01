@@ -56,6 +56,22 @@ public class ActivityService {
         return activityRepository.findById(id).map(ActivityMapper::toDTO);
     }
 
+    public Activity buildValidActivity(ActivityDTO dto) {
+        List<Long> laneIds = extractLaneIds(dto.lanes());
+
+        validateLaneCount(laneIds);
+        validateDuration(dto.startTime(), dto.endTime());
+
+        List<Lane> lanes = laneRepository.findAllById(laneIds);
+        if (lanes.size() != laneIds.size()) {
+            throw new IllegalArgumentException("En eller flere baner findes ikke");
+        }
+        validateNoOverlap(laneIds, dto.startTime(), dto.endTime());
+
+        return new Activity(dto.type(),dto.startTime(),dto.endTime(),lanes, dto.guests());
+    }
+
+
     @Transactional
     public ActivityDTO createActivity(ActivityDTO dto) {
         List<Long> laneIds = extractLaneIds(dto.lanes());
