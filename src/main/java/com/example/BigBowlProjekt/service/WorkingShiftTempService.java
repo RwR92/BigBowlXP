@@ -49,7 +49,11 @@ public class WorkingShiftTempService {
         workingShiftRepository.delete(workingShift);
     }
 
-   // public WorkingShiftDTO editWorkingShift(WorkingShiftDTO workingShiftDTO) {
+    public WorkingShiftDTO editWorkingShift(WorkingShiftDTO workingShiftDTO) {
+        WorkingShift workingShift = workingShiftRepository.findById(workingShiftDTO.id())
+                .orElseThrow(() -> new WorkingShiftNotFoundException(
+                        "Working Shift not found with id: " + workingShiftDTO.id()
+                ));
 
-   // }
+    }
 }
