@@ -27,18 +27,6 @@ public class AdminEmployeeController {
         this.workingShiftService = workingShiftService;
     }
 
-//    // Vi bruger ResponseEntity for at kommunikere med klienten med server response codes
-//    @GetMapping("/employees/display")
-//    public ResponseEntity<List<Employee>> getAllEmployees() {
-//        List<Employee> employee = employeeService.getAllEmployees();
-//
-//        if (employee == null) {
-//            return ResponseEntity.notFound().build();
-//        } else {
-//            return ResponseEntity.ok(employee);
-//        }
-//    }
-
     @GetMapping("/employees")
     @ResponseBody
     public List<EmployeeDTO> getAllEmployees() {
