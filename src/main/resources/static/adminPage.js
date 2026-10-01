@@ -1,51 +1,45 @@
-const API_URL = "api/lanes"
-document.addEventListener("DOMContentLoaded", initApp);
+const API_URL = "/api/lanes"
 
 
-export async function initApp() {
-    await getBowlingLanes();
+export async function initAdminPage() {
+    const lanes = await getBowlingLanes()
+    renderLaneRow(lanes);
 }
 
 async function getBowlingLanes() {
-
     try {
         const response = await fetch(API_URL);
-
         if (!response.ok) {
-            throw new Error("Could not get lanes, error: " + response.statusText);
+            throw new Error("Could not get lanes: " + response.status);
         }
-        const lanes = await response.json();
-        await createBowlingLanes(lanes);
+        return await response.json();
     } catch (error) {
-        console.error("Error loading bowling lanes: ", error);
+        console.error("Error loading bowling lanes:", error);
         return [];
     }
 }
 
-async function createBowlingLanes(lanes) {
-    const tBody = document.getElementById("#bowlingLaneTableBody");
-    tBody.textContent = "";
-    for (const lane of lanes) {
-        await renderLaneRow(lane);
-    }
+function createLaneRow(lane) {
+    const row = document.createElement("tr");
+    row.dataset.id = lane.id;
+
+    const numberCell = document.createElement("td");
+    numberCell.textContent = lane.laneNumber;
+
+    const childCell = document.createElement("td");
+    childCell.textContent = lane.childFriendly ? "Yes" : "No";
+
+    const typeCell = document.createElement("td");
+    typeCell.textContent = lane.type;
+
+    row.append(numberCell, childCell, typeCell);
+    return row;
 }
 
-async function renderLaneRow(lane) {
+function renderLaneRow(lanes) {
     const tBody = document.querySelector("#bowlingLaneTableBody");
-
-    const row = document.createElement("tr");
-    row.setAttribute("data-id", lane.id);
-
-    const laneNumberCell = document.createElement("td");
-    laneNumberCell.textContent = lane.laneNumber;
-
-    const laneChildFriendlyCell = document.createElement("td");
-    laneChildFriendlyCell.textContent = lane.childFriendly ? "Yes" : "No";
-
-    const laneTypeCell = document.createElement("td");
-    laneTypeCell.textContent = lane.type;
-
-    row.append(laneNumberCell, laneChildFriendlyCell, laneTypeCell);
-    tBody.appendChild(row);
-
+    tBody.textContent = "";
+    for (const lane of lanes) {
+        tBody.appendChild(createLaneRow(lane));
+    }
 }
