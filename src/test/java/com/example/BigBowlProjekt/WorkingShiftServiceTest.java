@@ -1,7 +1,7 @@
 package com.example.BigBowlProjekt;
 
 import com.example.BigBowlProjekt.model.WorkingShift;
-import com.example.BigBowlProjekt.service.WorkingShiftTempService;
+import com.example.BigBowlProjekt.service.WorkingShiftService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,21 +10,20 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class WorkingShiftTempServiceTest {
+public class WorkingShiftServiceTest {
 
     @Mock
     WorkingShift workingShift;
 
-    WorkingShiftTempService service;
+    WorkingShiftService service;
 
     @BeforeEach
     void setUp() {
-        service = new WorkingShiftTempService(null, null);
+        service = new WorkingShiftService(null, null);
     }
 
     @Test
