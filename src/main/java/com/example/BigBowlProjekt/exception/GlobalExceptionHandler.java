@@ -15,10 +15,18 @@ public class GlobalExceptionHandler {
         return pd;
     }
 
-    @ExceptionHandler(WorkingShiftNotFoundException.class)
-    public ProblemDetail handleWorkingShiftNotFoundException(WorkingShiftNotFoundException ex) {
+    @ExceptionHandler(NotFoundException.class)
+    public ProblemDetail handleNotFoundException(NotFoundException ex) {
         ProblemDetail pd = ProblemDetail.forStatus(404);
         pd.setTitle("Not Found Exception");
+        pd.setDetail(ex.getMessage());
+        return pd;
+    }
+
+    @ExceptionHandler(WorkingShiftOverlapException.class)
+    public ProblemDetail handleWorkingShiftOverlapException(WorkingShiftOverlapException ex) {
+        ProblemDetail pd = ProblemDetail.forStatus(400);
+        pd.setTitle("Shift Overlap Exception");
         pd.setDetail(ex.getMessage());
         return pd;
     }
