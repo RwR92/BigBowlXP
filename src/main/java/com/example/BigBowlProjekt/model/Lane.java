@@ -14,7 +14,7 @@ public class Lane {
     @Enumerated(EnumType.STRING)
     private LaneType type;
     private Boolean childFriendly;
-    private Boolean isOpen;
+    private Boolean isOpen=true;
 
 
     public Lane() {}
