@@ -1,15 +1,13 @@
 package com.example.BigBowlProjekt.dto;
 
-import com.example.BigBowlProjekt.model.Employee;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public record WorkingShiftDTO(
-        Long id,
+public record ShiftFormDTO(
+        Long workingShiftId,
+        Long employeeId,
         LocalDate date,
         LocalTime startTime,
-        LocalTime endTime,
-        Employee employee
+        LocalTime endTime
 ) {
 }

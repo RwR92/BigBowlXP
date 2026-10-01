@@ -6,55 +6,23 @@ import com.example.BigBowlProjekt.exception.NotFoundException;
 import com.example.BigBowlProjekt.exception.WorkingShiftOverlapException;
 import com.example.BigBowlProjekt.mapper.WorkingShiftMapper;
 import com.example.BigBowlProjekt.model.Employee;
+import com.example.BigBowlProjekt.model.WorkingShift;
 import com.example.BigBowlProjekt.repository.EmployeeRepository;
 import com.example.BigBowlProjekt.repository.WorkingShiftRepository;
-import com.example.BigBowlProjekt.model.WorkingShift;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class WorkingShiftService {
+public class WorkingShiftTempService {
 
     private final WorkingShiftRepository workingShiftRepository;
     private final EmployeeRepository employeeRepository;
 
-    public WorkingShiftService(WorkingShiftRepository workingShiftRepository, EmployeeRepository employeeRepository) {
+    public WorkingShiftTempService(WorkingShiftRepository workingShiftRepository, EmployeeRepository employeeRepository) {
         this.workingShiftRepository = workingShiftRepository;
         this.employeeRepository = employeeRepository;
-    }
-
-    public List<WorkingShiftDTO> getAllWorkingShifts() {
-
-        List<WorkingShift> workingShifts = workingShiftRepository.findAll();
-
-        List<WorkingShiftDTO> workingShiftDTOList = new ArrayList<>();
-
-        for (WorkingShift shifts : workingShifts) {
-
-            WorkingShiftDTO shiftDTO = WorkingShiftMapper.toDTO(shifts);
-
-            workingShiftDTOList.add(shiftDTO);
-        }
-
-        return workingShiftDTOList;
-    }
-
-    public List<WorkingShiftDTO> getAllWorkingShiftWeekAhead(LocalDate givenDate) {
-        List<WorkingShiftDTO> weekList = new ArrayList<>();
-        for (WorkingShiftDTO shift : getAllWorkingShifts()) {
-            if (
-                    shift.date().isBefore(givenDate.plusDays(7))
-                            && shift.date().isAfter(givenDate)
-                            || shift.date().equals(givenDate)
-            ) {
-                weekList.add(shift);
-            }
-        }
-        return weekList;
     }
 
     public WorkingShiftDTO createWorkingShift(WorkingShiftRequest workingShiftRequest) {
@@ -95,7 +63,7 @@ public class WorkingShiftService {
     }
 
     public void deleteWorkingShift(Long id) {
-        if (!workingShiftRepository.existsById(id)) {
+       if (!workingShiftRepository.existsById(id)) {
             throw new NotFoundException(
                     "Working Shift Not found with id: " + id
             );
@@ -154,5 +122,3 @@ public class WorkingShiftService {
                 && newEnd.isAfter(existingShift.getStartTime());
     }
 }
-
-

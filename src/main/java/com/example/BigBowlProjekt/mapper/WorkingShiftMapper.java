@@ -15,6 +15,5 @@ public class WorkingShiftMapper {
                 workingShift.getEndTime(),
                 workingShift.getEmployee()
         );
-
     }
 }

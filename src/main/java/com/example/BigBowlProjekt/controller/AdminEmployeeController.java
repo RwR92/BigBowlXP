@@ -27,27 +27,15 @@ public class AdminEmployeeController {
         this.workingShiftService = workingShiftService;
     }
 
-//    // Vi bruger ResponseEntity for at kommunikere med klienten med server response codes
-//    @GetMapping("/employees/display")
-//    public ResponseEntity<List<Employee>> getAllEmployees() {
-//        List<Employee> employee = employeeService.getAllEmployees();
-//
-//        if (employee == null) {
-//            return ResponseEntity.notFound().build();
-//        } else {
-//            return ResponseEntity.ok(employee);
-//        }
-//    }
-
-    @GetMapping("/employees")
-    @ResponseBody
-    public List<EmployeeDTO> getAllEmployees() {
-        return employeeService.getAllEmployees();
-    }
-
     @GetMapping("/employees/display")
-    public String showAllEmployees() {
-        return "employee-overview";
+    public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
+
+        if (employeeService.getAllEmployees() == null) {
+            return ResponseEntity.notFound().build();
+
+        } else {
+            return ResponseEntity.ok(employeeService.getAllEmployees());
+        }
     }
 
     @GetMapping("/working-shift/{givenDate}")
@@ -55,7 +43,7 @@ public class AdminEmployeeController {
         int day = givenDate % 100;
         int month = (givenDate % 10000) / 100;
         int year = givenDate / 10000;
-        List list = workingShiftService.getAllWorkingShiftWeekAhead(LocalDate.of(year, month, day));
+        List<WorkingShiftDTO> list = workingShiftService.getAllWorkingShiftWeekAhead(LocalDate.of(year, month, day));
         return ResponseEntity.ok(list);
     }
 
@@ -68,5 +56,7 @@ public class AdminEmployeeController {
         } else {
             return ResponseEntity.ok(workingShiftList);
         }
+
     }
+
 }   
