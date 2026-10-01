@@ -1,6 +1,7 @@
 package com.example.BigBowlProjekt.service;
 
 import com.example.BigBowlProjekt.dto.LaneDTO;
+import com.example.BigBowlProjekt.exception.NotFoundException;
 import com.example.BigBowlProjekt.model.Lane;
 import com.example.BigBowlProjekt.model.LaneType;
 import com.example.BigBowlProjekt.repository.LaneRepository;
@@ -49,8 +50,7 @@ public class LaneService {
     private Lane findLane(Long id){
         Optional<Lane> laneById = laneRepository.findById(id);
         if(laneById.isEmpty()) {
-            // Skal laves om til at bruge vores egen exception
-            throw new RuntimeException();
+            throw new NotFoundException("Lane with id: "+id+" not found");
         }
         return laneById.get();
     }
