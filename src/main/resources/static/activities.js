@@ -180,6 +180,8 @@ async function addReservation(event) {
             createdReservation
         );
 
+        document.getElementById("message").textContent = "Reservation " + createdReservation.id + " is created";
+
 
         document
             .getElementById("reservationForm")
