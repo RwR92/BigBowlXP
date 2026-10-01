@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 public class AvailabilityService {
 
-    // Antagelse: hallen har åbent 10:00-23:00. Ret hvis det ikke stemmer.
+
     private static final LocalTime OPENING_TIME = LocalTime.of(10, 0);
     private static final LocalTime CLOSING_TIME = LocalTime.of(23, 0);
 
