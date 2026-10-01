@@ -30,7 +30,7 @@ export async function handleRoute(dataRole) {
 
     if (userType !== dataRole) {
         if (userType === "admin") {
-            window.location.replace("test-user-page.html");
+            window.location.replace("test-admin-page.html");
         } else if (userType === "employee") {
             window.location.replace("test-employee-page.html");
         }
