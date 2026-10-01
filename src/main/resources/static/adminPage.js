@@ -1,12 +1,18 @@
 const API_URL = "/api/lanes"
 
+let lanes = [];
 
 export async function initAdminPage() {
-    const lanes = await getBowlingLanes()
+    await refreshLanes();
+    document.querySelector("#bowlingLaneTableBody").addEventListener("click", handleTableClick);
+}
+
+async function refreshLanes(){
+    lanes = await fetchLanes()
     renderLaneRow(lanes);
 }
 
-async function getBowlingLanes() {
+async function fetchLanes() {
     try {
         const response = await fetch(API_URL);
         if (!response.ok) {
@@ -30,9 +36,19 @@ function createLaneRow(lane) {
     childCell.textContent = lane.childFriendly ? "Yes" : "No";
 
     const typeCell = document.createElement("td");
-    typeCell.textContent = lane.type;
+    typeCell.textContent = lane.type; // Navnet "type" bør nok ændres, da 'type' er et beskyttet navn.
 
-    row.append(numberCell, childCell, typeCell);
+    const isOpenCell = document.createElement("td");
+    isOpenCell.textContent = lane.isOpen ? "Open" : "Closed";
+
+    const actionCell = document.createElement("td");
+
+    const setStatusButton = document.createElement("button");
+    setStatusButton.setAttribute("data-action", "set-status");
+    setStatusButton.textContent = lane.isOpen ? "Close" : "Open";
+
+    actionCell.append(setStatusButton)
+    row.append(numberCell, childCell, typeCell, isOpenCell, actionCell);
     return row;
 }
 
@@ -41,5 +57,45 @@ function renderLaneRow(lanes) {
     tBody.textContent = "";
     for (const lane of lanes) {
         tBody.appendChild(createLaneRow(lane));
+    }
+}
+async function handleTableClick(e){
+    const action = e.target.getAttribute("data-action");
+    const row = e.target.closest("tr");
+    const id = row.getAttribute("data-id");
+
+    if(action === "set-status"){
+        await setStatus(id);
+        await refreshLanes();
+    }
+}
+async function setStatus(id){
+    let lane = null;
+    for(const l of lanes){
+        console.log("l.id: "+typeof l.id+" id: "+typeof id);
+        if(l.id.toString() === id){
+            lane = l.isOpen;
+        }
+    }
+    let apiAppend="";
+    if(!lane){
+        apiAppend = "open";
+    } else if(lane){
+        apiAppend = "close";
+    }
+    await updateLane(id, apiAppend);
+}
+
+async function updateLane(id, apiAppend){
+    try{
+        const response = await fetch(`${API_URL}/${id}/${apiAppend}`, {
+            method: "PATCH"
+        });
+        if(!response.ok){
+            throw new Error(`Failed to connect: ${response}`);
+        }
+        return await response.json();
+    } catch (error){
+        console.log(error);
     }
 }
