@@ -7,8 +7,9 @@ import { handleRoute } from "./script.js";
 document.addEventListener("DOMContentLoaded", initActivities);
 
 async function initActivities(){
-    await handleRoute(document.body.dataset.role);
-    console.log(document.body.dataset.role);
+    console.log()
+    await handleRoute("Før handle route: "+document.body.dataset.role);
+    console.log("Efter handle route: "+document.body.dataset.role);
     await getReservations();
 }
 
