@@ -1,12 +1,12 @@
 package com.example.BigBowlProjekt.dto;
 
-import com.example.BigBowlProjekt.model.ReservationType;
+import com.example.BigBowlProjekt.model.ActivityType;
 
 import java.time.LocalDateTime;
 
-public record ReservationSummaryDTO(
+public record ActivitySummaryDTO(
         Long id,
-        ReservationType type,
+        ActivityType type,
         LocalDateTime startTime,
         LocalDateTime endTime
 ) {}

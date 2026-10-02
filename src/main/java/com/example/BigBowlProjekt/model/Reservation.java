@@ -1,8 +1,6 @@
 package com.example.BigBowlProjekt.model;
 
-
 import jakarta.persistence.*;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,47 +13,66 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private ReservationType type;
+    private String reservationNumber;
+    private LocalDateTime createdAt;
 
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
-    @ManyToMany
-    @JoinTable(
-            name = "reservation_lane",
-            joinColumns = @JoinColumn(name = "reservation_id"),
-            inverseJoinColumns = @JoinColumn(name = "lane_id")
-    )
+    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Activity> activities = new ArrayList<>();
 
-    private List<Lane> lanes = new ArrayList<>();
-    private Integer guests;
+    public Reservation() {}
 
-    public  Reservation() {
+    public Reservation(Customer customer) {
+        this.customer = customer;
+        this.createdAt = LocalDateTime.now();
+    }
 
+    public void addActivity(Activity activity) {
+        activities.add(activity);
+        activity.setReservation(this);
+    }
+
+    public void removeActivity(Activity activity) {
+        activities.remove(activity);
+        activity.setReservation(null);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getReservationNumber() {
+        return reservationNumber;
+    }
+
+    public void setReservationNumber(String reservationNumber) {
+        this.reservationNumber = reservationNumber;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public List<Activity> getActivities() {
+        return activities;
+    }
 }
-    public Reservation(ReservationType type, LocalDateTime startTime, LocalDateTime endTime,
-                       List<Lane> lanes, Integer guests) {
-        this.type = type;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.lanes = lanes;
-        this.guests = guests;
-    }
-    public boolean overlaps(LocalDateTime otherStart, LocalDateTime otherEnd) {
-        return startTime.isBefore(otherEnd) && endTime.isAfter(otherStart);
-    }
-
-    public Long getId() {return id;}
-    public void setId(Long id) {this.id = id;}
-    public ReservationType getType() {return type;}
-    public void setType(ReservationType type) {this.type = type;}
-    public LocalDateTime getStartTime() {return startTime;}
-    public void setStartTime(LocalDateTime startTime) {this.startTime = startTime;}
-    public LocalDateTime getEndTime() {return endTime;}
-    public void setEndTime(LocalDateTime endTime) {this.endTime = endTime;}
-    public List<Lane> getLanes() {return lanes;}
-    public void setLanes(List<Lane> lanes) {this.lanes = lanes;}
-    public Integer getGuests() {return guests;}
-    public void setGuests(Integer guests) {this.guests = guests;}}
-

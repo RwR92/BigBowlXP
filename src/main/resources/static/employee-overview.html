@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee overview</title>
+    <!--    <link rel="icon" type="image/placeholder" href="/images/favicon.ico">-->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-role="admin">
+<button id="logout-btn">Logout</button>
+<h1>
+    Employee overview
+</h1>
+
+<label>Filtrér efter role</label>
+<select name="role" id="filterByRole">
+    <option value="all">Se alle</option>
+    <option value="Manager">Manager</option>
+    <option value="Employee">Medarbejder</option>
+</select>
+
+<br><br>
+
+<table>
+    <thead>
+    <tr id="employeeTableHeader">
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Phone Number</th>
+        <th data-sort-key="role" scope="col">Role</th>
+    </tr>
+    </thead>
+    <tbody id="employeeTableBody">
+    </tbody>
+</table>
+
+
+<script type="module" src="EmployeeScript.js"></script>
+
+</body>
+</html>
