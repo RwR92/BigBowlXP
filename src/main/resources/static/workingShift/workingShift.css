@@ -1,0 +1,27 @@
+.popup-container {
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0,0,0,0.5);
+}
+
+.popup {
+    display: flex;
+    flex-direction: column;
+
+    padding: 1em;
+    gap: 1em;
+
+    border-radius: 8px;
+    border: 1px solid black;
+    background: white;
+}
+
+.hidden {
+    display: none !important;
+}

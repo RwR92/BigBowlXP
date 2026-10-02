@@ -12,6 +12,21 @@
 <table id="workShift-list">
 
 </table>
-<script src="workingShift.js"></script>
+
+<!-- POPUP MAGIC -->
+<div class="popup-container hidden">
+    <form class="popup">
+        <label for="start-time">Start tid:</label>
+        <input type="time" id="start-time">
+        <label for="end-time">Slut tid:</label>
+        <input type="time" id="end-time">
+        <label for="date">Dag:</label>
+        <input type="date" id="date">
+        <label for="employee-id">Medarbejder nummer:</label>
+        <input type="number" id="employee-id">
+    </form>
+</div>
+
+<script type="module" src="workingShift.js"></script>
 </body>
 </html>
