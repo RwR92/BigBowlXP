@@ -16,10 +16,12 @@ import java.util.Optional;
 public class WorkingShiftService {
 
     private final WorkingShiftRepository workingShiftRepository;
+    private final AuditService auditService;
 
 
-    public WorkingShiftService(WorkingShiftRepository workingShiftRepository) {
+    public WorkingShiftService(WorkingShiftRepository workingShiftRepository, AuditService auditService) {
         this.workingShiftRepository = workingShiftRepository;
+        this.auditService = auditService;
     }
 
     public List<WorkingShiftDTO> getAllWorkingShifts() {

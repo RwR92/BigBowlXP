@@ -1,32 +1,29 @@
 package com.example.BigBowlProjekt.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class AuditLog {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    private Customer customer;
+    @ManyToOne
+    private String user;
 
     private String action;
 
-    private LocalDate timeStamp;
+    private LocalDateTime timeStamp;
 
     private String description;
 
     protected AuditLog(){}
 
-    public AuditLog(Customer customer, String action, LocalDate timeStamp, String description) {
-        this.customer = customer;
+    public AuditLog (String user, String action, LocalDateTime timeStamp, String description) {
+        this.user = user;
         this.action = action;
         this.timeStamp = timeStamp;
         this.description = description;
@@ -36,39 +33,19 @@ public class AuditLog {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public String getUser() {
+        return user;
     }
 
     public String getAction() {
         return action;
     }
 
-    public void setAction(String action) {
-        this.action = action;
-    }
-
-    public LocalDate getTimeStamp() {
+    public LocalDateTime getTimeStamp() {
         return timeStamp;
-    }
-
-    public void setTimeStamp(LocalDate timeStamp) {
-        this.timeStamp = timeStamp;
     }
 
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

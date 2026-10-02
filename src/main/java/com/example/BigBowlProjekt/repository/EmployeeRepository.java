@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
+    boolean existsByFirstNameAndLastName(String firstName, String lastName);
 }

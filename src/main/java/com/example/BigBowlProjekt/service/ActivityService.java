@@ -33,12 +33,14 @@ public class ActivityService {
     private final CustomerRepository customerRepository;
     private final ActivityRepository activityRepository;
     private final LaneRepository laneRepository;
+    private final AuditService auditService;
 
     public ActivityService(CustomerRepository customerRepository, ActivityRepository activityRepository,
-                           LaneRepository laneRepository) {
+                           LaneRepository laneRepository, AuditService auditService) {
         this.customerRepository = customerRepository;
         this.activityRepository = activityRepository;
         this.laneRepository = laneRepository;
+        this.auditService = auditService;
     }
 
     public List<ActivityDTO> getAllActivities() {

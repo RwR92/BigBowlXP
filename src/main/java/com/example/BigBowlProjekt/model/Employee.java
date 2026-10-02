@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 
 @Entity
-@JsonPropertyOrder({"id", "firstName", "lastName", "phoneNumber", "role"})
+@JsonPropertyOrder({"employeeId", "firstName", "lastName", "phoneNumber", "role"})
 public class Employee {
 
     @Id
