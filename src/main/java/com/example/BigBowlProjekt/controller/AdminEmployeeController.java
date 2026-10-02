@@ -27,7 +27,7 @@ public class AdminEmployeeController {
         this.workingShiftService = workingShiftService;
     }
 
-    @GetMapping("/employees/display")
+    @GetMapping("/employees")
     public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
 
         if (employeeService.getAllEmployees() == null) {
