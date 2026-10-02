@@ -10,6 +10,6 @@ public record WorkingShiftDTO(
         LocalDate date,
         LocalTime startTime,
         LocalTime endTime,
-        Employee employee
+        EmployeeDTO employeeDTO
 ) {
 }
