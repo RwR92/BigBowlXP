@@ -15,15 +15,17 @@
 
 <!-- POPUP MAGIC -->
 <div class="popup-container hidden">
-    <form class="popup">
+    <form class="popup popup-add">
+        <p class="hidden" id="activity-message-popup"></p>
         <label for="start-time">Start tid:</label>
-        <input type="time" id="start-time">
+        <input required type="time" id="start-time" name="start-time">
         <label for="end-time">Slut tid:</label>
-        <input type="time" id="end-time">
+        <input required type="time" id="end-time" name="end-time">
         <label for="date">Dag:</label>
-        <input type="date" id="date">
+        <input required type="date" id="date" name="date">
         <label for="employee-id">Medarbejder nummer:</label>
-        <input type="number" id="employee-id">
+        <input required type="number" id="employee-id" name="employee-id">
+        <button type="submit">Opret vagt</button>
     </form>
 </div>
 
