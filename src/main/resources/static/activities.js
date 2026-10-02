@@ -1,15 +1,14 @@
 // API URL
 const API_URL = "/api/activities";
 
-import { handleRoute } from "./script.js";
+import { authUser } from "./script.js";
 
 // Load reservations when page opens
 document.addEventListener("DOMContentLoaded", initActivities);
 
 async function initActivities(){
     console.log()
-    await handleRoute("Før handle route: "+document.body.dataset.role);
-    console.log("Efter handle route: "+document.body.dataset.role);
+    await authUser(document.body.dataset.role);
     await getReservations();
 }
 

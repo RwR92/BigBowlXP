@@ -1,29 +1,26 @@
 document.addEventListener("DOMContentLoaded", initApp);
 let count = 0;
 async function initApp() {
-     await handleRoute(document.body.dataset.role);
+     await authUser(document.body.dataset.role);
     console.log(sessionStorage.getItem("user"))
 }
-
-export async function handleRoute(dataRole) {
-    count ++;
-    console.log(dataRole);
+export async function authUser(dataRole){
     const response = await fetch("/api/auth", {
-        method: "GET",
-        headers: {
-            "Content-type": "application/json"
-        },
-        body: JSON.stringify()
+        method: "GET"
     })
-
     let userType = null;
     if (response.ok) {
         const user = await response.json();
         userType = user.userType;
     }
-    if(userType === dataRole){
-        return;
+
+    if(userType !== dataRole){
+       await handleRoute(dataRole,userType);
     }
+}
+async function handleRoute(dataRole,userType) {
+    count ++;
+    console.log("Vi kom ind i handleRoute: "+count+" gange");
 
     if (!userType) {
         if (dataRole) {
@@ -38,5 +35,4 @@ export async function handleRoute(dataRole) {
             window.location.replace("employee-home-page.html");
         }
     }
-    console.log(count);
 }

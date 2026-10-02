@@ -1,6 +1,7 @@
 const API_URL = "/api/lanes"
 let lanes = [];
 import {logout} from "./app.js"
+document.addEventListener("DOMContentLoaded", initAdminPage);
 async function initAdminPage() {
     await refreshLanes();
     document.querySelector("#bowlingLaneTableBody").addEventListener("click", handleTableClick);

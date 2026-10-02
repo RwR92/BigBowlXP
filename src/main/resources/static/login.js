@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", initApp);
 const BASE_URL_LOGIN = "/api/login";
 const formData = [];
-import {handleRoute} from "./script.js"
+import {authUser} from "./script.js"
 async function initApp() {
     document.querySelector("#loginForm").addEventListener("submit", handleLoginSubmit)
 }
