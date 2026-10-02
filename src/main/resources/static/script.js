@@ -7,6 +7,7 @@ async function initApp() {
 
 export async function handleRoute(dataRole) {
     count ++;
+    console.log(dataRole);
     const response = await fetch("/api/auth", {
         method: "GET",
         headers: {
@@ -20,19 +21,21 @@ export async function handleRoute(dataRole) {
         const user = await response.json();
         userType = user.userType;
     }
+    if(userType === dataRole){
+        return;
+    }
 
     if (!userType) {
         if (dataRole) {
             window.location.replace("login.html");
         }
-       // return;
     }
 
     if (userType !== dataRole) {
         if (userType === "admin") {
-            window.location.replace("test-admin-page.html");
+            window.location.replace("admin-home-page.html");
         } else if (userType === "employee") {
-            window.location.replace("test-employee-page.html");
+            window.location.replace("employee-home-page.html");
         }
     }
     console.log(count);
