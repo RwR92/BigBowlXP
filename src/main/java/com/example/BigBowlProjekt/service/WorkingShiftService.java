@@ -28,19 +28,10 @@ public class WorkingShiftService {
     }
 
     public List<WorkingShiftDTO> getAllWorkingShifts() {
-
-        List<WorkingShift> workingShifts = workingShiftRepository.findAll();
-
-        List<WorkingShiftDTO> workingShiftDTOList = new ArrayList<>();
-
-        for (WorkingShift shifts : workingShifts) {
-
-            WorkingShiftDTO shiftDTO = WorkingShiftMapper.toDTO(shifts);
-
-            workingShiftDTOList.add(shiftDTO);
-        }
-
-        return workingShiftDTOList;
+        return workingShiftRepository.findAll()
+                .stream()
+                .map(WorkingShiftMapper::toDTO)
+                .toList();
     }
 
     public List<WorkingShiftDTO> getAllWorkingShiftWeekAhead(LocalDate givenDate) {
