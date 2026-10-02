@@ -1,10 +1,11 @@
 const API_DATABASE = "http://localhost:8080/api/employees";
 let employees = []
+import {initApp} from "./app.js"
 
-document.addEventListener("DOMContentLoaded", initApp);
+document.addEventListener("DOMContentLoaded", initEmployeeScriptApp);
 
-async function initApp() {
-
+async function initEmployeeScriptApp() {
+    await initApp()
     try {
         employees = await fetchEmployees();
         displayEmployees(employees);

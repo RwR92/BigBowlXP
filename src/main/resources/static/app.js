@@ -1,8 +1,8 @@
 const BASE_URL_LOGOUT = "api/logout";
-import {authUser} from "./script.js"
+ import {authUser} from "./script.js"
 document.addEventListener("DOMContentLoaded", initApp);
 
-async function initApp() {
+export async function initApp() {
     document.querySelector("#logout-btn").addEventListener("click", logout)
     await authUser(document.body.dataset.role);
 }
