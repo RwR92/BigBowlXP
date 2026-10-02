@@ -46,10 +46,4 @@ public class AdminEmployeeController {
         List<WorkingShiftDTO> list = workingShiftService.getAllWorkingShiftWeekAhead(LocalDate.of(year, month, day));
         return ResponseEntity.ok(list);
     }
-
-    @GetMapping("/working-shift")
-    public ResponseEntity<List<WorkingShiftDTO>> showAllWorkingShifts() {
-        return ResponseEntity.ok(workingShiftService.getAllWorkingShifts());
-    }
-
 }   

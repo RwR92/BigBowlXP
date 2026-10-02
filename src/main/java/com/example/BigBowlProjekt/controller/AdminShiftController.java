@@ -6,6 +6,8 @@ import com.example.BigBowlProjekt.service.WorkingShiftService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/working-shifts")
@@ -15,6 +17,11 @@ public class AdminShiftController {
 
     public AdminShiftController(WorkingShiftService workingShiftService) {
         this.workingShiftService = workingShiftService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<WorkingShiftDTO>> showAllWorkingShifts() {
+        return ResponseEntity.ok(workingShiftService.getAllWorkingShifts());
     }
 
     @PostMapping
