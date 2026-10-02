@@ -49,14 +49,7 @@ public class AdminEmployeeController {
 
     @GetMapping("/working-shift")
     public ResponseEntity<List<WorkingShiftDTO>> showAllWorkingShifts() {
-        List<WorkingShiftDTO> workingShiftList = workingShiftService.getAllWorkingShifts();
-
-        if (workingShiftList == null) {
-            return ResponseEntity.notFound().build();
-        } else {
-            return ResponseEntity.ok(workingShiftList);
-        }
-
+        return ResponseEntity.ok(workingShiftService.getAllWorkingShifts());
     }
 
 }   
