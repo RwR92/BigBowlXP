@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", initApp);
 
-const BASE_URL = "/api/working-shifts";
+import { deleteWorkShift, fetchWorkshifts } from "./workingShiftAPI.js";
+
 const table = document.querySelector("#workShift-list");
 const createBtn = document.querySelector("#create-btn");
 
@@ -10,10 +11,7 @@ async function initApp() {
     displayWorkShifts(await fetchWorkshifts());
 }
 
-async function fetchWorkshifts() {
-    const workShiftList = await fetch(`${BASE_URL}`)
-    return await workShiftList.json();
-}
+
 
 function displayWorkShifts(workShiftList) {
     table.innerHTML = "";
@@ -63,8 +61,4 @@ async function handleTableClick(event) {
     }
 }
 
-async function deleteWorkShift(id) {
-    await fetch(`${BASE_URL}/${id}`, {
-        method: "Delete"
-    });
-}
+
