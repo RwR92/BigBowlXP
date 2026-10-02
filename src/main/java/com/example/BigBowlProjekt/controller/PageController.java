@@ -3,6 +3,7 @@ package com.example.BigBowlProjekt.controller;
 import com.example.BigBowlProjekt.dto.LoginInfoDTO;
 import com.example.BigBowlProjekt.dto.UserTypeDTO;
 import com.example.BigBowlProjekt.service.LoginService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +48,6 @@ public class PageController {
     public ResponseEntity<UserTypeDTO> auth(HttpSession session) {
         UserTypeDTO user = (UserTypeDTO) session.getAttribute("user");
         UserTypeDTO newUser = new UserTypeDTO(HttpHelper.authUser(user));
-        System.out.println(newUser);
         return ResponseEntity.status(HttpStatus.OK).body(newUser);
     }
 }

@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", initApp);
 const BASE_URL_LOGIN = "/api/login";
 const formData = [];
-import {handleRoute} from "./script.js"
+import {authUser} from "./script.js"
 async function initApp() {
     document.querySelector("#loginForm").addEventListener("submit", handleLoginSubmit)
 }
@@ -17,19 +17,18 @@ async function handleLoginSubmit(e) {
 
     const response = await tryLogin(formData);
     if(response.userType === "admin"){
-        window.location.href = "test-admin-page.html";
+        window.location.href = "admin-home-page.html";
     } else if (response.userType === "employee"){
-        window.location.href = "test-employee-page.html";
+        window.location.href = "employee-home-page.html";
     }
 }
 
-async function tryLogin(loginInfo){
-    const response= await fetch(BASE_URL_LOGIN, {
+async function tryLogin(loginInfo) {
+    const response = await fetch(BASE_URL_LOGIN, {
         method: "POST",
-        headers: {
-            "Content-type": "application/json"
-        },
-        body:   JSON.stringify(loginInfo)
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(loginInfo)
     });
-    return await response.json();
+    const text = await response.text();
+    return text ? JSON.parse(text) : null;
 }

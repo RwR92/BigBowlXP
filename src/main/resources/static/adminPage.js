@@ -1,10 +1,11 @@
 const API_URL = "/api/lanes"
-
 let lanes = [];
-
-export async function initAdminPage() {
+import {logout} from "./app.js"
+document.addEventListener("DOMContentLoaded", initAdminPage);
+async function initAdminPage() {
     await refreshLanes();
     document.querySelector("#bowlingLaneTableBody").addEventListener("click", handleTableClick);
+    document.querySelector("#logout-btn").addEventListener("click", logout);
 }
 
 async function refreshLanes(){
