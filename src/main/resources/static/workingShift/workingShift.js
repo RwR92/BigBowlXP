@@ -112,7 +112,6 @@ async function showEditForm(id) {
 
 async function handlePopupFormSubmit(event) {
     event.preventDefault();
-    console.log("click submit")
     const formData = new FormData(event.target);
     const startTime = formData.get("start-time");
     const endTime = formData.get("end-time");
@@ -128,7 +127,8 @@ async function handlePopupFormSubmit(event) {
     const formType = popupForm.getAttribute("data-action");
     if (formType === "create") {
         try {
-            await addWorkShift(workShiftData);
+            const workShift = await addWorkShift(workShiftData);
+            renderWorkShift(workShift);
             popupContainer.classList.add("hidden");
         } catch (error) {
             activityTextMessage(error.message);
