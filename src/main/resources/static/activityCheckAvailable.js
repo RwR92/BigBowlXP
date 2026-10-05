@@ -15,7 +15,7 @@ async function loadAvailability() {
         alert("Vælg både aktivitet og dato.");
         return;
     }
-    console.log(date);
+
     try {
         const response = await fetch(`${API_URL}?type=${type}&date=${date}`);
 
