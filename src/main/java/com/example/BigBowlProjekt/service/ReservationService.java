@@ -11,6 +11,7 @@ import com.example.BigBowlProjekt.repository.ReservationRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -47,8 +48,13 @@ public class ReservationService {
     @Transactional
     public ReservationDTO createReservation(Long customerId, List<ActivityDTO> activityLines) {
 
-        Customer customer = customerRepository.findById(customerId)
-                .orElseThrow(() -> new IllegalArgumentException("Kunde findes ikke."));
+        Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
+
+        if (optionalCustomer.isEmpty()) {
+            throw new IllegalArgumentException("Kunde findes ikke.");
+        }
+
+        Customer customer = optionalCustomer.get();
 
         Reservation reservation = new Reservation(customer);
         reservation.setReservationNumber(generateReservationNumber());
@@ -61,6 +67,37 @@ public class ReservationService {
         Reservation saved = reservationRepository.save(reservation);
         return ReservationMapper.toDTO(saved);
     }
+
+    public List<ReservationDTO> getDayOverview (LocalDate date) {
+        List<ReservationDTO> result = new ArrayList<>();
+
+        for (Reservation reservation : reservationRepository.findAll()){
+
+            boolean hasActivityOnDate = false;
+
+            for (Activity activity : reservation.getActivities()) {
+                if (activity.getStartTime().toLocalDate().equals(date)) {
+                    hasActivityOnDate = true;
+                    break;
+                }
+            }
+            if (hasActivityOnDate) {
+                result.add(ReservationMapper.toDTO(reservation));
+
+            }
+
+        }
+        return result;
+    }
+@Transactional
+public void cancelReservation(long id) {
+        if (!reservationRepository.existsById(id)) {
+            throw new IllegalArgumentException("Kunde findes ikke.");
+        }
+        reservationRepository.deleteById(id);
+}
+
+
     private String generateReservationNumber(){
         return "BIGBOW_"+ UUID.randomUUID().toString().substring(0, 8).toUpperCase();
     }
