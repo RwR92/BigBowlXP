@@ -10,7 +10,7 @@
     background: rgba(0,0,0,0.5);
 }
 
-.popup {
+.popup-form {
     display: flex;
     flex-direction: column;
 
