@@ -8,9 +8,16 @@ export async function fetchWorkshifts() {
 }
 
 export async function deleteWorkShift(id) {
-    await fetch(`${BASE_URL}/${id}`, {
+    const response = await fetch(`${BASE_URL}/${id}`, {
         method: "Delete"
     });
+
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.detail);
+    }
+
+    return response.ok;
 }
 
 export async function addWorkShift(workShift) {
