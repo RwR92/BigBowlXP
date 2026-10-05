@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", initApp);
 
-import { deleteWorkShift, fetchWorkshifts, addWorkShift } from "./workingShiftAPI.js";
+import { deleteWorkShift, fetchWorkshifts, addWorkShift, editWorkShift } from "./workingShiftAPI.js";
 
 const table = document.querySelector("#workShift-list");
 const createBtn = document.querySelector("#create-btn");
