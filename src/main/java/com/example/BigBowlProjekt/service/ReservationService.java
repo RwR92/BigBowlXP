@@ -97,7 +97,6 @@ public void cancelReservation(long id) {
         reservationRepository.deleteById(id);
 }
 
-
     private String generateReservationNumber(){
         return "BIGBOW_"+ UUID.randomUUID().toString().substring(0, 8).toUpperCase();
     }
