@@ -1,10 +1,7 @@
 package com.example.BigBowlProjekt.model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 @JsonPropertyOrder({"id", "firstName", "lastName", "phoneNumber", "role"})
@@ -22,8 +19,7 @@ public class Employee {
 
     private String role;
 
-    public Employee(Long employeeId, String firstName, String lastName, String phoneNumber, String role) {
-        this.employeeId = employeeId;
+    public Employee(String firstName, String lastName, String phoneNumber, String role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -49,6 +45,7 @@ public class Employee {
         return phoneNumber;
     }
 
-    public String getRole() {return role;
+    public String getRole() {
+        return role;
     }
 }

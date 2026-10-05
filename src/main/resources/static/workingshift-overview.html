@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Workingshift overview</title>
+    <!--    <link rel="icon" type="image/placeholder" href="/images/favicon.ico">-->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>
+    Workingshift overview
+</h1>
+
+<label>Filtrér efter uge</label>
+<select name="role" id="filterByRole">
+    <option value="all">Se alle</option>
+    <option value="Manager">Manager</option>
+    <option value="Employee">Medarbejder</option>
+</select>
+
+<br><br>
+
+<table>
+    <thead>
+    <tr id="workingShiftTableHeader">
+        <th scope="col">Date</th>
+        <th scope="col">Time</th>
+        <th scope="col">Time</th>
+        <th scope="col">Time</th>
+    </tr>
+    </thead>
+    <tbody id="workingShiftTableBody">
+    </tbody>
+</table>
+
+
+<script src="WorkingShiftScript.js"></script>
+
+</body>
+</html>

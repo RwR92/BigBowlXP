@@ -1,10 +1,16 @@
 // API URL
 const API_URL = "/api/activities";
 
+import { authUser } from "./script.js";
 
 // Load reservations when page opens
-document.addEventListener("DOMContentLoaded", getReservations);
+document.addEventListener("DOMContentLoaded", initActivities);
 
+async function initActivities(){
+    console.log()
+    await authUser(document.body.dataset.role);
+    await getReservations();
+}
 
 // ------------------------------------
 // GET ALL RESERVATIONS
