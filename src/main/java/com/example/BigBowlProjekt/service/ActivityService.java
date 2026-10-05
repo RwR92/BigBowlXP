@@ -4,6 +4,7 @@ import com.example.BigBowlProjekt.dto.LaneSummaryDTO;
 import com.example.BigBowlProjekt.dto.ActivityDTO;
 import com.example.BigBowlProjekt.mapper.ActivityMapper;
 import com.example.BigBowlProjekt.model.Activity;
+import com.example.BigBowlProjekt.model.ActivityType;
 import com.example.BigBowlProjekt.model.Lane;
 import com.example.BigBowlProjekt.repository.CustomerRepository;
 import com.example.BigBowlProjekt.repository.LaneRepository;
@@ -57,6 +58,17 @@ public class ActivityService {
     }
 
     public Activity buildValidActivity(ActivityDTO dto) {
+        if (dto.type() == ActivityType.DINING) {
+            if (dto.startTime() == null || dto.endTime() == null
+                    || !dto.endTime().isAfter(dto.startTime())) {
+                throw new IllegalArgumentException("Sluttid skal ligge efter starttid.");
+            }
+            if (dto.guests() == null || dto.guests() < 1) {
+                throw new IllegalArgumentException("Angiv antal gæster til spisning.");
+            }
+            return new Activity(dto.type(), dto.startTime(), dto.endTime(), new ArrayList<>(), dto.guests());
+        }
+
         List<Long> laneIds = extractLaneIds(dto.lanes());
 
         validateLaneCount(laneIds);
@@ -64,13 +76,13 @@ public class ActivityService {
 
         List<Lane> lanes = laneRepository.findAllById(laneIds);
         if (lanes.size() != laneIds.size()) {
-            throw new IllegalArgumentException("En eller flere baner findes ikke");
+            throw new IllegalArgumentException("En eller flere baner findes ikke.");
         }
+
         validateNoOverlap(laneIds, dto.startTime(), dto.endTime());
 
-        return new Activity(dto.type(),dto.startTime(),dto.endTime(),lanes, dto.guests());
+        return new Activity(dto.type(), dto.startTime(), dto.endTime(), lanes, dto.guests());
     }
-
 
     @Transactional
     public ActivityDTO createActivity(ActivityDTO dto) {
@@ -125,12 +137,11 @@ public class ActivityService {
 
         for (Activity existing : allActivities) {
 
-            // Tester om tiden overlapper
             if (!existing.overlaps(startTime, endTime)) {
                 continue;
             }
 
-            // Bruger den eksisterende aktivitet en af de samme baner?
+
             for (Lane lane : existing.getLanes()) {
                 if (laneIds.contains(lane.getId())) {
                     throw new IllegalArgumentException("Bane " + lane.getLaneNumber()
