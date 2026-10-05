@@ -12,4 +12,5 @@ public record ActivityDTO(
         LocalDateTime endTime,
         List<LaneSummaryDTO> lanes,
         Integer guests
-) {}
+) {
+}
