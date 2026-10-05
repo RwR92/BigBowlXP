@@ -48,4 +48,9 @@ public class AdminShiftController {
         workingShiftService.deleteWorkingShift(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<WorkingShiftDTO> getWorkingShiftById(@PathVariable Long id) {
+        return ResponseEntity.ok(workingShiftService.getWorkingShiftById(id));
+    }
 }
