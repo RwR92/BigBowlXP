@@ -29,3 +29,20 @@ export async function addWorkShift(workShift) {
 
     return await response.json();
 }
+
+export async function editWorkShift(id, workShift) {
+    const response = await fetch(`${BASE_URL}/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(workShift)
+    })
+
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.detail);
+    }
+
+    return await response.json();
+}
