@@ -45,7 +45,7 @@ public class ActivityController {
     public List<TimeSlot> getDayAvailability(
             @RequestParam LaneType type,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-
+        System.out.println(date);
         return availabilityService.getDayAvailability(type, date);
     }
 
