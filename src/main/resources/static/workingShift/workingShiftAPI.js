@@ -46,3 +46,16 @@ export async function editWorkShift(id, workShift) {
 
     return await response.json();
 }
+
+export async function getPersonById(id) {
+    const response = await fetch(`${BASE_URL}/${id}`, {
+        method: "GET"
+    })
+
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.detail);
+    }
+
+    return await response.json();
+}
