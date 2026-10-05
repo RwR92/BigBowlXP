@@ -49,7 +49,6 @@ function renderWorkShift(workShift) {
         <td>${workShift.id}</td>
         <td>${workShift.date}</td>
         <td>${workShift.startTime}</td>
-        <td>${workShift.startTime}</td>
         <td>${workShift.endTime}</td>
         <td>${workShift.employeeDTO.id}</td>
         <td>${workShift.employeeDTO.firstName} ${workShift.employeeDTO.lastName}</td>
@@ -65,9 +64,9 @@ function renderUpdatedWorkShift(workShift) {
     const row = table.querySelector(`tr[data-id="${workShift.id}"]`);
 
     row.children[0].textContent = workShift.id;
-    row.children[1].textContent = workShift.startTime;
-    row.children[2].textContent = workShift.endTime;
-    row.children[3].textContent = workShift.date;
+    row.children[1].textContent = workShift.date;
+    row.children[2].textContent = workShift.startTime;
+    row.children[3].textContent = workShift.endTime;
     row.children[4].textContent = workShift.employeeDTO.id;
     row.children[5].textContent = `${workShift.employeeDTO.firstName} ${workShift.employeeDTO.lastName}`;
 }
@@ -93,7 +92,7 @@ async function handleTableClick(event) {
 }
 
 async function showEditForm(id) {
-    popupForm.setAttribute("data-acton", "edit");
+    popupForm.setAttribute("data-action", "edit");
     popupForm.setAttribute("data-id", id);
     h3Form.textContent = "Rediger eksisterende vagt";
 
