@@ -1,3 +1,23 @@
+body {
+    padding: 2em;
+}
+
+#create-btn {
+    margin-bottom: 1.5em;
+    padding: 0.67em 1.67em;
+
+    border-radius: 10px;
+    border: 1px solid black;
+
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#create-btn:hover {
+    /*filter: brightness(90%);*/
+}
+
+/* POPUP MAGIC */
 .popup-container {
     position: fixed;
     z-index: 1000;
@@ -24,4 +44,23 @@
 
 .hidden {
     display: none !important;
+}
+
+/* TABLE PZAZZ */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 1em;
+    text-align: center;
+}
+
+tbody tr:hover {
+    /*filter: brightness(90%);*/
 }
