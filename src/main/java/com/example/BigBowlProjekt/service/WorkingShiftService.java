@@ -28,19 +28,10 @@ public class WorkingShiftService {
     }
 
     public List<WorkingShiftDTO> getAllWorkingShifts() {
-
-        List<WorkingShift> workingShifts = workingShiftRepository.findAll();
-
-        List<WorkingShiftDTO> workingShiftDTOList = new ArrayList<>();
-
-        for (WorkingShift shifts : workingShifts) {
-
-            WorkingShiftDTO shiftDTO = WorkingShiftMapper.toDTO(shifts);
-
-            workingShiftDTOList.add(shiftDTO);
-        }
-
-        return workingShiftDTOList;
+        return workingShiftRepository.findAll()
+                .stream()
+                .map(WorkingShiftMapper::toDTO)
+                .toList();
     }
 
     public List<WorkingShiftDTO> getAllWorkingShiftWeekAhead(LocalDate givenDate) {
@@ -97,7 +88,7 @@ public class WorkingShiftService {
     public void deleteWorkingShift(Long id) {
         if (!workingShiftRepository.existsById(id)) {
             throw new NotFoundException(
-                    "Working Shift Not found with id: " + id
+                    "Working Shift not found with id: " + id
             );
         }
 
@@ -146,6 +137,15 @@ public class WorkingShiftService {
         workingShift.setEndTime(request.endTime());
 
         workingShiftRepository.save(workingShift);
+        return WorkingShiftMapper.toDTO(workingShift);
+    }
+
+    public WorkingShiftDTO getWorkingShiftById(Long id) {
+        WorkingShift workingShift = workingShiftRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(
+                        "Working shift not found with id: " + id
+                ));
+
         return WorkingShiftMapper.toDTO(workingShift);
     }
 
