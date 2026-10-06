@@ -1,4 +1,9 @@
 package com.example.BigBowlProjekt.dto;
 
-public class SaleResponseDTO {
+import java.time.LocalDate;
+
+public record SaleResponseDTO(
+        Long id,
+        LocalDate date
+) {
 }
