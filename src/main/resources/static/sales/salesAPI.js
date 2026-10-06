@@ -4,6 +4,12 @@ export async function getAllSalesWithinLastMonth() {
     const response = await fetch(`${BASE_URL}`, {
         method: "GET"
     } )
-    console.log("status:", response.status);
+    return await response.json();
+}
+
+export async function getAllSalesFromSpecificMonth(year, month) {
+    const response = await fetch(`${BASE_URL}/specific-month?year=${year}&month=${month}`, {
+        method: "GET"
+    } )
     return await response.json();
 }
