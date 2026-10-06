@@ -1,5 +1,7 @@
 package com.example.BigBowlProjekt.controller;
 
+import com.example.BigBowlProjekt.dto.SaleRequestDTO;
+import com.example.BigBowlProjekt.dto.SaleResponseDTO;
 import com.example.BigBowlProjekt.service.SaleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

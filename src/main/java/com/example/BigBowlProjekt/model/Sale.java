@@ -2,7 +2,8 @@ package com.example.BigBowlProjekt.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,10 +13,22 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime saleDate;
+    private LocalDate saleDate;
 
     @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
-    private List<SaleItem> saleItems;
+    private List<SaleItem> saleItems = new ArrayList<>();
+
+    public Sale(){}
+
+    public Sale(LocalDate saleDate, List<SaleItem> saleItems) {
+        this.saleDate = saleDate;
+        this.saleItems = saleItems;
+    }
+
+    public void addSaleItem(SaleItem saleItem){
+        saleItems.add(saleItem);
+    }
+
 
     public Long getId() {
         return id;
@@ -25,11 +38,11 @@ public class Sale {
         this.id = id;
     }
 
-    public LocalDateTime getSaleDate() {
+    public LocalDate getSaleDate() {
         return saleDate;
     }
 
-    public void setSaleDate(LocalDateTime saleDate) {
+    public void setSaleDate(LocalDate saleDate) {
         this.saleDate = saleDate;
     }
 

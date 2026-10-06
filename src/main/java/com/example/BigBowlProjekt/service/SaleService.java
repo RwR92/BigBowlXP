@@ -1,5 +1,11 @@
 package com.example.BigBowlProjekt.service;
 
+import com.example.BigBowlProjekt.dto.SaleRequestDTO;
+import com.example.BigBowlProjekt.dto.SaleResponseDTO;
+import com.example.BigBowlProjekt.mapper.SaleMapper;
+import com.example.BigBowlProjekt.model.Sale;
+import com.example.BigBowlProjekt.repository.ProductRepository;
+import com.example.BigBowlProjekt.repository.SaleRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -8,16 +14,16 @@ import org.springframework.stereotype.Service;
 public class SaleService {
 
     private final SaleRepository saleRepository;
-    private final SaleMapper saleMapper;
+    private final ProductRepository productRepository;
 
-    public SaleService(SaleRepository saleRepository, SaleMapper saleMapper){
+
+    public SaleService(SaleRepository saleRepository, ProductRepository productRepository){
         this.saleRepository = saleRepository;
-        this.saleMapper = saleMapper;
+        this.productRepository = productRepository;
     }
 
     public SaleResponseDTO createSale(SaleRequestDTO sale){
-        Sale saleModel = saleMapper.toModel(sale);
-        Sale savedSale = saleRepository.save(saleModel);
-        return saleMapper.toResponse(savedSale);
+        Sale savedSale = saleRepository.save(SaleMapper.toModel(sale, productRepository));
+        return SaleMapper.toResponse(savedSale);
     }
 }

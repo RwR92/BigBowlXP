@@ -17,6 +17,8 @@ public class SaleItem {
     private Product product;
 
 
+
+    private Integer quantity;
     private BigDecimal price;
 
     public Long getId() {
@@ -49,5 +51,13 @@ public class SaleItem {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }
