@@ -11,7 +11,8 @@ public class LaneMapper {
                 lane.getId(),
                 lane.getLaneNumber(),
                 lane.getType(),
-                lane.isChildFriendly()
+                lane.isChildFriendly(),
+                lane.getIsOpen()
         );
     }
 

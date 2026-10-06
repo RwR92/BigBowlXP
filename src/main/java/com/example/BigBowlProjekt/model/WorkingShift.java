@@ -44,8 +44,16 @@ public class WorkingShift {
         return date;
     }
 
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     public LocalTime getStartTime() {
         return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
     }
 
     public LocalTime getEndTime() {
@@ -58,5 +66,9 @@ public class WorkingShift {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 }

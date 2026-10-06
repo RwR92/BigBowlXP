@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dagsoversigt</title>
+</head>
+<script src="dayOverview.js"></script>
+<body>
+<h1>Dagsoversigt</h1>
+
+<div>
+    <label for="date">dato</label>
+    <input type="date" id="date">
+    <button onclick="loadDay()">Vis Dag</button>
+
+</div>
+<p id="message"></p>
+
+<table border="1" id="timeline" hidden>
+    <thead id="timelineHead">
+    </thead>
+    <tbody id="timelineBody">
+    </tbody>
+</table>
+
+</body>
+</html>

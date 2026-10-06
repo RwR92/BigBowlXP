@@ -28,14 +28,14 @@ public class AdminEmployeeController {
     }
 
     @GetMapping("/employees")
-    @ResponseBody
-    public List<EmployeeDTO> getAllEmployees() {
-        return employeeService.getAllEmployees();
-    }
+    public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
 
-    @GetMapping("/employees/display")
-    public String showAllEmployees() {
-        return "employee-overview";
+        if (employeeService.getAllEmployees() == null) {
+            return ResponseEntity.notFound().build();
+
+        } else {
+            return ResponseEntity.ok(employeeService.getAllEmployees());
+        }
     }
 
     @GetMapping("/working-shift/{givenDate}")
@@ -43,18 +43,7 @@ public class AdminEmployeeController {
         int day = givenDate % 100;
         int month = (givenDate % 10000) / 100;
         int year = givenDate / 10000;
-        List list = workingShiftService.getAllWorkingShiftWeekAhead(LocalDate.of(year, month, day));
+        List<WorkingShiftDTO> list = workingShiftService.getAllWorkingShiftWeekAhead(LocalDate.of(year, month, day));
         return ResponseEntity.ok(list);
-    }
-
-    @GetMapping("/working-shift")
-    public ResponseEntity<List<WorkingShiftDTO>> showAllWorkingShifts() {
-        List<WorkingShiftDTO> workingShiftList = workingShiftService.getAllWorkingShifts();
-
-        if (workingShiftList == null) {
-            return ResponseEntity.notFound().build();
-        } else {
-            return ResponseEntity.ok(workingShiftList);
-        }
     }
 }   

@@ -13,8 +13,7 @@ public class WorkingShiftMapper {
                 workingShift.getDate(),
                 workingShift.getStartTime(),
                 workingShift.getEndTime(),
-                workingShift.getEmployee()
+                EmployeeMapper.toDTO(workingShift.getEmployee())
         );
-
     }
 }
