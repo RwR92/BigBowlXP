@@ -23,7 +23,7 @@ public class WorkingShiftServiceTest {
 
     @BeforeEach
     void setUp() {
-        service = new WorkingShiftService(null, null);
+        service = new WorkingShiftService(null, null, null);
     }
 
     @Test

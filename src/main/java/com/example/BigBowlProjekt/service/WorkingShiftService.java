@@ -21,10 +21,12 @@ public class WorkingShiftService {
 
     private final WorkingShiftRepository workingShiftRepository;
     private final EmployeeRepository employeeRepository;
+    private final AuditService auditService;
 
-    public WorkingShiftService(WorkingShiftRepository workingShiftRepository, EmployeeRepository employeeRepository) {
+    public WorkingShiftService(WorkingShiftRepository workingShiftRepository, EmployeeRepository employeeRepository, AuditService auditService) {
         this.workingShiftRepository = workingShiftRepository;
         this.employeeRepository = employeeRepository;
+        this.auditService = auditService;
     }
 
     public List<WorkingShiftDTO> getAllWorkingShifts() {
