@@ -2,6 +2,7 @@ package com.example.BigBowlProjekt.controller;
 
 import com.example.BigBowlProjekt.model.AuditLog;
 import com.example.BigBowlProjekt.service.AuditService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,9 +19,10 @@ public class AdminAuditController {
     }
 
     @GetMapping
-    public List<AuditLog> getAllLogs() {
-        return auditService.getAllLogs();
+    public ResponseEntity<List<AuditLog>> getAllLogs() {
+        if (auditService.getAllLogs().isEmpty()) {
+            ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(auditService.getAllLogs());
     }
-
-
 }

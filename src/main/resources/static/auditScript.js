@@ -1,13 +1,18 @@
 document.addEventListener("DOMContentLoaded", initApp);
+let list = [];
 
 async function initApp(){
     await refresh();
 }
 
 async function getData(){
-const response = await fetch("/api/admin/audit");
-    return response;
+    try {
+        list = await fetch("/api/admin/audit");
 
+    } catch (error) {
+        console.log("Error Could Not Fetch!!! ", error);
+    }
+    return list;
 }
 
 function createElement(auditLog) {
