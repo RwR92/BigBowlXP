@@ -1,8 +1,10 @@
 package com.example.BigBowlProjekt.init;
 
 import com.example.BigBowlProjekt.model.Employee;
+import com.example.BigBowlProjekt.model.Sale;
 import com.example.BigBowlProjekt.model.WorkingShift;
 import com.example.BigBowlProjekt.repository.EmployeeRepository;
+import com.example.BigBowlProjekt.repository.SaleRepository;
 import com.example.BigBowlProjekt.repository.WorkingShiftRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -15,13 +17,15 @@ public class TestDataInit implements CommandLineRunner {
 
     private final WorkingShiftRepository workingShiftRepository;
     private final EmployeeRepository employeeRepository;
+    private final SaleRepository saleRepository;
 
     public TestDataInit(
             WorkingShiftRepository workingShiftRepository,
-            EmployeeRepository employeeRepository) {
+            EmployeeRepository employeeRepository, SaleRepository saleRepository) {
 
         this.workingShiftRepository = workingShiftRepository;
         this.employeeRepository = employeeRepository;
+        this.saleRepository = saleRepository;
     }
 
     @Override
@@ -112,5 +116,14 @@ public class TestDataInit implements CommandLineRunner {
             workingShiftRepository.save(shift4);
             workingShiftRepository.save(shift5);
         }
+
+        Sale s1 = new Sale(LocalDate.now().minusDays(1));
+        Sale s2 = new Sale(LocalDate.now());
+        Sale s3 = new Sale(LocalDate.now().minusDays(3));
+        Sale s4 = new Sale(LocalDate.now().minusMonths(2));
+        saleRepository.save(s1);
+        saleRepository.save(s2);
+        saleRepository.save(s3);
+        saleRepository.save(s4);
     }
 }
