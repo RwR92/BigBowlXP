@@ -33,7 +33,7 @@ async function displaySpecificMonthsSale(event) {
     table.innerHTML = "";
     monthsSaleList.forEach(sale => {
         renderSalesInformation(sale)
-    })
+    });
 }
 
 function renderSalesInformation(sale) {
