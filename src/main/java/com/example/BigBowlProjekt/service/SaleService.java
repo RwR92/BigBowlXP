@@ -31,10 +31,10 @@ public class SaleService {
             /* To shorten the text within the if statement and make it more readable
              we add these two references */
             LocalDate now = LocalDate.now();
-            LocalDate salesDate = sale.getDate();
+            LocalDate salesDate = sale.getSaleDate();
 
             if (salesDate.isAfter(now.minusMonths(1)) && salesDate.isBefore(now) || salesDate.equals(now)) {
-                SaleResponseDTO saleResponseDTO = SaleMapper.toDTO(sale);
+                SaleResponseDTO saleResponseDTO = SaleMapper.toResponse(sale);
                 salesList.add(saleResponseDTO);
             }
         }

@@ -1,24 +1,38 @@
-document.addEventListener("DOMContentLoaded", initApp);
+document.addEventListener("DOMContentLoaded", initSaleApp);
+import {initApp} from "../app"
+import {createSale, getProducts} from "./salesAPI.js"
 
-import {getAllSalesWithinLastMonth} from "./salesAPI.js";
 
-const table = document.querySelector(".sales-table");
+async function initSaleApp(){
 
-async function initApp() {
-    await displaySales();
 }
 
-async function displaySales() {
-    const salesList = await getAllSalesWithinLastMonth();
-    table.innerHTML = "";
-    console.log("sales:", salesList);
-    salesList.forEach(sale => {
-        renderSalesInformation(sale)
-    });
+async function displayProducts(){
+    const products = await getProducts();
+    products.innerHTML = "";
+    try{
+        for(const product of products){
+            products.appendChild(renderProducts(product));
+        }
+    }catch (error){
+        console.log(error)
+    }
+
 }
 
-function renderSalesInformation(sale) {
-    const row = document.createElement("tr");
-    row.innerHTML = `${sale.date}`;
-    table.appendChild(row);
+async function renderProducts(product){
+    const li = document.createElement("li");
+    li.dataset.id = product.id;
+
+    const label = document.createElement("span");
+    label.textContent = `${product.name} (${Number(product.price).toFixed(2)} kr.)`;
+
+    const input = document.createElement("input");
+    input.type = "number";
+    input.min = "0";
+    input.value = "0";
+    input.addEventListener("input");
+
+    li.append(label, input);
+    return li;
 }

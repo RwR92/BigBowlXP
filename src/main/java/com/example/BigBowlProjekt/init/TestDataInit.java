@@ -117,13 +117,5 @@ public class TestDataInit implements CommandLineRunner {
             workingShiftRepository.save(shift5);
         }
 
-        Sale s1 = new Sale(LocalDate.now().minusDays(1));
-        Sale s2 = new Sale(LocalDate.now());
-        Sale s3 = new Sale(LocalDate.now().minusDays(3));
-        Sale s4 = new Sale(LocalDate.now().minusMonths(2));
-        saleRepository.save(s1);
-        saleRepository.save(s2);
-        saleRepository.save(s3);
-        saleRepository.save(s4);
     }
 }
