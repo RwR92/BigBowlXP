@@ -5,11 +5,7 @@ import com.example.BigBowlProjekt.dto.SaleResponseDTO;
 import com.example.BigBowlProjekt.service.SaleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,5 +28,12 @@ public class SaleController {
     @GetMapping
     public ResponseEntity<List<SaleResponseDTO>> getAllSalesWithinLastMonth() {
         return ResponseEntity.ok(saleService.getAllSalesWithinLastMonth());
+    }
+
+    @GetMapping("/specific-month")
+    public ResponseEntity<List<SaleResponseDTO>> getAllSalesFromSpecificMonth(
+            @RequestParam int year,
+            @RequestParam int month) {
+        return ResponseEntity.ok(saleService.getAllSalesFromSpecificMonth(year, month));
     }
 }

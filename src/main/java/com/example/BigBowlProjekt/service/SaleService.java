@@ -10,6 +10,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,19 +27,30 @@ public class SaleService {
     }
 
     public List<SaleResponseDTO> getAllSalesWithinLastMonth() {
-        List<SaleResponseDTO> salesList = new ArrayList<>();
-        for (Sale sale : saleRepository.findAll()) {
-            /* To shorten the text within the if statement and make it more readable
-             we add these two references */
-            LocalDate now = LocalDate.now();
-            LocalDate salesDate = sale.getDate();
+        return saleRepository.findAll()
+                .stream()
+                .filter(sale -> {
+                    LocalDate now = LocalDate.now();
+                    LocalDate salesDate = sale.getSaleDate();
 
-            if (salesDate.isAfter(now.minusMonths(1)) && salesDate.isBefore(now) || salesDate.equals(now)) {
-                SaleResponseDTO saleResponseDTO = SaleMapper.toDTO(sale);
-                salesList.add(saleResponseDTO);
-            }
-        }
-        return salesList;
+                    return salesDate.isAfter(now.minusMonths(1))
+                            && salesDate.isBefore(now)
+                            || salesDate.equals(now);
+                })
+                .map(SaleMapper::toResponse)
+                .toList();
+    }
+
+    public List<SaleResponseDTO> getAllSalesFromSpecificMonth(int year, int month) {
+        YearMonth yearMonth = YearMonth.of(year, month);
+
+        LocalDate startDate = yearMonth.atDay(1);
+        LocalDate endDate = yearMonth.atEndOfMonth();
+
+        return saleRepository.getAllBySaleDateIsBetween(startDate, endDate)
+                .stream()
+                .map(SaleMapper::toResponse)
+                .toList();
     }
 
     public SaleResponseDTO createSale(SaleRequestDTO sale){
