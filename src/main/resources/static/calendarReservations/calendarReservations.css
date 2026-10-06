@@ -1,0 +1,198 @@
+body {
+    padding: 2em;
+    font-family: Arial, sans-serif;
+}
+
+.calendar-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 2em;
+}
+
+.calendar-controls h2 {
+    margin: 0 1em;
+}
+
+.calendar-controls button {
+    padding: 0.5em 1em;
+    border: 1px solid black;
+    background: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.calendar-controls button:hover {
+    background: #eee;
+}
+
+.view-buttons {
+    margin-left: auto;
+}
+
+.view-btn.active {
+    background: #ddd;
+    font-weight: bold;
+}
+
+/* dag view kalender style */
+
+
+.day-calendar {
+    border: 1px solid black;
+}
+
+.day-header {
+    padding: 1em;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid black;
+}
+
+.day-body {
+    position: relative;
+    height: 1440px;
+}
+
+.time-slot {
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    height: 59px;
+
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.time-label {
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 50px;
+    font-size: 12px;
+}
+
+.day-activities {
+    position: absolute;
+    left: 60px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.activity {
+    position: absolute;
+
+    background: lightblue;
+    border: 1px solid #333;
+    border-radius: 5px;
+
+    padding: 5px;
+    box-sizing: border-box;
+
+    overflow: hidden;
+}
+
+/* uge view kalender style */
+
+
+.week-calendar {
+    display: grid;
+    grid-template-columns: 60px repeat(7, 1fr);
+
+    border: 1px solid black;
+}
+
+.week-time-column {
+    border-right: 1px solid black;
+    position: relative;
+    height: 1440px;
+}
+
+.week-day {
+    border-right: 1px solid black;
+}
+
+.week-day-header {
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-bottom: 1px solid black;
+    font-weight: bold;
+}
+
+.week-day-body {
+    position: relative;
+    height: 1440px;
+}
+
+.week-hour-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    height: 60px;
+
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.week-time-label {
+    position: absolute;
+    left: 5px;
+    font-size: 12px;
+}
+
+/* månede view kalender style */
+
+.month-calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.month-day-name {
+    padding: 1em;
+    text-align: center;
+
+    font-weight: bold;
+
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.month-cell {
+    min-height: 120px;
+
+    padding: 5px;
+
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.month-cell.other-month {
+    background: #eee;
+    color: #999;
+}
+
+.month-date {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.month-activity {
+    padding: 3px;
+    margin-bottom: 3px;
+
+    background: lightblue;
+    border: 1px solid #333;
+    border-radius: 3px;
+
+    font-size: 12px;
+}
