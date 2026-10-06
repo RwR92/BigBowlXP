@@ -2,9 +2,12 @@ package com.example.BigBowlProjekt.controller;
 
 import com.example.BigBowlProjekt.dto.ActivityDTO;
 import com.example.BigBowlProjekt.dto.TimeSlot;
+import com.example.BigBowlProjekt.dto.UserTypeDTO;
 import com.example.BigBowlProjekt.model.LaneType;
 import com.example.BigBowlProjekt.service.ActivityService;
+import com.example.BigBowlProjekt.service.AuditService;
 import com.example.BigBowlProjekt.service.AvailabilityService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,11 +22,13 @@ public class ActivityController {
 
     private final ActivityService activityService;
     private final AvailabilityService availabilityService;
+    private final AuditService auditService;
 
     public ActivityController(ActivityService activityService,
-                              AvailabilityService availabilityService) {
+                              AvailabilityService availabilityService, AuditService auditService) {
         this.activityService = activityService;
         this.availabilityService = availabilityService;
+        this.auditService = auditService;
     }
 
     @GetMapping
@@ -49,16 +54,20 @@ public class ActivityController {
     }
 
     @PostMapping
-    public ActivityDTO createActivity(@RequestBody ActivityDTO activityDTO) {
-        return activityService.createActivity(activityDTO);
+    public ActivityDTO createActivity(@RequestBody ActivityDTO activityDTO, HttpSession httpSession) {
+        ActivityDTO activity = activityService.createActivity(activityDTO);
+        UserTypeDTO user = (UserTypeDTO) httpSession.getAttribute("user");
+        auditService.log(user.userType(),"POST","createdActivity id: " + activity.id());
+        return activity;
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteActivity(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteActivity(@PathVariable Long id, HttpSession httpSession) {
         Optional<ActivityDTO> byId = activityService.getActivityById(id);
-
         if (byId.isPresent()) {
             activityService.deleteActivity(id);
+            UserTypeDTO user = (UserTypeDTO) httpSession.getAttribute("user");
+            auditService.log(user.userType(),"DELETE","deleted activity with id: " + id);
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
