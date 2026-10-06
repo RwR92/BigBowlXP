@@ -27,6 +27,7 @@ public class Sale {
 
     public void addSaleItem(SaleItem saleItem){
         saleItems.add(saleItem);
+        saleItem.setSale(this);
     }
 
 

@@ -16,8 +16,6 @@ public class SaleItem {
     @ManyToOne
     private Product product;
 
-
-
     private Integer quantity;
     private BigDecimal price;
 
