@@ -157,7 +157,7 @@
 
     function createLink(reservation) {
     const link = document.createElement("a");
-    link.href = "reservation-details.html?id=" + reservation.id;
+    link.href = "/reservation/reservation-details.html?id=" + reservation.id;
     link.textContent = reservation.reservationNumber;
     return link;
 }

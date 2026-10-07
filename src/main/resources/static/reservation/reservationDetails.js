@@ -119,7 +119,7 @@ async function cancelReservation() {
         }
 
         alert("Reservationen er annulleret.");
-        window.location.href = "day-overview.html";
+        window.location.href = "/reservation/day-overview.html";
 
     } catch (error) {
         console.error("Fejl ved annullering:", error);
