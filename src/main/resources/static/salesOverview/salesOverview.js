@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", initApp);
 
 import { getAllSalesFromSpecificMonth, getAllSalesWithinLastMonth } from "./salesOverviewAPI.js";
 
-const table = document.querySelector(".sales-table");
+const salesUl = document.querySelector(".sales-list");
 const monthForm = document.querySelector(".specific-month-form");
 
 async function initApp() {
@@ -14,11 +14,8 @@ async function initApp() {
 async function displaySales() {
     const salesList = await getAllSalesWithinLastMonth();
 
-    table.innerHTML = "";
-    console.log("sales:", salesList);
-    salesList.forEach(sale => {
-        renderSalesInformation(sale)
-    });
+    salesList.innerHTML = "";
+    renderSalesInformation(salesList);
 }
 
 async function displaySpecificMonthsSale(event) {
@@ -29,43 +26,24 @@ async function displaySpecificMonthsSale(event) {
 
     const monthsSaleList = await getAllSalesFromSpecificMonth(year, month);
 
-    table.innerHTML = "";
-    monthsSaleList.forEach(sale => {
-        renderSalesInformation(sale)
-    });
+    salesUl.innerHTML = "";
+    renderSalesInformation(monthsSaleList);
 }
 
-function renderSalesInformation(sale) {
-    const row = document.createElement("tr");
-
-    const td1 = document.createElement("td");
-    td1.textContent = sale.id;
-    const td2 = document.createElement("td");
-    td2.textContent = sale.saleDate;
-
-    row.appendChild(td1);
-    row.appendChild(td2);
-
-    const td3 = document.createElement("td");
-    const tableInTd = document.createElement("table");
-
-
-    for (const s of sale.items) {
-        const tableRow = document.createElement("tr");
-        const tableData1 = document.createElement("td");
-        tableData1.textContent = s.name;
-        const tableData2 = document.createElement("td");
-        tableData2.textContent = s.quantity;
-        const tableData3 = document.createElement("td");
-        tableData3.textContent = s.price;
-
-        tableRow.appendChild(tableData1);
-        tableRow.appendChild(tableData2);
-        tableRow.appendChild(tableData3);
-        tableInTd.appendChild(tableRow);
-    }
-
-    td3.appendChild(tableInTd);
-    row.appendChild(td3);
-    table.appendChild(row);
+function renderSalesInformation(salesList) {
+    const salesSortedByDate = {};
+    salesList.forEach(sale => {
+        if (!salesSortedByDate[sale.saleDate]) {
+            salesSortedByDate[sale.saleDate] = [sale];
+        } else {
+            salesSortedByDate[sale.saleDate].push(sale);
+        }
+    });
+    Object.keys(salesSortedByDate).forEach(date => {
+        const li = document.createElement("li");
+        li.setAttribute("data-date", date);
+        const [year, month, day] = date.split("-");
+        li.textContent = `${day}/${month}-${year} · ${salesSortedByDate[date].length} salg`
+        salesUl.appendChild(li);
+    })
 }
