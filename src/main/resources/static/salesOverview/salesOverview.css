@@ -1,3 +1,87 @@
 .hidden {
     display: none !important;
 }
+
+.sales-drawer {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 35%;
+
+    border: 1px solid black;
+    border-radius: 2em;
+    margin: 1em;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.drawer-sales-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 2em 0 2em;
+    border-bottom: 1px solid black;
+}
+
+.drawer-close {
+    transition: transform 0.2s;
+
+    width: 1.4em;
+    height: 1.4em;
+}
+
+.drawer-close:hover {
+    transform: scale(1.4);
+}
+
+.drawer-sales {
+    height: 100%;
+    overflow: auto;
+    margin: 0 1em 1em 1em;
+    padding: 1em;
+}
+
+.sale-container {
+    border: 1px solid black;
+    border-radius: 2em;
+    margin-bottom: 1em;
+    transition: transform 0.2s ease;
+}
+
+.sale-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.15);
+}
+
+.sale-header-container {
+    padding: 0.5em 1em 0.5em 1em;
+    border-bottom: 1px solid black;
+}
+
+.sale-header-container h3 {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+}
+
+.sale-table-container table {
+    width: 100%;
+    table-layout: fixed;
+    text-align: center;
+    padding: 1em;
+}
+
+.sale-table-container th {
+    border-bottom: 1px solid black;
+}
+
+.total-price-container {
+    padding: 0.5em 3.5em 1em 1em;
+    display: flex;
+    justify-content: end;
+    border-top: 1px solid black;
+}
+
+.total-price-container span {
+    text-decoration: underline;
+}
