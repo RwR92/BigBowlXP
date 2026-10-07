@@ -25,6 +25,7 @@ public class SaleController {
 
     @PostMapping
     public ResponseEntity<SaleResponseDTO> createSale(@RequestBody SaleRequestDTO sale){
+        //System.out.println("Du kom ind i createSale: "+sale);
         SaleResponseDTO savedSale = saleService.createSale(sale);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedSale);
     }

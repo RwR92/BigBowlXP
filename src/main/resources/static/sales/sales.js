@@ -42,8 +42,12 @@ async function renderProducts(product){
 
 async function handleSubmit(e){
     e.preventDefault();
-    const whatever = await getSelectedProducts();
-    console.log(whatever);
+    const selectedProducts = await getSelectedProducts();
+    try{
+        await createSale(selectedProducts);
+    } catch(error){
+        console.log(error);
+    }
 }
 
 async function getSelectedProducts(){
