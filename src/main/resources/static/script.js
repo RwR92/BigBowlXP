@@ -24,15 +24,15 @@ async function handleRoute(dataRole,userType) {
 
     if (!userType) {
         if (dataRole) {
-            window.location.replace("login.html");
+            window.location.replace("login/login.html");
         }
     }
 
     if (userType !== dataRole) {
         if (userType === "admin") {
-            window.location.replace("admin-home-page.html");
+            window.location.replace("/admin-home-page.html");
         } else if (userType === "employee") {
-            window.location.replace("employee-home-page.html");
+            window.location.replace("/employee-home-page.html");
         }
     }
 }
