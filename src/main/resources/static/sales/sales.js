@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", initSaleApp);
-//import {initApp} from "../app"
+import {initApp} from "../app.js"
 import {createSale, getProducts} from "./salesAPI.js"
 
 let products = [];
 
 async function initSaleApp(){
+    await initApp();
     document.querySelector("#saleForm").addEventListener("submit", handleSubmit)
     await displayProducts();
 }
@@ -42,9 +43,18 @@ async function renderProducts(product){
 
 async function handleSubmit(e){
     e.preventDefault();
+
     const selectedProducts = await getSelectedProducts();
+    if(selectedProducts.length === 0){
+        showMessage("Du skal vælge mere end 0 produkter.");
+        return;
+    }
+
     try{
-        await createSale(selectedProducts);
+        if(await createSale(selectedProducts)){
+            alert("Succesfuld oprettelse af salg");
+            window.location.href="../employee-home-page.html";
+        }
     } catch(error){
         console.log(error);
     }
@@ -59,5 +69,9 @@ async function getSelectedProducts(){
             products.push({productId: Number(li.dataset.id), quantity: quantity});
         }
     }
-    return products;
+    return {saleItems: products};
+}
+
+function showMessage(text){
+    document.querySelector("#message").textContent = text;
 }
