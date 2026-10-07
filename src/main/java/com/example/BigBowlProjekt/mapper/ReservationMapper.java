@@ -13,17 +13,18 @@ import java.util.List;
 
 public class ReservationMapper {
 
-    public static ReservationDTO toDTO (Reservation reservation){
+    public static ReservationDTO toDTO(Reservation reservation) {
         List<ActivityDTO> activitiesDTO = new ArrayList<>();
-        for (Activity activity : reservation.getActivities()){
+
+        for (Activity activity : reservation.getActivities()) {
             activitiesDTO.add(ActivityMapper.toDTO(activity));
         }
+
         return new ReservationDTO(
                 reservation.getId(),
-                reservation.getReservationNumber(),
-                reservation.getCreatedAt(),
-                toCustomerDTO(reservation.getCustomer()),
-                activitiesDTO);
+                reservation.getName(),
+                activitiesDTO
+        );
     }
     private static CustomerDTO toCustomerDTO(Customer customer) {
         if (customer == null) {

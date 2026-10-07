@@ -1,32 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Reservations</title>
 
-    <link rel="stylesheet" href="reservationStyle.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body data-role="employee">
 
 <h1>Reservations</h1>
 
+
+<!-- ========================================
+     RESERVATIONS TABLE
+========================================= -->
+
 <div class="reservations">
 
     <table>
 
         <thead>
+
         <tr>
             <th>ID</th>
-            <th>Start Time</th>
-            <th>End Time</th>
-            <th>Guests</th>
-            <th>Type</th>
-            <th>Lane</th>
+            <th>Name</th>
+            <th>Activities</th>
             <th>Action</th>
         </tr>
+
         </thead>
+
 
         <tbody id="reservationTableBody">
         </tbody>
@@ -35,75 +42,75 @@
 
 </div>
 
+
+
+<!-- ========================================
+     ADD RESERVATION
+========================================= -->
+
 <div class="reservation-form">
 
     <h2>Add Reservation</h2>
 
+
     <form id="reservationForm">
 
+
+        <!-- Reservation name -->
+
         <div>
-            <label for="startTime">Start Time</label>
+
+            <label for="reservationName">
+                Customer Name
+            </label>
 
             <input
-                    type="datetime-local"
-                    id="startTime"
+                    type="text"
+                    id="reservationName"
                     required>
+
         </div>
 
 
-        <div>
-            <label for="endTime">End Time</label>
+        <!-- Activities -->
 
-            <input
-                    type="datetime-local"
-                    id="endTime"
-                    required>
+        <h3>Activities</h3>
+
+        <div id="activitiesContainer">
         </div>
 
 
-        <div>
-            <label for="guests">Guests</label>
+        <!-- Add activity -->
 
-            <input
-                    type="number"
-                    id="guests"
-                    min="1"
-                    required>
-        </div>
+        <button
+                type="button"
+                id="addActivityButton">
 
+            + Add Activity
 
-        <div>
-            <label for="type">Type</label>
-
-            <select id="type" required>
-                <option value="">Choose type</option>
-                <option value="BOWLING">Bowling</option>
-                <option value="AIRHOCKEY">Airhockey</option>
-                <option value="DINING">Dining</option>
-            </select>
-        </div>
+        </button>
 
 
-        <div>
-            <label for="laneId">Lane ID</label>
+        <br>
+        <br>
 
-            <input
-                    type="number"
-                    id="laneId"
-                    min="1"
-                    required>
-        </div>
 
+        <!-- Submit reservation -->
 
         <button type="submit">
+
             Add Reservation
+
         </button>
+
 
     </form>
 
 </div>
 
-<script type="module" src="../activities.js"></script>
+
+<script type="module" src="activities.js"></script>
 
 </body>
+
 </html>
