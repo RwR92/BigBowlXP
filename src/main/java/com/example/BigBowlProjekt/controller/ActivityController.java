@@ -57,7 +57,7 @@ public class ActivityController {
     public ActivityDTO createActivity(@RequestBody ActivityDTO activityDTO, HttpSession httpSession) {
         ActivityDTO activity = activityService.createActivity(activityDTO);
         UserTypeDTO user = (UserTypeDTO) httpSession.getAttribute("user");
-        auditService.log(user.userType(),"POST","createdActivity id: " + activity.id());
+        auditService.log(user.userType(),"Oprettet aktivitet","Aktivitet: " + activity.type());
         return activity;
     }
 

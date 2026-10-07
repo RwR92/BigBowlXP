@@ -8,8 +8,8 @@ async function initApp(){
 
 async function getData() {
     try {
-        list = await fetch("/api/admin/audit");
-
+       const response = await fetch("/api/admin/audit");
+        list = await response.json();
     } catch (error) {
         console.log("Error Could Not Fetch!!! ", error);
     }
@@ -18,12 +18,16 @@ async function getData() {
 }
 
 function createElement(auditLog) {
-    const createdElement = document.createElement("row");
+    const createdElement = document.createElement("tr");
+    const date = new Date(auditLog.timeStamp).toLocaleString("da-DK", {
+        dateStyle: "short",
+        timeStyle: "short"
+    });
     createdElement.innerHTML = `
-<tb>${auditLog.user}</tb>
-<tb>${auditLog.action}</tb>
-<tb>${auditLog.timeStamp}</tb>
-<tb>${auditLog.description}</tb>
+<td>${auditLog.user}</td>
+<td>${auditLog.action}</td>
+<td>${date}</td>
+<td>${auditLog.description}</td>
 `
     console.log("createElement")
     const tableBody = document.getElementById("tbody");
