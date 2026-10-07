@@ -20,8 +20,9 @@ public class SaleController {
     }
 
     @PostMapping
-    public ResponseEntity<SaleResponseDTO> createSale(@RequestBody SaleRequestDTO sale){
-        SaleResponseDTO savedSale = saleService.createSale(sale);
+    public ResponseEntity<SaleResponseDTO> createSale(@RequestBody SaleRequestDTO saleItems){
+        System.out.println("Du kom ind i createSale: "+saleItems);
+        SaleResponseDTO savedSale = saleService.createSale(saleItems);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedSale);
     }
 

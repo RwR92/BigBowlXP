@@ -2,7 +2,6 @@ package com.example.BigBowlProjekt.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,31 +12,19 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String reservationNumber;
-    private LocalDateTime createdAt;
+    private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
-
-    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)
     private List<Activity> activities = new ArrayList<>();
 
-    public Reservation() {}
+    // constructors, getters, setters
 
-    public Reservation(Customer customer) {
-        this.customer = customer;
-        this.createdAt = LocalDateTime.now();
-    }
+    public Reservation() {};
 
-    public void addActivity(Activity activity) {
-        activities.add(activity);
-        activity.setReservation(this);
-    }
-
-    public void removeActivity(Activity activity) {
-        activities.remove(activity);
-        activity.setReservation(null);
+    public Reservation(Long id, String name, List<Activity> activities) {
+        this.id = id;
+        this.name = name;
+        this.activities = activities;
     }
 
     public Long getId() {
@@ -48,31 +35,19 @@ public class Reservation {
         this.id = id;
     }
 
-    public String getReservationNumber() {
-        return reservationNumber;
+    public String getName() {
+        return name;
     }
 
-    public void setReservationNumber(String reservationNumber) {
-        this.reservationNumber = reservationNumber;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Activity> getActivities() {
         return activities;
+    }
+
+    public void setActivities(List<Activity> activities) {
+        this.activities = activities;
     }
 }

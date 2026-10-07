@@ -1,170 +1,611 @@
-// API URL
-const API_URL = "/api/activities";
+// ========================================
+// API
+// ========================================
+
+const API_URL = "/api/reservation";
+
 
 import { authUser } from "./script.js";
 
-// Load reservations when page opens
-document.addEventListener("DOMContentLoaded", initActivities);
 
-async function initActivities(){
-    console.log()
-    await authUser(document.body.dataset.role);
+// ========================================
+// PAGE LOAD
+// ========================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    initReservations
+);
+
+
+async function initReservations() {
+
+    await authUser(
+        document.body.dataset.role
+    );
+
     await getReservations();
+
+    // Add first activity automatically
+    addActivityForm();
 }
 
-// ------------------------------------
-// GET ALL RESERVATIONS
-// ------------------------------------
+
+
+// ========================================
+// GET RESERVATIONS
+// ========================================
 
 async function getReservations() {
 
     try {
 
-        const response = await fetch(API_URL);
+        const response =
+            await fetch(API_URL);
+
 
         if (!response.ok) {
-            throw new Error("Could not get reservations");
+
+            throw new Error(
+                "Could not get reservations"
+            );
+
         }
 
-        const reservations = await response.json();
 
-        displayReservations(reservations);
+        const reservations =
+            await response.json();
+
+
+        displayReservations(
+            reservations
+        );
+
 
     } catch (error) {
 
-        console.error("Error loading reservations:", error);
+        console.error(
+            "Error loading reservations:",
+            error
+        );
 
     }
+
 }
 
 
-// ------------------------------------
-// DISPLAY RESERVATIONS
-// ------------------------------------
 
-function displayReservations(reservations) {
+// ========================================
+// DISPLAY RESERVATIONS
+// ========================================
+
+function displayReservations(
+    reservations
+) {
 
     const tableBody =
-        document.getElementById("reservationTableBody");
+        document.getElementById(
+            "reservationTableBody"
+        );
+
 
     tableBody.innerHTML = "";
 
 
     // No reservations
+
     if (reservations.length === 0) {
 
-        const row = document.createElement("tr");
+        const row =
+            document.createElement("tr");
+
 
         row.innerHTML = `
-                <td colspan="6">
-                    No reservations found.
-                </td>
-            `;
+            <td colspan="4">
+                No reservations found.
+            </td>
+        `;
+
 
         tableBody.appendChild(row);
 
         return;
+
     }
 
 
-    // Create a row for every reservation
-    reservations.forEach(reservation => {
 
-        const row = document.createElement("tr");
+    // One row per reservation
 
-        row.innerHTML = `
-                <td>${reservation.id}</td>
-                <td>${reservation.startTime}</td>
-                <td>${reservation.endTime}</td>
-                <td>${reservation.guests}</td>
-                <td>${reservation.type}</td>
+    reservations.forEach(
+        reservation => {
+
+            const row =
+                document.createElement("tr");
+
+
+            // Create activity HTML
+
+            const activitiesHTML =
+                reservation.activities
+                    .map(activity => {
+
+                        const lanes =
+                            activity.lanes
+                                .map(
+                                    lane =>
+                                        lane.laneNumber
+                                )
+                                .join(", ");
+
+
+                        return `
+                            <div class="activity">
+
+                                <strong>
+                                    ${activity.type}
+                                </strong>
+
+                                <br>
+
+                                ${activity.startTime}
+                                -
+                                ${activity.endTime}
+
+                                <br>
+
+                                Guests:
+                                ${activity.guests}
+
+                                <br>
+
+                                Lane:
+                                ${lanes || "None"}
+
+                            </div>
+
+                            <hr>
+                        `;
+
+                    })
+                    .join("");
+
+
+            row.innerHTML = `
+
                 <td>
-    ${reservation.lanes.map(lane => lane.laneNumber).join(", ")}
-</td>
-
-                <td>
-                    <button onclick="deleteReservation(${reservation.id})">
-                        Delete
-                    </button>
+                    ${reservation.id}
                 </td>
+
+
+                <td>
+                    ${reservation.name}
+                </td>
+
+
+                <td>
+                    ${activitiesHTML}
+                </td>
+
+
+                <td>
+
+                    <button
+                            class="delete-btn">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
             `;
 
-        tableBody.appendChild(row);
 
-    });
+            tableBody.appendChild(row);
+
+
+            // Delete button
+
+            const deleteButton =
+                row.querySelector(
+                    ".delete-btn"
+                );
+
+
+            deleteButton.addEventListener(
+                "click",
+                () => {
+
+                    deleteReservation(
+                        reservation.id
+                    );
+
+                }
+            );
+
+        }
+    );
 
 }
 
 
-// ------------------------------------
-// CREATE RESERVATION
-// ------------------------------------
+
+// ========================================
+// ADD ACTIVITY FORM
+// ========================================
+
+let activityNumber = 0;
+
+
+function addActivityForm() {
+
+    activityNumber++;
+
+
+    const container =
+        document.getElementById(
+            "activitiesContainer"
+        );
+
+
+    const activityDiv =
+        document.createElement("div");
+
+
+    activityDiv.classList.add(
+        "activity-form"
+    );
+
+
+    activityDiv.dataset.activityNumber =
+        activityNumber;
+
+
+    activityDiv.innerHTML = `
+
+        <h4>
+            Activity ${activityNumber}
+        </h4>
+
+
+        <div>
+
+            <label>
+                Start Time
+            </label>
+
+            <input
+                    type="datetime-local"
+                    class="activity-start"
+                    required>
+
+        </div>
+
+
+        <div>
+
+            <label>
+                End Time
+            </label>
+
+            <input
+                    type="datetime-local"
+                    class="activity-end"
+                    required>
+
+        </div>
+
+
+        <div>
+
+            <label>
+                Guests
+            </label>
+
+            <input
+                    type="number"
+                    class="activity-guests"
+                    min="1"
+                    required>
+
+        </div>
+
+
+        <div>
+
+            <label>
+                Type
+            </label>
+
+            <select
+                    class="activity-type"
+                    required>
+
+                <option value="">
+                    Choose type
+                </option>
+
+                <option value="BOWLING">
+                    Bowling
+                </option>
+
+                <option value="AIRHOCKEY">
+                    Airhockey
+                </option>
+
+                <option value="DINING">
+                    Dining
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div>
+
+            <label>
+                Lane ID
+            </label>
+
+            <input
+                    type="number"
+                    class="activity-lane"
+                    min="1">
+
+        </div>
+
+
+        <button
+                type="button"
+                class="remove-activity">
+
+            Remove Activity
+
+        </button>
+
+
+        <hr>
+
+    `;
+
+
+    container.appendChild(
+        activityDiv
+    );
+
+
+    // Remove activity button
+
+    const removeButton =
+        activityDiv.querySelector(
+            ".remove-activity"
+        );
+
+
+    removeButton.addEventListener(
+        "click",
+        () => {
+
+            activityDiv.remove();
+
+        }
+    );
+
+}
+
+
+
+// ========================================
+// ADD ACTIVITY BUTTON
+// ========================================
 
 document
-    .getElementById("reservationForm")
-    .addEventListener("submit", addReservation);
+    .getElementById(
+        "addActivityButton"
+    )
+    .addEventListener(
+        "click",
+        addActivityForm
+    );
 
-async function addReservation(event) {
+
+
+// ========================================
+// CREATE RESERVATION
+// ========================================
+
+document
+    .getElementById(
+        "reservationForm"
+    )
+    .addEventListener(
+        "submit",
+        addReservation
+    );
+
+
+
+async function addReservation(
+    event
+) {
 
     event.preventDefault();
 
 
-    const startTime =
-        document.getElementById("startTime").value;
+    // Reservation name
 
-    const endTime =
-        document.getElementById("endTime").value;
+    const reservationName =
+        document.getElementById(
+            "reservationName"
+        ).value;
 
-    const guests =
-        document.getElementById("guests").value;
 
-    const type =
-        document.getElementById("type").value;
 
-    const laneId =
-        document.getElementById("laneId").value;
+    // Find all activity forms
 
+    const activityForms =
+        document.querySelectorAll(
+            ".activity-form"
+        );
+
+
+    const activities = [];
+
+
+
+    // Convert every form into an ActivityDTO
+
+    activityForms.forEach(
+        activityForm => {
+
+
+            const startTime =
+                activityForm
+                    .querySelector(
+                        ".activity-start"
+                    )
+                    .value;
+
+
+            const endTime =
+                activityForm
+                    .querySelector(
+                        ".activity-end"
+                    )
+                    .value;
+
+
+            const guests =
+                activityForm
+                    .querySelector(
+                        ".activity-guests"
+                    )
+                    .value;
+
+
+            const type =
+                activityForm
+                    .querySelector(
+                        ".activity-type"
+                    )
+                    .value;
+
+
+            const laneId =
+                activityForm
+                    .querySelector(
+                        ".activity-lane"
+                    )
+                    .value;
+
+
+
+            // Create ActivityDTO
+
+            const activity = {
+
+                type: type,
+
+                startTime: startTime,
+
+                endTime: endTime,
+
+                guests: Number(
+                    guests
+                ),
+
+                lanes: laneId
+                    ? [
+                        {
+                            id: Number(
+                                laneId
+                            )
+                        }
+                    ]
+                    : []
+
+            };
+
+
+            activities.push(
+                activity
+            );
+
+        }
+    );
+
+
+
+    // Make sure there is at least
+    // one activity
+
+    if (activities.length === 0) {
+
+        alert(
+            "Add at least one activity."
+        );
+
+        return;
+
+    }
+
+
+
+    // Create ReservationDTO
 
     const reservation = {
 
-        type: type,
+        name: reservationName,
 
-        startTime: startTime,
-
-        endTime: endTime,
-
-        lanes: [
-            {
-                id: Number(laneId)
-            }
-        ],
-
-        guests: Number(guests)
+        activities: activities
 
     };
 
 
-    console.log("Sending reservation:", reservation);
+    console.log(
+        "Sending reservation:",
+        reservation
+    );
 
+
+
+    // ====================================
+    // SEND TO BACKEND
+    // ====================================
 
     try {
 
-        const response = await fetch(API_URL, {
+        const response =
+            await fetch(
+                API_URL,
+                {
 
-            method: "POST",
+                    method: "POST",
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+                    headers: {
 
-            body: JSON.stringify(reservation)
+                        "Content-Type":
+                            "application/json"
 
-        });
+                    },
+
+                    body:
+                        JSON.stringify(
+                            reservation
+                        )
+
+                }
+            );
+
 
 
         if (!response.ok) {
 
-            const errorText = await response.text();
+            const errorText =
+                await response.text();
+
 
             console.error(
                 "Server returned:",
@@ -172,14 +613,18 @@ async function addReservation(event) {
                 errorText
             );
 
+
             throw new Error(
                 "Could not create reservation"
             );
+
         }
+
 
 
         const createdReservation =
             await response.json();
+
 
         console.log(
             "Reservation created:",
@@ -187,12 +632,38 @@ async function addReservation(event) {
         );
 
 
+
+        // Reset form
+
         document
-            .getElementById("reservationForm")
+            .getElementById(
+                "reservationForm"
+            )
             .reset();
 
 
-        getReservations();
+        // Remove activity forms
+
+        document
+            .getElementById(
+                "activitiesContainer"
+            )
+            .innerHTML = "";
+
+
+        // Reset activity counter
+
+        activityNumber = 0;
+
+
+        // Add a new empty activity
+
+        addActivityForm();
+
+
+        // Reload reservations
+
+        await getReservations();
 
 
     } catch (error) {
@@ -207,29 +678,38 @@ async function addReservation(event) {
 }
 
 
-// ------------------------------------
-// DELETE RESERVATION
-// ------------------------------------
 
-async function deleteReservation(id) {
+// ========================================
+// DELETE RESERVATION
+// ========================================
+
+async function deleteReservation(
+    id
+) {
 
     try {
 
-        const response = await fetch(
-            `${API_URL}/${id}`,
-            {
-                method: "DELETE"
-            }
-        );
+        const response =
+            await fetch(
+                `${API_URL}/${id}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
 
 
         if (!response.ok) {
-            throw new Error("Could not delete reservation");
+
+            throw new Error(
+                "Could not delete reservation"
+            );
+
         }
 
 
-        // Reload reservations
-        getReservations();
+
+        await getReservations();
 
 
     } catch (error) {
