@@ -34,18 +34,18 @@ public class AdminReservationController {
         }
         return ResponseEntity.notFound().build();
     }
-    /* @GetMapping("/day-overview")
+    @GetMapping("/day-overview")
     public List<ReservationDTO> getDayOverview(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return reservationService.getDayOverview(date);
 
-    }*/
+    }
         @PostMapping
     public ReservationDTO createReservation(@RequestBody ReservationDTO reservationDTO) {
         return reservationService.createReservation(reservationDTO);
     }
 
-        @DeleteMapping
+        @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteReservation(@PathVariable Long id){
         reservationService.deleteReservation(id);
         return ResponseEntity.noContent().build();

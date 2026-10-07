@@ -42,8 +42,8 @@ function displayReservation(reservation) {
     document.getElementById("message").hidden = true;
     document.getElementById("info").hidden = false;
 
-    document.getElementById("number").textContent = reservation.reservationNumber;
-    document.getElementById("created").textContent =
+    document.getElementById("number").textContent = reservation.id;
+    document.getElementById("customer").textContent = reservation.name;
         new Date(reservation.createdAt).toLocaleString("da-DK");
 
     if (reservation.customer) {
