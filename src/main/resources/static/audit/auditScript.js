@@ -2,17 +2,19 @@ document.addEventListener("DOMContentLoaded", initApp);
 let list = [];
 
 async function initApp(){
-    await refresh();
+    await getData()
+    refresh();
 }
 
-async function getData(){
+async function getData() {
     try {
         list = await fetch("/api/admin/audit");
 
     } catch (error) {
         console.log("Error Could Not Fetch!!! ", error);
     }
-    return list;
+    console.log("getData")
+    console.log(list)
 }
 
 function createElement(auditLog) {
@@ -23,6 +25,7 @@ function createElement(auditLog) {
 <tb>${auditLog.timeStamp}</tb>
 <tb>${auditLog.description}</tb>
 `
+    console.log("createElement")
     const tableBody = document.getElementById("tbody");
     tableBody.appendChild(createdElement);
 }
@@ -31,8 +34,10 @@ function forEachElement(list) {
     for(const auditLog of list) {
         createElement(auditLog);
     }
+    console.log("forEachElement")
 }
 
 function refresh() {
-    forEachElement(getData());
+    forEachElement(list);
+    console.log("refresh")
 }
