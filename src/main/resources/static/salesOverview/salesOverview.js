@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", initApp);
 
-import {getAllSalesFromSpecificMonth, getAllSalesWithinLastMonth} from "./salesAPI.js";
+import {getAllSalesFromSpecificMonth, getAllSalesWithinLastMonth} from "./salesOverviewAPI.js";
 
 const table = document.querySelector(".sales-table");
 const yearMonth = document.querySelector("#year-month")
