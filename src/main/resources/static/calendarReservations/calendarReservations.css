@@ -61,7 +61,7 @@ body {
 
     height: 59px;
 
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid black;
     box-sizing: border-box;
 }
 
@@ -137,7 +137,7 @@ body {
 
     height: 60px;
 
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid black;
     box-sizing: border-box;
 }
 
