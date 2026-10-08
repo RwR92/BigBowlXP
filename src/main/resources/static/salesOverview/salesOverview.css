@@ -89,3 +89,9 @@
 .total-price-container span {
     text-decoration: underline;
 }
+
+li:hover {
+    color: white;
+    background-color: blue;
+    max-width: fit-content;
+}
