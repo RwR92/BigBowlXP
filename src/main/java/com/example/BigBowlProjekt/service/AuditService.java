@@ -1,7 +1,9 @@
 package com.example.BigBowlProjekt.service;
 
+import com.example.BigBowlProjekt.dto.UserTypeDTO;
 import com.example.BigBowlProjekt.model.AuditLog;
 import com.example.BigBowlProjekt.repository.AuditLogRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -24,4 +26,11 @@ public class AuditService {
         auditLogRepository.save(auditLog);
     }
 
+    public String userGrabber(HttpSession session) {
+        UserTypeDTO userTypeDTO = (UserTypeDTO) session.getAttribute("user");
+        if (userTypeDTO.userType().equals("admin")) {
+            return "Admin";
+        }
+        return "Employee";
+    }
 }
