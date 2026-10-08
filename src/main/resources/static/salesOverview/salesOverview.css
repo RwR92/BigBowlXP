@@ -1,6 +1,6 @@
 * {
     font-family: Arial, sans-serif;
-    background-color: var(--soft-white);
+
 }
 
 :root {
@@ -142,17 +142,18 @@ body {
 
 .sales-list li:hover {
     color: var(--soft-white);
-    background-color: var(--ui-elements);
     max-width: fit-content;
     cursor: pointer;
+    text-decoration: underline;
 }
 
 .sales-list li:hover::marker {
-    color: var(--ui-elements);
+    color: var(--text);
 }
 
 .sales-list {
     margin-bottom: 1em;
+    color: var(--soft-white);
 }
 
 .sales-list li {
@@ -162,27 +163,32 @@ body {
 }
 
 .filter-btn {
-    color: var(--soft-white);
-    background-color: var(--text);
+    color: var(--text);
+    background-color: var(--soft-white);
+    border-color: var(--soft-white);
 }
 
 .filter-btn:hover {
-    background-color: var(--ui-elements);
+    background-color: var(--text);
     cursor: pointer;
+    color: var(--soft-white);
+    border-color: var(--text);
 }
 
 .calender {
     border-width: 2px;
     border-style: solid;
-    border-color: var(--text);
+    border-color: var(--soft-white);
     margin-left: 2em;
     cursor: pointer;
+    background-color: var(--soft-white);
 }
 
 .calender:hover {
-    border-color: var(--ui-elements);
+    border-color: var(--text);
 }
 
 .specific-month-form h2 {
+    color: var(--soft-white);
     margin-left: 1.1em;
 }
