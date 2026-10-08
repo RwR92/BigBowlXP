@@ -1,6 +1,7 @@
 package com.example.BigBowlProjekt.service;
 
 import com.example.BigBowlProjekt.model.Lane;
+import com.example.BigBowlProjekt.model.LaneType;
 import org.springframework.stereotype.Component;
 
 import java.time.DayOfWeek;
@@ -22,6 +23,9 @@ public class ClubSchedule {
 
         DayOfWeek day = start.getDayOfWeek();
         if (day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY) {
+            return false;
+        }
+        if (lane.getType() != LaneType.BOWLING || lane.getLaneNumber() > CLUB_MAX_LANE_NUMBER) {
             return false;
         }
 
