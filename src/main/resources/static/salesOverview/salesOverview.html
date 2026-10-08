@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Salg</title>
+    <link rel="stylesheet" href="../universalStylesheet.css">
+    <link rel="stylesheet" href="salesOverview.css">
+</head>
+<body>
+
+<div>
+    <form class="specific-month-form">
+        <label for="year-month">Filtrér efter måned:</label>
+        <input required type="date" id="year-month" name="year-month">
+        <button type="submit">Filtrér</button>
+    </form>
+</div>
+
+<div>
+    <ul class="sales-list">
+
+    </ul>
+</div>
+
+<!-- He's done it again. DYNAMIC FUCKING MAGIC. *QUEUE EXPLOSIONS* -->
+<div class="sales-drawer hidden">
+    <div class="drawer-sales-header">
+        <div class="drawer-date-container">
+            <h2 class="drawer-date"></h2>
+        </div>
+
+
+        <div class="drawer-button-container">
+            <img src="x-icon.png" alt="ad" class="drawer-close">
+        </div>
+    </div>
+
+
+    <div class="drawer-sales">
+
+    </div>
+</div>
+
+<script type="module" src="salesOverview.js"></script>
+</body>
+</html>
