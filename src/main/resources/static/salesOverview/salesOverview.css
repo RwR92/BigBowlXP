@@ -1,3 +1,8 @@
+* {
+    font-family: Arial, sans-serif;
+
+}
+
 .hidden {
     display: none !important;
 }
@@ -112,8 +117,55 @@
     color: var(--text);
 }
 
-li:hover {
-    color: white;
-    background-color: blue;
+.sales-list li:hover {
+    color: var(--soft-white);
     max-width: fit-content;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.sales-list li:hover::marker {
+    color: var(--text);
+}
+
+.sales-list {
+    margin-bottom: 1em;
+    color: var(--soft-white);
+}
+
+.sales-list li {
+    margin-bottom: 0.5em;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.filter-btn {
+    color: var(--text);
+    background-color: var(--soft-white);
+    border-color: var(--soft-white);
+}
+
+.filter-btn:hover {
+    background-color: var(--text);
+    cursor: pointer;
+    color: var(--soft-white);
+    border-color: var(--text);
+}
+
+.calender {
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--soft-white);
+    margin-left: 2em;
+    cursor: pointer;
+    background-color: var(--soft-white);
+}
+
+.calender:hover {
+    border-color: var(--text);
+}
+
+.specific-month-form h2 {
+    color: var(--soft-white);
+    margin-left: 1.1em;
 }

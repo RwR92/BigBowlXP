@@ -17,7 +17,7 @@ body {
 .calendar-controls button {
     padding: 0.5em 1em;
     border: 1px solid black;
-    background: white;
+    background: #09bc8a;
     cursor: pointer;
     border-radius: 5px;
 }
@@ -61,7 +61,7 @@ body {
 
     height: 59px;
 
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid black;
     box-sizing: border-box;
 }
 
@@ -137,7 +137,7 @@ body {
 
     height: 60px;
 
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid black;
     box-sizing: border-box;
 }
 
@@ -177,7 +177,7 @@ body {
 }
 
 .month-cell.other-month {
-    background: #eee;
+    background: rgba(23, 43, 43, 0.3);
     color: #999;
 }
 
