@@ -1,7 +1,10 @@
 package com.example.BigBowlProjekt.model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 @JsonPropertyOrder({"employeeId", "firstName", "lastName", "phoneNumber", "role"})

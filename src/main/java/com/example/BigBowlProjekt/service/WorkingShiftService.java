@@ -6,9 +6,9 @@ import com.example.BigBowlProjekt.exception.NotFoundException;
 import com.example.BigBowlProjekt.exception.WorkingShiftOverlapException;
 import com.example.BigBowlProjekt.mapper.WorkingShiftMapper;
 import com.example.BigBowlProjekt.model.Employee;
+import com.example.BigBowlProjekt.model.WorkingShift;
 import com.example.BigBowlProjekt.repository.EmployeeRepository;
 import com.example.BigBowlProjekt.repository.WorkingShiftRepository;
-import com.example.BigBowlProjekt.model.WorkingShift;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

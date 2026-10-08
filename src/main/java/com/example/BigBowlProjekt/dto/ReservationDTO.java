@@ -1,12 +1,10 @@
-package com.example.BigBowlProjekt.dto;
+        package com.example.BigBowlProjekt.dto;
 
-import java.time.LocalDateTime;
-import java.util.List;
+        import java.util.List;
 
-public record ReservationDTO(
-        Long id,
-        String reservationNumber,
-        LocalDateTime createdAt,
-        CustomerDTO customer,
-        List<ActivityDTO> activities
-) {}
+        public record ReservationDTO(
+                Long id,
+                String name,
+                List<ActivityDTO> activities
+        ) {
+        }

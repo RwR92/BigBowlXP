@@ -1,8 +1,8 @@
 package com.example.BigBowlProjekt.mapper;
 
-import com.example.BigBowlProjekt.dto.LaneSummaryDTO;
 import com.example.BigBowlProjekt.dto.ActivityDTO;
 import com.example.BigBowlProjekt.dto.ActivitySummaryDTO;
+import com.example.BigBowlProjekt.dto.LaneSummaryDTO;
 import com.example.BigBowlProjekt.model.Activity;
 import com.example.BigBowlProjekt.model.Lane;
 
