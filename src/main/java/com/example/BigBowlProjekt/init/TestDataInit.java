@@ -1,7 +1,6 @@
 package com.example.BigBowlProjekt.init;
 
 import com.example.BigBowlProjekt.model.Employee;
-import com.example.BigBowlProjekt.model.Sale;
 import com.example.BigBowlProjekt.model.WorkingShift;
 import com.example.BigBowlProjekt.repository.EmployeeRepository;
 import com.example.BigBowlProjekt.repository.SaleRepository;

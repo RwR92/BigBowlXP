@@ -24,7 +24,7 @@ async function handleRoute(dataRole,userType) {
 
     if (!userType) {
         if (dataRole) {
-            window.location.replace("login.html");
+            window.location.replace("/login.html");
         }
     }
 

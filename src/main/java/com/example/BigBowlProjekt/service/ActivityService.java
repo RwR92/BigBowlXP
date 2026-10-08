@@ -1,14 +1,14 @@
 package com.example.BigBowlProjekt.service;
 
-import com.example.BigBowlProjekt.dto.LaneSummaryDTO;
 import com.example.BigBowlProjekt.dto.ActivityDTO;
+import com.example.BigBowlProjekt.dto.LaneSummaryDTO;
 import com.example.BigBowlProjekt.mapper.ActivityMapper;
 import com.example.BigBowlProjekt.model.Activity;
 import com.example.BigBowlProjekt.model.ActivityType;
 import com.example.BigBowlProjekt.model.Lane;
+import com.example.BigBowlProjekt.repository.ActivityRepository;
 import com.example.BigBowlProjekt.repository.CustomerRepository;
 import com.example.BigBowlProjekt.repository.LaneRepository;
-import com.example.BigBowlProjekt.repository.ActivityRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
