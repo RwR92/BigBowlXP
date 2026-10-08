@@ -1,9 +1,16 @@
 * {
     font-family: Arial, sans-serif;
+    background-color: var(--soft-white);
 }
 
 :root {
     --border-color: black;
+    --ui-elements: #508991; /* Pacific Cyan */
+    --container: #004346; /* Dark Teal */
+    --text: #172A3A;
+    --actions: #09BC8A;
+    --highlights: #75DDDD;
+    --soft-white: #F4F7F6;
 }
 
 .hidden {
@@ -94,14 +101,15 @@
     text-decoration: underline;
 }
 
-li:hover {
-    color: white;
-    background-color: #508991;
+.sales-list li:hover {
+    color: var(--soft-white);
+    background-color: var(--ui-elements);
     max-width: fit-content;
+    cursor: pointer;
 }
 
-li:hover::marker {
-    color: #508991;
+.sales-list li:hover::marker {
+    color: var(--ui-elements);
 }
 
 .sales-list {
@@ -110,24 +118,32 @@ li:hover::marker {
 
 .sales-list li {
     margin-bottom: 0.5em;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .filter-btn {
-    color: white;
-    background-color: #172a3a;
+    color: var(--soft-white);
+    background-color: var(--text);
 }
 
 .filter-btn:hover {
-    background-color: #508991;
+    background-color: var(--ui-elements);
+    cursor: pointer;
 }
 
 .calender {
     border-width: 2px;
     border-style: solid;
-    border-color: #333333;
+    border-color: var(--text);
     margin-left: 2em;
+    cursor: pointer;
 }
 
-h3 {
-    margin-left: 1.4em;
+.calender:hover {
+    border-color: var(--ui-elements);
+}
+
+.specific-month-form h2 {
+    margin-left: 1.1em;
 }
