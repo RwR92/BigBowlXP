@@ -1,0 +1,68 @@
+:root{
+    background-color: #508991;
+}
+
+thead{
+    background-color: #75DDDD;
+    color: white;
+    font-family: "Times New Roman";
+}
+
+@keyframes flyOut {
+    from {
+        transform: translateX(100%);
+    opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+}
+
+table {
+    width: 100%;
+    max-width: 800px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px;
+    line-height: 1.5;
+    border: 2px solid #172a3a;
+    border-collapse: separate;
+    border-spacing: 0;
+    animation: flyOut 5s ease-out;
+}
+
+.center {
+    display: grid;
+    place-items: center;
+}
+
+th {
+    background: var(--dark-teal);
+    color: white;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+td, th {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--pearl-aqua);
+    font-family: "Times New Roman" ;
+
+}
+
+
+h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--dark-teal);
+    font-family: "Times New Roman";
+    text-align: left;
+}
+
+.auditLog:hover{background-color: rgba(117, 221,221, 0.2)}
+

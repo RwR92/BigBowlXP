@@ -29,6 +29,8 @@ function createElement(auditLog) {
 <td>${date}</td>
 <td>${auditLog.description}</td>
 `
+    createdElement.className = "auditLog";
+
     console.log("createElement")
     const tableBody = document.getElementById("tbody");
     tableBody.appendChild(createdElement);
