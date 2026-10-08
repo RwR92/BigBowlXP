@@ -30,6 +30,7 @@
     width: 360px;
     padding: 36px 32px;
     border-radius: 14px;
+    border: 2px solid #172a3a;
     box-shadow: 0 6px 18px #004346;
     text-align: center;
     box-sizing: border-box;
@@ -39,7 +40,7 @@
     width: 240px;
     padding: 11px 14px;
     font-size: 14px;
-    border: 1px solid;
+    border: 2px solid #172a3a;
     border-radius: 8px;
     box-sizing: border-box;
 }
@@ -50,7 +51,7 @@
     width: 120px;
     padding: 10px 0;
     font-size: 14px;
-    border: 1px solid;
+    border: 2px solid #172a3a;
     border-radius: 8px;
     cursor: pointer;
 }
