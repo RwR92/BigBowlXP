@@ -272,7 +272,7 @@ function addActivityForm() {
         <div>
 
             <label>
-                Start Time
+                Start Tid
             </label>
 
             <input
@@ -286,7 +286,7 @@ function addActivityForm() {
         <div>
 
             <label>
-                End Time
+                Slut Tid
             </label>
 
             <input
@@ -300,7 +300,7 @@ function addActivityForm() {
         <div>
 
             <label>
-                Guests
+                Antal Gæster
             </label>
 
             <input
@@ -315,7 +315,8 @@ function addActivityForm() {
         <div>
 
             <label>
-                Type
+                Aktivitetstype
+              
             </label>
 
             <select
@@ -335,7 +336,7 @@ function addActivityForm() {
                 </option>
 
                 <option value="DINING">
-                    Dining
+                    Spisning
                 </option>
 
             </select>
@@ -346,7 +347,7 @@ function addActivityForm() {
         <div>
 
             <label>
-                Lane ID
+                Bane
             </label>
 
             <input
@@ -361,12 +362,13 @@ function addActivityForm() {
                 type="button"
                 class="remove-activity">
 
-            Remove Activity
+            Slet aktivitet
+           
 
         </button>
 
 
-        <hr>
+        <hr>    
 
     `;
 
