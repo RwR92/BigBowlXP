@@ -196,3 +196,10 @@ body {
 
     font-size: 12px;
 }
+.month-cell.clickable {
+    cursor: pointer;
+}
+
+.month-cell.clickable:hover {
+    background: rgba(117, 221, 221, 0.3);
+}

@@ -13,10 +13,12 @@
 
 <div>
     <label for="date">dato</label>
-    <input type="date" id="date">
-    <button onclick="loadDay()">Vis Dag</button>
-
+    <input type="date" id="date" onchange="loadDay()">
+    <button type="button" onclick="window.location.href='/calendarReservations/calendarReservations.html'">
+        Tilbage til kalender
+    </button>
 </div>
+
 <p id="message"></p>
 
 <table border="1" id="timeline" hidden>

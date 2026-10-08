@@ -4,7 +4,8 @@
     const OPEN_HOUR = 10;
     const CLOSE_HOUR = 23;
 
-    document.getElementById("date").value = todayString();
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById("date").value = params.get("date") || todayString();
     document.addEventListener("DOMContentLoaded", loadDay);
 
     function todayString() {
