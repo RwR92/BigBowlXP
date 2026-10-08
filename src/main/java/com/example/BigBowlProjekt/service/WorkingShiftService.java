@@ -61,7 +61,7 @@ public class WorkingShiftService {
                 workingShiftRequest.employeeId());
 
         for (WorkingShift w : workingShifts) {
-            if (overlaps(workingShiftRequest.startTime(), workingShiftRequest.endTime(), w)) {
+            if (overlaps(workingShiftRequest.date(),workingShiftRequest.startTime(), workingShiftRequest.endTime(), w)) {
                 throw new WorkingShiftOverlapException(
                         "Employee already has a shift at this time: "
                                 + w.getStartTime()
@@ -117,7 +117,7 @@ public class WorkingShiftService {
                 continue;
             }
 
-            if (overlaps(request.startTime(), request.endTime(), w)) {
+            if (overlaps(request.date(),request.startTime(), request.endTime(), w)) {
                 throw new WorkingShiftOverlapException(
                         "Employee already has a shift at this time: "
                                 + w.getStartTime()
@@ -149,7 +149,11 @@ public class WorkingShiftService {
         return WorkingShiftMapper.toDTO(workingShift);
     }
 
-    public boolean overlaps(LocalTime newStart, LocalTime newEnd, WorkingShift existingShift) {
+    public boolean overlaps(LocalDate newDate, LocalTime newStart, LocalTime newEnd, WorkingShift existingShift) {
+
+        if (!newDate.equals(existingShift.getDate())){
+            return false;
+        }
         return newStart.isBefore(existingShift.getEndTime())
                 && newEnd.isAfter(existingShift.getStartTime());
     }
