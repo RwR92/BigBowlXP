@@ -25,14 +25,14 @@ function renderHeader(){
     const saleOverviewBtn = document.createElement("button");
     saleOverviewBtn.textContent = "Se Salg";
     saleOverviewBtn.setAttribute("id", "sale-overview-btn");
-    saleOverviewBtn.setAttribute("onclick", "window.location.href='/salesOverview/sales-overview.html'")
+    saleOverviewBtn.setAttribute("onclick", "window.location.href='/salesOverview/salesOverview.html'")
 
     const saleBtn = document.createElement("button");
     saleBtn.textContent = "Opret salg";
     saleBtn.setAttribute("id", "sale-btn");
     saleBtn.setAttribute("onclick", "window.location.href='/sales/sale.html'")
 
-    childArray = [logoutBtn, reservationBtn, saleOverviewBtn, saleBtn];
+    childArray = [logoutBtn, homeBtn, reservationBtn, saleOverviewBtn, saleBtn];
 
     const headerId = document.querySelector("#employee-header").
     getAttribute("id");
