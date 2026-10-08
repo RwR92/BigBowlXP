@@ -39,6 +39,6 @@ function renderHeader(){
 
     console.log("Header Id: "+headerId);
     for(const child of childArray){
-        appendChild(childArray, headerId);
+        appendChild(child, headerId);
     }
 }
