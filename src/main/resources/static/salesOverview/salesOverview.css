@@ -4,13 +4,26 @@
 }
 
 :root {
-    --border-color: black;
     --ui-elements: #508991; /* Pacific Cyan */
     --container: #004346; /* Dark Teal */
-    --text: #172A3A;
-    --actions: #09BC8A;
-    --highlights: #75DDDD;
+    --text: #172A3A; /* Jet Black */
+    --actions: #09BC8A; /* Mint Leaf */
+    --highlights: #75DDDD; /* Pearl Aqua */
     --soft-white: #F4F7F6;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(
+            -45deg,
+            var(--text) 0%,
+            var(--ui-elements) 100%
+    );
 }
 
 .hidden {
@@ -24,19 +37,20 @@
     bottom: 0;
     width: 35%;
 
-    border: 1px solid var(--border-color);
+    border: 1px solid black;
     border-radius: 2em;
     margin: 1em;
 
     display: flex;
     flex-direction: column;
+
+    background: var(--container);
 }
 
 .drawer-sales-header {
     display: flex;
     justify-content: space-between;
     padding: 1em 2em 0 2em;
-    border-bottom: 1px solid var(--border-color);
 }
 
 .drawer-close {
@@ -55,50 +69,75 @@
     overflow: auto;
     margin: 0 1em 1em 1em;
     padding: 1em;
+    border-radius: 2em;
+    border: 1px solid black;
+    background: var(--ui-elements);
+}
+
+.drawer-date-container {
+    color: var(--soft-white);
+    text-decoration: underline;
 }
 
 .sale-container {
-    border: 1px solid var(--border-color);
+    border: 1px solid black;
     border-radius: 2em;
     margin-bottom: 1em;
     transition: transform 0.2s ease;
+    overflow: hidden;
+    background: var(--container);
 }
 
 .sale-container:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
     box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.15);
 }
 
 .sale-header-container {
     padding: 0.5em 1em 0.5em 1em;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid black;
 }
 
 .sale-header-container h3 {
     margin-top: 0.5em;
     margin-bottom: 0;
+    color: var(--soft-white);
+    text-decoration: underline;
 }
 
 .sale-table-container table {
     width: 100%;
     table-layout: fixed;
     text-align: center;
-    padding: 1em;
+    color: var(--highlights);
+    border-collapse: collapse;
+}
+
+.sale-table-container th,
+.sale-table-container td {
+    padding: 0.5em;
 }
 
 .sale-table-container th {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid black;
+    background: var(--text);
+}
+
+.sale-table-container td {
+    background: var(--ui-elements);
 }
 
 .total-price-container {
     padding: 0.5em 2.5em 0.5em 1em;
     display: flex;
     justify-content: end;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid black;
+    background: var(--actions);
 }
 
 .total-price-container span {
     text-decoration: underline;
+    color: var(--text);
 }
 
 .sales-list li:hover {

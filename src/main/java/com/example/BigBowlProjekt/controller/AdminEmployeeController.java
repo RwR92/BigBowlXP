@@ -2,12 +2,10 @@ package com.example.BigBowlProjekt.controller;
 
 import com.example.BigBowlProjekt.dto.EmployeeDTO;
 import com.example.BigBowlProjekt.dto.WorkingShiftDTO;
-import com.example.BigBowlProjekt.model.Employee;
-import com.example.BigBowlProjekt.model.WorkingShift;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import com.example.BigBowlProjekt.service.EmployeeService;
 import com.example.BigBowlProjekt.service.WorkingShiftService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;

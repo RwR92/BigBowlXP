@@ -1,4 +1,4 @@
-// ========================================
+ // ========================================
 // API
 // ========================================
 
@@ -612,6 +612,8 @@ async function addReservation(
                 response.status,
                 errorText
             );
+
+            alert("Kunne ikke oprette reservation: " + errorText);
 
 
             throw new Error(
