@@ -20,7 +20,7 @@ function renderHeader(){
     const reservationBtn = document.createElement("button");
     reservationBtn.textContent = "Reservationer";
     reservationBtn.setAttribute("id", "reservation-btn");
-    reservationBtn.setAttribute("onclick", "window.location.href='/sales/sale.html'")
+    reservationBtn.setAttribute("onclick", "window.location.href='/reservation/reservation.html'")
 
     const saleOverviewBtn = document.createElement("button");
     saleOverviewBtn.textContent = "Se Salg";
