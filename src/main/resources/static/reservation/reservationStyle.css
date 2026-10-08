@@ -5,41 +5,41 @@
     --dark-teal: #004346;
     --mint-leaf: #09bc8a;
 
-    --bg: #eef9f9;                         /* meget lys Pearl Aqua */
-    --row-hover: rgba(117, 221, 221, 0.2); /* Pearl Aqua, svag */
+    --row-hover: rgba(255, 255, 255, 0.4);
 }
-
 
 body {
     font-family: system-ui, Arial, sans-serif;
-    background: var(--bg);
+    background: var(--pacific-cyan);
     color: var(--jet-black);
     margin: 0;
     padding: 32px;
 }
 
-h1 { font-size: 1.5rem; margin-bottom: 20px; color: var(--dark-teal); }
-h2 { font-size: 1.2rem; margin-top: 32px; color: var(--dark-teal); }
-h3 { font-size: 1.05rem; margin: 24px 0 12px; color: var(--dark-teal); }
+h1 { font-size: 1.5rem; margin-bottom: 20px; }
+h2 { font-size: 1.2rem; margin-top: 32px; }
+h3 { font-size: 1.05rem; margin: 24px 0 12px; }
 
-a { color: var(--dark-teal); }
-a:hover { color: var(--pacific-cyan); }
+a { color: var(--jet-black); font-weight: 600; }
+a:hover { color: white; }
 
 
 table {
     width: 100%;
     max-width: 800px;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 8px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--pearl-aqua);
+    border: 2px solid var(--jet-black);
+    border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 1px 3px rgba(23, 42, 58, 0.15);
+    box-shadow: 0 6px 18px var(--dark-teal);
 }
 
 th, td {
     text-align: left;
     padding: 12px 16px;
-    border-bottom: 1px solid var(--pearl-aqua);
+    border-bottom: 1px solid var(--pacific-cyan);
 }
 
 th {
@@ -59,7 +59,7 @@ tbody tr:last-child td { border-bottom: none; }
 
 td hr {
     border: none;
-    border-top: 1px solid var(--pearl-aqua);
+    border-top: 1px solid var(--pacific-cyan);
     margin: 8px 0;
 }
 
@@ -74,57 +74,55 @@ label {
 }
 
 input, select {
-    padding: 8px 10px;
-    border: 1px solid var(--pacific-cyan);
-    border-radius: 6px;
+    padding: 8px 12px;
+    border: 2px solid var(--jet-black);
+    border-radius: 8px;
     font-size: 1rem;
     color: var(--jet-black);
     background: white;
+    box-sizing: border-box;
 }
 
 input:focus, select:focus, button:focus-visible {
-    outline: 2px solid var(--mint-leaf);
+    outline: 3px solid white;
     outline-offset: 2px;
 }
 
 
 button {
     padding: 8px 16px;
-    background: var(--dark-teal);
-    color: white;
-    border: none;
-    border-radius: 6px;
+    background: var(--mint-leaf);
+    color: var(--jet-black);
+    border: 2px solid var(--jet-black);
+    border-radius: 8px;
+    box-shadow: 0 3px 6px var(--dark-teal);
     cursor: pointer;
     font-size: 1rem;
+    font-weight: 600;
 }
 
-button:hover { background: var(--jet-black); }
+button:hover { box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); }
 
 button.danger,
-.delete-btn { background: #c0392b; }
-
-button.danger:hover,
-.delete-btn:hover { background: #a93226; }
-
+.delete-btn {
+    background: #c0392b;
+    color: white;
+}
 
 #addActivityButton,
 .remove-activity {
     background: white;
-    color: var(--dark-teal);
-    border: 1px solid var(--pacific-cyan);
+    color: var(--jet-black);
 }
-
-#addActivityButton:hover,
-.remove-activity:hover { background: var(--row-hover); }
-
 
 .reservation-form {
     max-width: 800px;
     margin-top: 32px;
     padding: 24px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(23, 42, 58, 0.15);
+    background: var(--pearl-aqua);
+    border: 2px solid var(--jet-black);
+    border-radius: 14px;
+    box-shadow: 0 6px 18px var(--dark-teal);
 }
 
 .reservation-form h2 { margin-top: 0; }
@@ -132,12 +130,12 @@ button.danger:hover,
 .activity-form {
     padding: 16px;
     margin-bottom: 16px;
-    background: var(--bg);
-    border: 1px solid var(--pearl-aqua);
+    background: rgba(255, 255, 255, 0.45);
+    border: 2px solid var(--jet-black);
     border-radius: 8px;
 }
 
-.activity-form h4 { margin: 0 0 12px; color: var(--dark-teal); }
+.activity-form h4 { margin: 0 0 12px; }
 .activity-form hr { display: none; }
 
 .activity {
@@ -145,10 +143,25 @@ button.danger:hover,
     line-height: 1.5;
 }
 
+
 .available {
     background: var(--mint-leaf);
     color: var(--jet-black);
     font-weight: bold;
 }
 
-.unavailable { color: var(--pacific-cyan); }
+.unavailable { color: var(--dark-teal); }
+
+.month-date {
+    display: block;
+    text-decoration: none;
+}
+.reservations {
+    max-height: 500px;
+    overflow-y: auto;
+    max-width: 800px;
+}
+.reservations th {
+     position: sticky;
+     top: 0;
+ }

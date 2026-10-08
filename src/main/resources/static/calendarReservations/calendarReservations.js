@@ -12,7 +12,7 @@ const todayBtn = document.querySelector("#today-btn");
 const viewButtons = document.querySelectorAll(".view-btn");
 
 let currentDate = new Date();
-let currentView = "day";
+let currentView = "month";
 
 
 async function initApp() {
@@ -381,6 +381,14 @@ function renderMonth(monthStart, activities) {
         dateElement.textContent = date.getDate();
 
         cell.appendChild(dateElement);
+
+        const dateString = toLocalDateTimeString(date).substring(0, 10);
+
+        cell.classList.add("clickable");
+
+        cell.addEventListener("click", () => {
+            window.location.href = "/reservation/day-overview.html?date=" + dateString;
+        });
 
 
         activities.forEach(activity => {
