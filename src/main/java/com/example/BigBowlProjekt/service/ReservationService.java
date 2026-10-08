@@ -2,13 +2,11 @@
 
     import com.example.BigBowlProjekt.dto.ActivityDTO;
     import com.example.BigBowlProjekt.dto.ReservationDTO;
-    import com.example.BigBowlProjekt.mapper.ActivityMapper;
     import com.example.BigBowlProjekt.mapper.ReservationMapper;
     import com.example.BigBowlProjekt.model.Activity;
-    import com.example.BigBowlProjekt.model.Lane;
     import com.example.BigBowlProjekt.model.Reservation;
-    import com.example.BigBowlProjekt.repository.LaneRepository;
     import com.example.BigBowlProjekt.repository.ActivityRepository;
+    import com.example.BigBowlProjekt.repository.LaneRepository;
     import com.example.BigBowlProjekt.repository.ReservationRepository;
     import org.springframework.stereotype.Service;
 

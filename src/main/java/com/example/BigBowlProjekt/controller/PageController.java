@@ -3,13 +3,10 @@ package com.example.BigBowlProjekt.controller;
 import com.example.BigBowlProjekt.dto.LoginInfoDTO;
 import com.example.BigBowlProjekt.dto.UserTypeDTO;
 import com.example.BigBowlProjekt.service.LoginService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
