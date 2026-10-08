@@ -28,18 +28,21 @@ public class ActivityService {
     private static final int MAX_HOURS = 2;
 
     private static final int CLUB_MAX_LANES = 14;
+    private static final LocalTime OPENING_TIME = LocalTime.of(10, 0);
+    private static final LocalTime CLOSING_TIME = LocalTime.of(22, 0);
     private static final LocalTime CLUB_START_TIME = LocalTime.of(10, 0);
     private static final LocalTime CLUB_END_TIME = LocalTime.of(17, 0);
 
     private final CustomerRepository customerRepository;
     private final ActivityRepository activityRepository;
     private final LaneRepository laneRepository;
-
+    private final ClubSchedule clubSchedule;
     public ActivityService(CustomerRepository customerRepository, ActivityRepository activityRepository,
-                           LaneRepository laneRepository) {
+                           LaneRepository laneRepository, ClubSchedule clubSchedule) {
         this.customerRepository = customerRepository;
         this.activityRepository = activityRepository;
         this.laneRepository = laneRepository;
+        this.clubSchedule = clubSchedule;
     }
 
     public List<ActivityDTO> getAllActivities() {
@@ -58,6 +61,7 @@ public class ActivityService {
     }
 
     public Activity buildValidActivity(ActivityDTO dto) {
+        validateOpeningHours(dto.startTime(), dto.endTime());
         if (dto.type() == ActivityType.DINING) {
             if (dto.startTime() == null || dto.endTime() == null
                     || !dto.endTime().isAfter(dto.startTime())) {
@@ -66,6 +70,7 @@ public class ActivityService {
             if (dto.guests() == null || dto.guests() < 1) {
                 throw new IllegalArgumentException("Angiv antal gæster til spisning.");
             }
+
             return new Activity(dto.type(), dto.startTime(), dto.endTime(), new ArrayList<>(), dto.guests());
         }
 
@@ -80,7 +85,7 @@ public class ActivityService {
         }
 
         validateNoOverlap(laneIds, dto.startTime(), dto.endTime());
-
+        validateNotClubTime(lanes, dto.startTime(), dto.endTime());
         return new Activity(dto.type(), dto.startTime(), dto.endTime(), lanes, dto.guests());
     }
 
@@ -90,6 +95,7 @@ public class ActivityService {
 
         validateLaneCount(laneIds);
         validateDuration(dto.startTime(), dto.endTime());
+        validateOpeningHours(dto.startTime(), dto.endTime());
 
         List<Lane> lanes = laneRepository.findAllById(laneIds);
         if (lanes.size() != laneIds.size()) {
@@ -146,7 +152,31 @@ public class ActivityService {
                 if (laneIds.contains(lane.getId())) {
                     throw new IllegalArgumentException("Bane " + lane.getLaneNumber()
                             + " er allerede booket i tidsrummet.");
+
                 }
+            }
+        }
+    }
+
+    private void validateOpeningHours(LocalDateTime startTime, LocalDateTime endTime) {
+        if (startTime == null || endTime == null) {
+            throw new IllegalArgumentException("Start- og sluttid skal udfyldes");
+        }
+        boolean sameDay = startTime.toLocalDate().equals(endTime.toLocalDate());
+
+        if (!sameDay
+                || startTime.toLocalTime().isBefore(OPENING_TIME)
+                || endTime.toLocalTime().isAfter(CLOSING_TIME)) {
+            throw new IllegalArgumentException("Vi har åbent kl. 10:00-22:00.");
+        }
+    }
+
+
+    private void validateNotClubTime(List<Lane> lanes, LocalDateTime startTime, LocalDateTime endTime) {
+        for (Lane lane : lanes) {
+            if (clubSchedule.isClubReserved(lane, startTime, endTime)) {
+                throw new IllegalArgumentException("Bane" + lane.getLaneNumber()
+                        + " er reserveret til bowlingklubber man-fre 10-17.");
             }
         }
     }
