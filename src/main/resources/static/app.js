@@ -9,5 +9,5 @@ export async function initApp() {
 
 export async function logout() {
     await fetch(BASE_URL_LOGOUT, {method: "POST"});
-    return window.location.href = "/login.html";
+    return window.location.href = "login/login.html";
 }

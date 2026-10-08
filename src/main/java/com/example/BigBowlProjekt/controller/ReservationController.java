@@ -1,17 +1,10 @@
 package com.example.BigBowlProjekt.controller;
 
-import com.example.BigBowlProjekt.dto.ActivityDTO;
 import com.example.BigBowlProjekt.dto.ReservationDTO;
-import com.example.BigBowlProjekt.dto.TimeSlot;
-import com.example.BigBowlProjekt.model.LaneType;
-import com.example.BigBowlProjekt.service.ActivityService;
-import com.example.BigBowlProjekt.service.AvailabilityService;
 import com.example.BigBowlProjekt.service.ReservationService;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 

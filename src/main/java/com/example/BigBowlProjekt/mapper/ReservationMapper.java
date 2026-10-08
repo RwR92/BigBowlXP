@@ -2,10 +2,10 @@ package com.example.BigBowlProjekt.mapper;
 
 import com.example.BigBowlProjekt.dto.ActivityDTO;
 import com.example.BigBowlProjekt.dto.CustomerDTO;
+import com.example.BigBowlProjekt.dto.ReservationDTO;
 import com.example.BigBowlProjekt.model.Activity;
 import com.example.BigBowlProjekt.model.Customer;
 import com.example.BigBowlProjekt.model.Reservation;
-import com.example.BigBowlProjekt.dto.ReservationDTO;
 
 import java.util.ArrayList;
 import java.util.List;
