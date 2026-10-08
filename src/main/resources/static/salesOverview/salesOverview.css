@@ -1,3 +1,7 @@
+* {
+    font-family: Arial, sans-serif;
+}
+
 :root {
     --border-color: black;
 }
@@ -92,6 +96,38 @@
 
 li:hover {
     color: white;
-    background-color: blue;
+    background-color: #508991;
     max-width: fit-content;
+}
+
+li:hover::marker {
+    color: #508991;
+}
+
+.sales-list {
+    margin-bottom: 1em;
+}
+
+.sales-list li {
+    margin-bottom: 0.5em;
+}
+
+.filter-btn {
+    color: white;
+    background-color: #172a3a;
+}
+
+.filter-btn:hover {
+    background-color: #508991;
+}
+
+.calender {
+    border-width: 2px;
+    border-style: solid;
+    border-color: #333333;
+    margin-left: 2em;
+}
+
+h3 {
+    margin-left: 1.4em;
 }
