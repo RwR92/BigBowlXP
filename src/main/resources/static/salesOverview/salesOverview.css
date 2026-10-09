@@ -117,17 +117,6 @@
     color: var(--text);
 }
 
-.sales-list li:hover {
-    color: var(--soft-white);
-    max-width: fit-content;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.sales-list li:hover::marker {
-    color: var(--text);
-}
-
 .sales-list {
     margin-bottom: 1em;
     color: var(--soft-white);
@@ -137,6 +126,17 @@
     margin-bottom: 0.5em;
     cursor: pointer;
     font-weight: bold;
+}
+
+.sales-list li:hover {
+    color: var(--soft-white);
+    max-width: fit-content;
+    cursor: pointer;
+    text-decoration: underline solid var(--text) !important;
+}
+
+.sales-list li:hover::marker {
+    color: var(--text);
 }
 
 .filter-btn {
