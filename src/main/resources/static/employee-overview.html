@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="reservation/reservationStyle.css">
 </head>
 <body data-role="admin">
-<button id="logout-btn">Logout</button>
+<header id="admin-header"></header>
 <h1>
     Employee overview
 </h1>
 
-<label>Filtrér efter role</label>
+<label for="filterByRole">Filtrér efter role</label>
 <select name="role" id="filterByRole">
     <option value="all">Se alle</option>
     <option value="Manager">Manager</option>
@@ -35,7 +35,7 @@
     </tbody>
 </table>
 
-
+<script type="module" src="/headers/adminHeader.js"></script>
 <script type="module" src="EmployeeScript.js"></script>
 
 </body>

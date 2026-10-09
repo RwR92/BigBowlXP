@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="../universalStylesheet.css">
     <link rel="stylesheet" href="calendarReservations.css">
 </head>
-<body>
+<body data-role="employee">
+<header id="employee-header"></header>
 
 <main>
 
@@ -31,12 +32,12 @@
         <button class="view-btn active" data-view="month">Måned</button>
         </div>
 
-    </div>
+
 
     <div id="calendar"></div>
 
 </main>
-
+<script type="module" src="/headers/employeeHeader.js"></script>
 <script type="module" src="calendarReservations.js"></script>
 </body>
 </html>

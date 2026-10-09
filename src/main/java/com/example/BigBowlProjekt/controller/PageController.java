@@ -18,12 +18,6 @@ public class PageController {
         this.loginService = loginService;
     }
 
-    /*@GetMapping
-    public String loginPage(){
-
-        return "login";
-    } */
-
 
     @PostMapping("/login")
     public UserTypeDTO login(@RequestBody LoginInfoDTO loginInfo, HttpSession session) {

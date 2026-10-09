@@ -1,151 +1,82 @@
- // ========================================
+// ========================================
 // API
 // ========================================
 
 const API_URL = "/api/reservation";
 
 
-import { authUser } from "./script.js";
-
+import {authUser} from "./script.js";
+import {logout} from "./app.js"
 
 // ========================================
 // PAGE LOAD
 // ========================================
 
-document.addEventListener(
-    "DOMContentLoaded",
-    initReservations
-);
-
+document.addEventListener("DOMContentLoaded", initReservations);
 
 async function initReservations() {
-
-    await authUser(
-        document.body.dataset.role
-    );
-
+    document.querySelector("#logout-btn").addEventListener("click", logout);
+    await authUser(document.body.dataset.role);
     await getReservations();
-
-    // Add first activity automatically
     addActivityForm();
 }
-
-
 
 // ========================================
 // GET RESERVATIONS
 // ========================================
 
 async function getReservations() {
-
     try {
-
-        const response =
-            await fetch(API_URL);
-
-
+        const response = await fetch(API_URL);
         if (!response.ok) {
-
-            throw new Error(
-                "Could not get reservations"
-            );
-
+            throw new Error("Could not get reservations");
         }
-
-
-        const reservations =
-            await response.json();
-
-
-        displayReservations(
-            reservations
-        );
-
-
+        const reservations = await response.json();
+        displayReservations(reservations);
     } catch (error) {
-
         console.error(
-            "Error loading reservations:",
-            error
-        );
-
+            "Error loading reservations:", error);
     }
-
 }
-
-
 
 // ========================================
 // DISPLAY RESERVATIONS
 // ========================================
 
-function displayReservations(
-    reservations
-) {
-
-    const tableBody =
-        document.getElementById(
-            "reservationTableBody"
-        );
-
+function displayReservations(reservations) {
+    const tableBody = document.getElementById("reservationTableBody");
 
     tableBody.innerHTML = "";
-
-
     // No reservations
-
     if (reservations.length === 0) {
-
-        const row =
-            document.createElement("tr");
-
-
+        const row = document.createElement("tr");
         row.innerHTML = `
             <td colspan="4">
                 No reservations found.
-            </td>
-        `;
-
+            </td>`;
 
         tableBody.appendChild(row);
-
         return;
-
     }
-
-
 
     // One row per reservation
 
-    reservations.forEach(
-        reservation => {
-
-            const row =
-                document.createElement("tr");
-
+    reservations.forEach(reservation => {
+            const row = document.createElement("tr");
 
             // Create activity HTML
+            const activitiesHTML = reservation.activities.map(activity => {
+                const lanes = activity.lanes.map(
+                    lane => lane.laneNumber)
+                    .join(", ");
+                return `
 
-            const activitiesHTML =
-                reservation.activities
-                    .map(activity => {
-
-                        const lanes =
-                            activity.lanes
-                                .map(
-                                    lane =>
-                                        lane.laneNumber
-                                )
-                                .join(", ");
-
-
-                        return `
                             <div class="activity">
 
                                 <strong>
                                     ${activity.type}
                                 </strong>
-
+                                
                                 <br>
 
                                 ${activity.startTime}
@@ -167,8 +98,8 @@ function displayReservations(
                             <hr>
                         `;
 
-                    })
-                    .join("");
+            })
+                .join("");
 
 
             row.innerHTML = `
@@ -228,7 +159,6 @@ function displayReservations(
     );
 
 }
-
 
 
 // ========================================
@@ -398,7 +328,6 @@ function addActivityForm() {
 }
 
 
-
 // ========================================
 // ADD ACTIVITY BUTTON
 // ========================================
@@ -413,7 +342,6 @@ document
     );
 
 
-
 // ========================================
 // CREATE RESERVATION
 // ========================================
@@ -426,7 +354,6 @@ document
         "submit",
         addReservation
     );
-
 
 
 async function addReservation(
@@ -444,7 +371,6 @@ async function addReservation(
         ).value;
 
 
-
     // Find all activity forms
 
     const activityForms =
@@ -454,7 +380,6 @@ async function addReservation(
 
 
     const activities = [];
-
 
 
     // Convert every form into an ActivityDTO
@@ -503,7 +428,6 @@ async function addReservation(
                     .value;
 
 
-
             // Create ActivityDTO
 
             const activity = {
@@ -514,9 +438,7 @@ async function addReservation(
 
                 endTime: endTime,
 
-                guests: Number(
-                    guests
-                ),
+                guests: Number(guests),
 
                 lanes: laneId
                     ? [
@@ -539,7 +461,6 @@ async function addReservation(
     );
 
 
-
     // Make sure there is at least
     // one activity
 
@@ -552,7 +473,6 @@ async function addReservation(
         return;
 
     }
-
 
 
     // Create ReservationDTO
@@ -570,7 +490,6 @@ async function addReservation(
         "Sending reservation:",
         reservation
     );
-
 
 
     // ====================================
@@ -602,7 +521,6 @@ async function addReservation(
             );
 
 
-
         if (!response.ok) {
 
             const errorText =
@@ -625,7 +543,6 @@ async function addReservation(
         }
 
 
-
         const createdReservation =
             await response.json();
 
@@ -634,7 +551,6 @@ async function addReservation(
             "Reservation created:",
             createdReservation
         );
-
 
 
         // Reset form
@@ -682,7 +598,6 @@ async function addReservation(
 }
 
 
-
 // ========================================
 // DELETE RESERVATION
 // ========================================
@@ -702,7 +617,6 @@ async function deleteReservation(
             );
 
 
-
         if (!response.ok) {
 
             throw new Error(
@@ -710,7 +624,6 @@ async function deleteReservation(
             );
 
         }
-
 
 
         await getReservations();
