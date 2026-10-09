@@ -32,7 +32,13 @@ function renderHeader(){
     saleBtn.setAttribute("id", "sale-btn");
     saleBtn.setAttribute("onclick", "window.location.href='/sales/sale.html'")
 
-    childArray = [logoutBtn, homeBtn, reservationBtn, saleOverviewBtn, saleBtn];
+    const calenderBtn = document.createElement("button");
+    calenderBtn.textContent = "Kalender";
+    calenderBtn.setAttribute("id", "calender-btn");
+    calenderBtn.setAttribute("onclick", "window.location.href='/calendarReservations/calendarReservations.html'")
+
+
+    childArray = [logoutBtn, homeBtn, reservationBtn, saleOverviewBtn, saleBtn, calenderBtn];
 
     const headerId = document.querySelector("#employee-header").
     getAttribute("id");

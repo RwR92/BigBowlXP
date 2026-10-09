@@ -1,6 +1,6 @@
 import { fetchActivities } from "./calendarReservationsAPI.js";
-
-document.addEventListener("DOMContentLoaded", initApp);
+import {initApp, logout} from "../app.js"
+document.addEventListener("DOMContentLoaded", initCalenderApp);
 
 const calendar = document.querySelector("#calendar");
 const calendarTitle = document.querySelector("#calendar-title");
@@ -15,7 +15,8 @@ let currentDate = new Date();
 let currentView = "month";
 
 
-async function initApp() {
+async function initCalenderApp() {
+    await initApp();
 
     previousBtn.addEventListener("click", async () => {
         moveCalendar(-1);

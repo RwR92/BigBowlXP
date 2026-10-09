@@ -15,97 +15,64 @@
 <h1>Reservations</h1>
 
 <div class="reservations">
-
     <table>
-
         <thead>
-
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Activities</th>
             <th>Action</th>
         </tr>
-
         </thead>
-
-
         <tbody id="reservationTableBody">
         </tbody>
-
     </table>
-
 </div>
-
-
 
 <!-- ========================================
      ADD RESERVATION
 ========================================= -->
 
 <div class="reservation-form">
-
     <h2>Add Reservation</h2>
-
-
     <form id="reservationForm">
-
 
         <!-- Reservation name -->
 
         <div>
-
             <label for="reservationName">
                 Customer Name
             </label>
-
             <input
                     type="text"
                     id="reservationName"
                     required>
-
         </div>
-
 
         <!-- Activities -->
 
         <h3>Activities</h3>
-
         <div id="activitiesContainer">
         </div>
-
 
         <!-- Add activity -->
 
         <button
                 type="button"
                 id="addActivityButton">
-
             + Add Activity
-
         </button>
 
-
         <br>
         <br>
-
 
         <!-- Submit reservation -->
-
         <button type="submit">
-
             Add Reservation
-
         </button>
-
-
     </form>
-
 </div>
-
 <script type="module" src="/headers/employeeHeader.js"></script>
 <script type="module" src="/activities.js"></script>
-
 </body>
-
 </html>
