@@ -3,6 +3,7 @@ package com.example.BigBowlProjekt.controller;
 import com.example.BigBowlProjekt.dto.WorkingShiftDTO;
 import com.example.BigBowlProjekt.dto.WorkingShiftRequest;
 import com.example.BigBowlProjekt.service.WorkingShiftService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,6 @@ public class AdminShiftController {
     @PostMapping
     public ResponseEntity<WorkingShiftDTO> createWorkingShift(
             @RequestBody WorkingShiftRequest dto) {
-
         return ResponseEntity.ok(
                 workingShiftService.createWorkingShift(dto)
         );

@@ -2,7 +2,9 @@ package com.example.BigBowlProjekt.controller;
 
 import com.example.BigBowlProjekt.dto.SaleRequestDTO;
 import com.example.BigBowlProjekt.dto.SaleResponseDTO;
+import com.example.BigBowlProjekt.service.AuditService;
 import com.example.BigBowlProjekt.service.SaleService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +16,17 @@ import java.util.List;
 public class SaleController {
 
     private final SaleService saleService;
+    private final AuditService auditService;
 
-    public SaleController(SaleService saleService) {
+    public SaleController(SaleService saleService, AuditService auditService) {
         this.saleService = saleService;
+        this.auditService = auditService;
     }
 
     @PostMapping
-    public ResponseEntity<SaleResponseDTO> createSale(@RequestBody SaleRequestDTO saleItems){
+    public ResponseEntity<SaleResponseDTO> createSale(@RequestBody SaleRequestDTO saleItems, HttpSession session) {
         SaleResponseDTO savedSale = saleService.createSale(saleItems);
+        auditService.logHandler(session,"POST",saleItems);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedSale);
     }
 
