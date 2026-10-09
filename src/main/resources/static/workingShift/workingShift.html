@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Working Shift Display</title>
+    <link rel="stylesheet" href="../universalStylesheet.css">
+    <link rel="stylesheet" href="workingShift.css">
+</head>
+<body>
+<header id="admin-header">
+
+</header>
+<main>
+    <button id="create-btn">
+        Opret ny vagt
+    </button>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Vagt nr</th>
+                    <th>Dato</th>
+                    <th>Start tid</th>
+                    <th>Slut tid</th>
+                    <th>Medarbejder nr</th>
+                    <th>Medarbejder</th>
+                    <th>Handlinger</th>
+                </tr>
+            </thead>
+            <tbody id="workShift-list">
+
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<!-- POPUP MAGIC -->
+<div class="popup-container hidden">
+    <form class="popup-form" data-action="create">
+        <div>
+            <h3 id="h3-form">Opret ny vagt</h3>
+        </div>
+        <div>
+            <p class="hidden" id="activity-message-popup"></p>
+        </div>
+        <div>
+            <label for="start-time">Start tid:</label>
+            <input required type="time" id="start-time" name="start-time">
+        </div>
+        <div>
+            <label for="end-time">Slut tid:</label>
+            <input required type="time" id="end-time" name="end-time">
+        </div>
+        <div>
+            <label for="date">Dag:</label>
+            <input required type="date" id="date" name="date">
+        </div>
+        <div>
+            <label for="employee-id">Medarbejder nummer:</label>
+            <input required type="number" id="employee-id" name="employee-id">
+        </div>
+        <div>
+            <button type="submit">Indsend</button>
+        </div>
+    </form>
+</div>
+<script type= "module" src="/headers/adminHeader.js"></script>
+<script type="module" src="workingShift.js"></script>
+</body>
+</html>

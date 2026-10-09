@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reservations</title>
+    <link rel="stylesheet" href="../universalStylesheet.css">
+    <link rel="stylesheet" href="reservationStyle.css">
+</head>
+
+<body data-role="employee">
+<header id="employee-header"></header>
+<h1>Reservations</h1>
+
+<div class="reservation-form">
+
+    <h2>Tilføj reservation</h2>
+
+    <form id="reservationForm">
+
+        <div>
+            <label for="reservationName">Kunde navn</label>
+            <input type="text" id="reservationName" required>
+        </div>
+
+        <h3>Aktiviteter</h3>
+
+        <div id="activitiesContainer"></div>
+
+        <button type="button" id="addActivityButton">+ Tilføj aktivitet</button>
+
+        <br><br>
+
+        <button type="submit">Opret resevation</button>
+
+    </form>
+
+</div>
+
+<h2>Alle reservationer</h2>
+
+<div class="reservations">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Activities</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="reservationTableBody"></tbody>
+    </table>
+</div>
+<div class="modal-overlay" id="successModal" hidden>
+    <div class="modal-box">
+        <h2>Reservation oprettet!</h2>
+        <p id="successMessage"></p>
+        <button type="button" id="closeModalButton">OK</button>
+    </div>
+</div>
+<script type="module" src="/headers/employeeHeader.js"></script>
+<script type="module" src="/activities.js"></script>
+</body>
+</html>

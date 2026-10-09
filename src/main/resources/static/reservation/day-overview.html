@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dagsoversigt</title>
+    <link rel="stylesheet" href="../universalStylesheet.css">
+    <link rel="stylesheet" href="reservationStyle.css">
+
+</head>
+
+<body data-role="employee">
+<header id="employee-header"></header>
+<h1>Dagsoversigt</h1>
+
+<div>
+    <label for="date">dato</label>
+    <input type="date" id="date" onchange="loadDay()">
+    <button type="button" onclick="window.location.href='/calendarReservations/calendarReservations.html'">
+        Tilbage til kalender
+    </button>
+</div>
+
+<p id="message"></p>
+
+<table border="1" id="timeline" hidden>
+    <thead id="timelineHead">
+    </thead>
+    <tbody id="timelineBody">
+    </tbody>
+</table>
+<script type="module" src="/headers/employeeHeader.js"></script>
+<script type="module" src="/reservation/dayOverview.js"></script>
+
+</body>
+</html>

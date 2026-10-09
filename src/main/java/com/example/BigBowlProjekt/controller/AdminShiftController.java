@@ -6,6 +6,8 @@ import com.example.BigBowlProjekt.service.WorkingShiftService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/working-shifts")
@@ -17,10 +19,14 @@ public class AdminShiftController {
         this.workingShiftService = workingShiftService;
     }
 
+    @GetMapping
+    public ResponseEntity<List<WorkingShiftDTO>> showAllWorkingShifts() {
+        return ResponseEntity.ok(workingShiftService.getAllWorkingShifts());
+    }
+
     @PostMapping
     public ResponseEntity<WorkingShiftDTO> createWorkingShift(
             @RequestBody WorkingShiftRequest dto) {
-
         return ResponseEntity.ok(
                 workingShiftService.createWorkingShift(dto)
         );
@@ -40,5 +46,10 @@ public class AdminShiftController {
             @PathVariable Long id) {
         workingShiftService.deleteWorkingShift(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<WorkingShiftDTO> getWorkingShiftById(@PathVariable Long id) {
+        return ResponseEntity.ok(workingShiftService.getWorkingShiftById(id));
     }
 }

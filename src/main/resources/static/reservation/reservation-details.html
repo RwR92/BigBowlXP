@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation</title>
+    <link rel="stylesheet" href="../universalStylesheet.css">
+    <link rel="stylesheet" href="reservationStyle.css">
+</head>
+
+<body>
+<script src="/reservation/reservationDetails.js"></script>
+<a href="day-overview.html">Til dagsoversigt</a>
+
+<h1>Reservation</h1>
+
+<p id="message">Henter reservation...</p>
+
+<div id="info" hidden>
+
+    <p><strong>Reservationsnummer:</strong> <span id="number"></span></p>
+    <p><strong>Oprettet:</strong> <span id="created"></span></p>
+    <p><strong>Kunde:</strong> <span id="customer"></span></p>
+
+    <h2>Aktiviteter</h2>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Aktivitet</th>
+            <th>Tidsrum</th>
+            <th>Baner</th>
+            <th>Gæster</th>
+        </tr>
+        </thead>
+        <tbody id="activityBody">
+        </tbody>
+    </table>
+
+</div>
+<button onclick="cancelReservation()">Annuller reservation</button>
+
+</div>
+
+<script src="/reservationDetails.js"></script>
+
+</body>
+</html>

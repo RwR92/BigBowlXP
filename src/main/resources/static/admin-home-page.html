@@ -2,16 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="admin-home-page.css">
     <title>test admin page</title>
+    <link rel="stylesheet" href="universalStylesheet.css">
 </head>
 <body data-role="admin">
-<h1>Du er på admin page</h1>
-<button id="logout-btn">Logout</button>
-
 <div>
-    <p>Medarbejder oversigt</p>
-    <button onclick="window.location.href='/employee-overview.html'">Medarbejder oversigt</button>
+    <header id="admin-header">
+
+    </header>
 </div>
+
+<h1>Du er på admin page</h1>
 <div>
     <table class="table">
         <thead>
@@ -25,6 +27,8 @@
         <tbody id="bowlingLaneTableBody"></tbody>
     </table>
 </div>
-<script type = "module" src="adminPage.js"></script>
+
+<script type= "module" src="headers/adminHeader.js"></script>
+<script type= "module" src="adminPage.js"></script>
 </body>
 </html>

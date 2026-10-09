@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Salg</title>
+    <link rel="stylesheet" href="../universalStylesheet.css">
+    <link rel="stylesheet" href="salesOverview.css">
+</head>
+<body data-role="employee">
+<header id="employee-header"></header>
+
+<div>
+    <form class="specific-month-form">
+        <h2><label for="year-month">Filtrér efter måned:</label></h2>
+        <input class="calender" required type="date" id="year-month" name="year-month">
+        <button class="filter-btn" type="submit">Filtrér</button>
+    </form>
+</div>
+
+<div>
+    <ul class="sales-list" id="sales-item">
+
+    </ul>
+</div>
+
+<!-- He's done it again. DYNAMIC FUCKING MAGIC. *QUEUE EXPLOSIONS* -->
+<div class="sales-drawer hidden">
+    <div class="drawer-sales-header">
+        <div class="drawer-date-container">
+            <h2 class="drawer-date"></h2>
+        </div>
+
+
+        <div class="drawer-button-container">
+            <img src="x-icon.png" alt="ad" class="drawer-close">
+        </div>
+    </div>
+
+
+    <div class="drawer-sales">
+
+    </div>
+</div>
+
+<script type="module" src="/headers/employeeHeader.js"></script>
+<script type="module" src="salesOverview.js"></script>
+</body>
+</html>

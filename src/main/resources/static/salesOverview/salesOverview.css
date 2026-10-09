@@ -1,0 +1,171 @@
+* {
+    font-family: Arial, sans-serif;
+
+}
+
+.hidden {
+    display: none !important;
+}
+
+.sales-drawer {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 35%;
+
+    border: 1px solid black;
+    border-radius: 2em;
+    margin: 1em;
+
+    display: flex;
+    flex-direction: column;
+
+    background: var(--container);
+}
+
+.drawer-sales-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 2em 0 2em;
+}
+
+.drawer-close {
+    transition: transform 0.2s;
+
+    width: 1.4em;
+    height: 1.4em;
+}
+
+.drawer-close:hover {
+    transform: scale(1.4);
+}
+
+.drawer-sales {
+    height: 100%;
+    overflow: auto;
+    margin: 0 1em 1em 1em;
+    padding: 1em;
+    border-radius: 2em;
+    border: 1px solid black;
+    background: var(--ui-elements);
+}
+
+.drawer-date-container {
+    color: var(--soft-white);
+    text-decoration: underline;
+}
+
+.sale-container {
+    border: 1px solid black;
+    border-radius: 2em;
+    margin-bottom: 1em;
+    transition: transform 0.2s ease;
+    overflow: hidden;
+    background: var(--container);
+}
+
+.sale-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.15);
+}
+
+.sale-header-container {
+    padding: 0.5em 1em 0.5em 1em;
+    border-bottom: 1px solid black;
+}
+
+.sale-header-container h3 {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+    color: var(--soft-white);
+    text-decoration: underline;
+}
+
+.sale-table-container table {
+    width: 100%;
+    table-layout: fixed;
+    text-align: center;
+    color: var(--highlights);
+    border-collapse: collapse;
+}
+
+.sale-table-container th,
+.sale-table-container td {
+    padding: 0.5em;
+}
+
+.sale-table-container th {
+    border-bottom: 1px solid black;
+    background: var(--text);
+}
+
+.sale-table-container td {
+    background: var(--ui-elements);
+}
+
+.total-price-container {
+    padding: 0.5em 2.5em 0.5em 1em;
+    display: flex;
+    justify-content: end;
+    border-top: 1px solid black;
+    background: var(--actions);
+}
+
+.total-price-container span {
+    text-decoration: underline;
+    color: var(--text);
+}
+
+.sales-list {
+    margin-bottom: 1em;
+    color: var(--soft-white);
+}
+
+.sales-list li {
+    margin-bottom: 0.5em;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.sales-list li:hover {
+    color: var(--soft-white);
+    max-width: fit-content;
+    cursor: pointer;
+    text-decoration: underline solid var(--text) !important;
+}
+
+.sales-list li:hover::marker {
+    color: var(--text);
+}
+
+.filter-btn {
+    color: var(--text);
+    background-color: var(--soft-white);
+    border-color: var(--soft-white);
+}
+
+.filter-btn:hover {
+    background-color: var(--text);
+    cursor: pointer;
+    color: var(--soft-white);
+    border-color: var(--text);
+}
+
+.calender {
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--soft-white);
+    margin-left: 2em;
+    cursor: pointer;
+    background-color: var(--soft-white);
+}
+
+.calender:hover {
+    border-color: var(--text);
+}
+
+.specific-month-form h2 {
+    color: var(--soft-white);
+    margin-left: 1.1em;
+}

@@ -1,0 +1,171 @@
+:root {
+    --pearl-aqua: #75dddd;
+    --pacific-cyan: #508991;
+    --jet-black: #172a3a;
+    --dark-teal: #004346;
+    --mint-leaf: #09bc8a;
+
+    --row-hover: rgba(255, 255, 255, 0.4);
+}
+
+body {
+    font-family: system-ui, Arial, sans-serif;
+    background: var(--pacific-cyan);
+    color: var(--jet-black);
+    margin: 0;
+    padding: 32px;
+}
+
+h1 { font-size: 1.5rem; margin-bottom: 20px; }
+h2 { font-size: 1.2rem; margin-top: 32px; }
+h3 { font-size: 1.05rem; margin: 24px 0 12px; }
+
+a { color: var(--jet-black); font-weight: 600; }
+a:hover { color: white; }
+
+
+table {
+    width: 100%;
+    max-width: 800px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--pearl-aqua);
+    border: 2px solid var(--jet-black);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px var(--dark-teal);
+}
+
+th, td {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--pacific-cyan);
+}
+
+th {
+    background: var(--dark-teal);
+    color: white;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+tbody tr:hover { background: var(--row-hover); }
+tbody tr:last-child td { border-bottom: none; }
+
+
+.table-wrapper { overflow-x: auto; }
+.table-wrapper table { max-width: none; }
+
+td hr {
+    border: none;
+    border-top: 1px solid var(--pacific-cyan);
+    margin: 8px 0;
+}
+
+
+form div { margin-bottom: 12px; }
+
+label {
+    display: inline-block;
+    min-width: 110px;
+    margin-right: 6px;
+    font-weight: 600;
+}
+
+input, select {
+    padding: 8px 12px;
+    border: 2px solid var(--jet-black);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--jet-black);
+    background: white;
+    box-sizing: border-box;
+}
+
+input:focus, select:focus, button:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 2px;
+}
+
+
+button {
+    padding: 8px 16px;
+    background: var(--mint-leaf);
+    color: var(--jet-black);
+    border: 2px solid var(--jet-black);
+    border-radius: 8px;
+    box-shadow: 0 3px 6px var(--dark-teal);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+button:hover { box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); }
+
+button.danger,
+.delete-btn {
+    background: #c0392b;
+    color: white;
+}
+
+#addActivityButton {
+    background: white;
+    color: var(--jet-black);
+}
+
+.remove-activity {
+    background: #c0392b;
+    color: white;
+}
+
+.reservation-form {
+    max-width: 800px;
+    margin-top: 32px;
+    padding: 24px;
+    background: var(--pearl-aqua);
+    border: 2px solid var(--jet-black);
+    border-radius: 14px;
+    box-shadow: 0 6px 18px var(--dark-teal);
+}
+
+.reservation-form h2 { margin-top: 0; }
+
+.activity-form {
+    padding: 16px;
+    margin-bottom: 16px;
+    background: rgba(255, 255, 255, 0.45);
+    border: 2px solid var(--jet-black);
+    border-radius: 8px;
+}
+
+.activity-form h4 { margin: 0 0 12px; }
+.activity-form hr { display: none; }
+
+.activity {
+    padding: 4px 0;
+    line-height: 1.5;
+}
+
+
+.available {
+    background: var(--mint-leaf);
+    color: var(--jet-black);
+    font-weight: bold;
+}
+
+.unavailable { color: var(--dark-teal); }
+
+.month-date {
+    display: block;
+    text-decoration: none;
+}
+.reservations {
+    max-height: 500px;
+    overflow-y: auto;
+    max-width: 800px;
+}
+.reservations th {
+     position: sticky;
+     top: 0;
+ }

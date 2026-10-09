@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,7 +24,7 @@ public class WorkingShiftServiceTest {
 
     @BeforeEach
     void setUp() {
-        service = new WorkingShiftService(null, null);
+        service = new WorkingShiftService(null, null, null);
     }
 
     @Test
@@ -32,6 +33,7 @@ public class WorkingShiftServiceTest {
         when(workingShift.getEndTime()).thenReturn(LocalTime.of(16, 0));
 
         boolean result = service.overlaps(
+                LocalDate.of(2026, 10, 8),
                 LocalTime.of(14, 0),
                 LocalTime.of(18, 0),
                 workingShift

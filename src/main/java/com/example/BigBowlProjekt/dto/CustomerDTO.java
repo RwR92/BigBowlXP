@@ -7,4 +7,5 @@ public record CustomerDTO(
        String lastName,
        String email,
        String number
-) {}
+) {
+}

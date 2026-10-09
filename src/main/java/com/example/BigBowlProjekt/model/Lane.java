@@ -2,8 +2,6 @@ package com.example.BigBowlProjekt.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-
 @Entity
 public class Lane {
 

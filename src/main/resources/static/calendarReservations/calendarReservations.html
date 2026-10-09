@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="../universalStylesheet.css">
+    <link rel="stylesheet" href="calendarReservations.css">
+</head>
+<body data-role="employee">
+<header id="employee-header"></header>
+
+<main>
+
+    <div class="calendar-controls">
+
+        <button id="previous-btn">
+            &lt;
+        </button>
+
+        <button id="today-btn">
+            I dag
+        </button>
+
+        <button id="next-btn">
+            &gt;
+        </button>
+
+        <h2 id="calendar-title"></h2>
+
+        <button class="view-btn" data-view="day">Dag</button>
+        <button class="view-btn" data-view="week">Uge</button>
+        <button class="view-btn active" data-view="month">Måned</button>
+        </div>
+
+
+
+    <div id="calendar"></div>
+
+</main>
+<script type="module" src="/headers/employeeHeader.js"></script>
+<script type="module" src="calendarReservations.js"></script>
+</body>
+</html>

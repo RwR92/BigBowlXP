@@ -1,8 +1,6 @@
 package com.example.BigBowlProjekt.mapper;
 
-import com.example.BigBowlProjekt.dto.EmployeeDTO;
 import com.example.BigBowlProjekt.dto.WorkingShiftDTO;
-import com.example.BigBowlProjekt.model.Employee;
 import com.example.BigBowlProjekt.model.WorkingShift;
 
 public class WorkingShiftMapper {
@@ -13,7 +11,7 @@ public class WorkingShiftMapper {
                 workingShift.getDate(),
                 workingShift.getStartTime(),
                 workingShift.getEndTime(),
-                workingShift.getEmployee()
+                EmployeeMapper.toDTO(workingShift.getEmployee())
         );
     }
 }

@@ -6,9 +6,9 @@ import com.example.BigBowlProjekt.exception.NotFoundException;
 import com.example.BigBowlProjekt.exception.WorkingShiftOverlapException;
 import com.example.BigBowlProjekt.mapper.WorkingShiftMapper;
 import com.example.BigBowlProjekt.model.Employee;
+import com.example.BigBowlProjekt.model.WorkingShift;
 import com.example.BigBowlProjekt.repository.EmployeeRepository;
 import com.example.BigBowlProjekt.repository.WorkingShiftRepository;
-import com.example.BigBowlProjekt.model.WorkingShift;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -21,26 +21,19 @@ public class WorkingShiftService {
 
     private final WorkingShiftRepository workingShiftRepository;
     private final EmployeeRepository employeeRepository;
+    private final AuditService auditService;
 
-    public WorkingShiftService(WorkingShiftRepository workingShiftRepository, EmployeeRepository employeeRepository) {
+    public WorkingShiftService(WorkingShiftRepository workingShiftRepository, EmployeeRepository employeeRepository, AuditService auditService) {
         this.workingShiftRepository = workingShiftRepository;
         this.employeeRepository = employeeRepository;
+        this.auditService = auditService;
     }
 
     public List<WorkingShiftDTO> getAllWorkingShifts() {
-
-        List<WorkingShift> workingShifts = workingShiftRepository.findAll();
-
-        List<WorkingShiftDTO> workingShiftDTOList = new ArrayList<>();
-
-        for (WorkingShift shifts : workingShifts) {
-
-            WorkingShiftDTO shiftDTO = WorkingShiftMapper.toDTO(shifts);
-
-            workingShiftDTOList.add(shiftDTO);
-        }
-
-        return workingShiftDTOList;
+        return workingShiftRepository.findAll()
+                .stream()
+                .map(WorkingShiftMapper::toDTO)
+                .toList();
     }
 
     public List<WorkingShiftDTO> getAllWorkingShiftWeekAhead(LocalDate givenDate) {
@@ -70,7 +63,7 @@ public class WorkingShiftService {
                 workingShiftRequest.employeeId());
 
         for (WorkingShift w : workingShifts) {
-            if (overlaps(workingShiftRequest.startTime(), workingShiftRequest.endTime(), w)) {
+            if (overlaps(workingShiftRequest.date(),workingShiftRequest.startTime(), workingShiftRequest.endTime(), w)) {
                 throw new WorkingShiftOverlapException(
                         "Employee already has a shift at this time: "
                                 + w.getStartTime()
@@ -97,7 +90,7 @@ public class WorkingShiftService {
     public void deleteWorkingShift(Long id) {
         if (!workingShiftRepository.existsById(id)) {
             throw new NotFoundException(
-                    "Working Shift Not found with id: " + id
+                    "Working Shift not found with id: " + id
             );
         }
 
@@ -126,7 +119,7 @@ public class WorkingShiftService {
                 continue;
             }
 
-            if (overlaps(request.startTime(), request.endTime(), w)) {
+            if (overlaps(request.date(),request.startTime(), request.endTime(), w)) {
                 throw new WorkingShiftOverlapException(
                         "Employee already has a shift at this time: "
                                 + w.getStartTime()
@@ -149,7 +142,20 @@ public class WorkingShiftService {
         return WorkingShiftMapper.toDTO(workingShift);
     }
 
-    public boolean overlaps(LocalTime newStart, LocalTime newEnd, WorkingShift existingShift) {
+    public WorkingShiftDTO getWorkingShiftById(Long id) {
+        WorkingShift workingShift = workingShiftRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(
+                        "Working shift not found with id: " + id
+                ));
+
+        return WorkingShiftMapper.toDTO(workingShift);
+    }
+
+    public boolean overlaps(LocalDate newDate, LocalTime newStart, LocalTime newEnd, WorkingShift existingShift) {
+
+        if (!newDate.equals(existingShift.getDate())){
+            return false;
+        }
         return newStart.isBefore(existingShift.getEndTime())
                 && newEnd.isAfter(existingShift.getStartTime());
     }

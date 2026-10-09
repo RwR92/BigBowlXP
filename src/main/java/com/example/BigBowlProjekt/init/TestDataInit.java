@@ -3,6 +3,7 @@ package com.example.BigBowlProjekt.init;
 import com.example.BigBowlProjekt.model.Employee;
 import com.example.BigBowlProjekt.model.WorkingShift;
 import com.example.BigBowlProjekt.repository.EmployeeRepository;
+import com.example.BigBowlProjekt.repository.SaleRepository;
 import com.example.BigBowlProjekt.repository.WorkingShiftRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -15,13 +16,15 @@ public class TestDataInit implements CommandLineRunner {
 
     private final WorkingShiftRepository workingShiftRepository;
     private final EmployeeRepository employeeRepository;
+    private final SaleRepository saleRepository;
 
     public TestDataInit(
             WorkingShiftRepository workingShiftRepository,
-            EmployeeRepository employeeRepository) {
+            EmployeeRepository employeeRepository, SaleRepository saleRepository) {
 
         this.workingShiftRepository = workingShiftRepository;
         this.employeeRepository = employeeRepository;
+        this.saleRepository = saleRepository;
     }
 
     @Override
@@ -111,6 +114,9 @@ public class TestDataInit implements CommandLineRunner {
             workingShiftRepository.save(shift3);
             workingShiftRepository.save(shift4);
             workingShiftRepository.save(shift5);
+
+
         }
+
     }
 }

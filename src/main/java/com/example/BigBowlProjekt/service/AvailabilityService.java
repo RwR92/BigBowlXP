@@ -17,6 +17,7 @@ import java.util.List;
 @Service
 public class AvailabilityService {
 
+
     private static final LocalTime OPENING_TIME = LocalTime.of(10, 0);
     private static final LocalTime CLOSING_TIME = LocalTime.of(23, 0);
 

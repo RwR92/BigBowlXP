@@ -1,0 +1,39 @@
+:root {
+    --ui-elements: #508991; /* Pacific Cyan */
+    --container: #004346; /* Dark Teal */
+    --text: #172A3A; /* Jet Black */
+    --actions: #09BC8A; /* Mint Leaf */
+    --highlights: #75DDDD; /* Pearl Aqua */
+    --soft-white: #F4F7F6;
+}
+
+html,
+body {
+    min-height: 100% !important;
+}
+
+body {
+    min-height: 100vh !important;
+    background: linear-gradient(
+            -45deg,
+            var(--text) 0%,
+            var(--ui-elements) 100%
+    ) !important;
+}
+
+/* Header */
+button:disabled {
+    background-color: #c0392b;
+}
+
+.header-btn {
+    padding: 8px 16px;
+    background: var(--actions);
+    color: var(--text);
+    border: 2px solid var(--text);
+    border-radius: 8px;
+    box-shadow: 0 3px 6px var(--container);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+}
