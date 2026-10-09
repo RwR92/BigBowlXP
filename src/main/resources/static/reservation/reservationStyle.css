@@ -109,10 +109,14 @@ button.danger,
     color: white;
 }
 
-#addActivityButton,
-.remove-activity {
+#addActivityButton {
     background: white;
     color: var(--jet-black);
+}
+
+.remove-activity {
+    background: #c0392b;
+    color: white;
 }
 
 .reservation-form {
