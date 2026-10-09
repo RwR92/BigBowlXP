@@ -73,14 +73,14 @@ public class AuditService {
     }
 
     public void logHandler(HttpSession session, String action, ReservationDTO reservationDTO) {
-        saveLog(userGrabber(session), actionHandler(action), reservationDescriptionMaker(reservationDTO, actionHandler(action)));
+        saveLog(userGrabber(session), actionHandler(action), reservationDescriptionMaker(reservationDTO, action));
     }
 
     public void logHandler(HttpSession session, String action, WorkingShiftDTO workingShiftDTO) {
-        saveLog(userGrabber(session), actionHandler(action), shiftDescriptionMaker(workingShiftDTO, actionHandler(action)));
+        saveLog(userGrabber(session), actionHandler(action), shiftDescriptionMaker(workingShiftDTO, action));
     }
 
     public void logHandler(HttpSession session, String action, SaleRequestDTO saleRequestDTO) {
-        saveLog(userGrabber(session), actionHandler(action), saleDescriptionMaker(saleRequestDTO, actionHandler(action)));
+        saveLog(userGrabber(session), actionHandler(action), saleDescriptionMaker(saleRequestDTO, action));
     }
 }
