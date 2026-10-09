@@ -1,4 +1,4 @@
-const BASE_URL_LOGOUT = "api/logout";
+const BASE_URL_LOGOUT = "/api/logout";
  import {authUser} from "./script.js"
 document.addEventListener("DOMContentLoaded", initApp);
 
@@ -8,6 +8,7 @@ export async function initApp() {
 }
 
 export async function logout() {
-    await fetch(BASE_URL_LOGOUT, {method: "POST"});
-    return window.location.href = "login/login.html";
+        await fetch(BASE_URL_LOGOUT, {method: "POST"});
+        window.location.href = "/login/login.html";
+
 }
