@@ -4,16 +4,8 @@ thead{
     font-family: "Times New Roman";
 }
 
-@keyframes flyOut {
-    from {
-        transform: translateY(100%);
-    opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-
+body {
+    padding: 2em;
 }
 
 table {
@@ -27,7 +19,6 @@ table {
     border: 2px solid #172a3a;
     border-collapse: separate;
     border-spacing: 0;
-    animation: flyOut 5s ease-out;
 }
 
 .center {

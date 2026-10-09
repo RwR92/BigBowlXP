@@ -28,13 +28,18 @@ function renderHeader(){
     employeeOverviewBtn.textContent = "Medarbejderovesigt";
     employeeOverviewBtn.setAttribute("id", "employee-overview-btn");
     employeeOverviewBtn.setAttribute("onclick", "window.location.href='/employee-overview.html'")
+
+    const auditLogBtn = document.createElement("button");
+    auditLogBtn.textContent = "Aktivitetslog";
+    auditLogBtn.setAttribute("id", "audit-btn");
+    auditLogBtn.setAttribute("onclick", "window.location.href='/audit/audit-log.html'")
     
     /*const reservationBtn = document.createElement("button");
     reservationBtn.textContent = "Reservationer";
     reservationBtn.setAttribute("id", "reservation-btn");
     reservationBtn.setAttribute("onclick", "window.location.href='/reservation/reservation.html'")*/
 
-    childArray = [logoutBtn, homeBtn, shiftBtn, employeeOverviewBtn];
+    childArray = [logoutBtn, homeBtn, shiftBtn, employeeOverviewBtn, auditLogBtn];
     const headerId = document.querySelector("#admin-header").
     getAttribute("id");
 
