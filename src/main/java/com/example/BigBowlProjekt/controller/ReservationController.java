@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/reservation")
@@ -39,15 +38,9 @@ public class ReservationController {
 
     @PostMapping
     public ReservationDTO createReservation(@RequestBody ReservationDTO reservationDTO, HttpSession session) {
-        auditService.log(
-                auditService.userGrabber(session),
-                "Opret",
-                "Oprettet en reservation bestående af " +
-                        reservationDTO.activities().stream()
-                                .map(activityDTO -> activityDTO.type().name().toLowerCase())
-                                .collect(Collectors.joining(", "))
-        );
-        return reservationService.createReservation(reservationDTO);
+        ReservationDTO reservation = reservationService.createReservation(reservationDTO);
+        auditService.logHandler(session,"POST",reservation);
+        return reservation;
     }
 
     @DeleteMapping("/{id}")
@@ -55,13 +48,7 @@ public class ReservationController {
         Optional<ReservationDTO> byId = reservationService.getReservationById(id);
 
         if (byId.isPresent()) {
-            auditService.log(
-                    auditService.userGrabber(session),
-                    "Slet","Slettede reservation for " + byId.get().name() +
-                            " med aktiviterne " + byId.get().activities().stream()
-                            .map(activityDTO -> activityDTO.type().name().toLowerCase())
-                            .collect(Collectors.joining(", "))
-            );
+            auditService.logHandler(session,"DELETE",byId.get());
             reservationService.deleteReservation(id);
             return ResponseEntity.noContent().build();
         }

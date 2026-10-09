@@ -56,8 +56,6 @@ public class ActivityController {
     @PostMapping
     public ActivityDTO createActivity(@RequestBody ActivityDTO activityDTO, HttpSession httpSession) {
         ActivityDTO activity = activityService.createActivity(activityDTO);
-        UserTypeDTO user = (UserTypeDTO) httpSession.getAttribute("user");
-        auditService.log(user.userType(),"Oprettet aktivitet","Aktivitet: " + activity.type());
         return activity;
     }
 
@@ -66,8 +64,6 @@ public class ActivityController {
         Optional<ActivityDTO> byId = activityService.getActivityById(id);
         if (byId.isPresent()) {
             activityService.deleteActivity(id);
-            UserTypeDTO user = (UserTypeDTO) httpSession.getAttribute("user");
-            auditService.log(user.userType(),"DELETE","deleted activity with id: " + id);
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
