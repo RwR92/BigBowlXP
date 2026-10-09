@@ -59,14 +59,6 @@ public class AuditService {
      return actionHandler(action) + " en reservation til " + clientName + " med " + activitySingularOrPlural + " " + activitiesNameOnly;
     }
 
-    public String shiftDescriptionMaker(WorkingShiftDTO workingShiftDTO, String action) {
-        String name = workingShiftDTO.employeeDTO().firstName();
-        LocalDate date = workingShiftDTO.date();
-        LocalTime startTime = workingShiftDTO.startTime();
-        LocalTime endTime = workingShiftDTO.endTime();
-        return actionHandler(action) + " arbejdstid til " + name + " den " + date + " kl " + startTime + "-" + endTime ;
-    }
-
     public String saleDescriptionMaker(SaleRequestDTO saleRequestDTO, String action) {
         String saleItems = saleRequestDTO.saleItems().stream().map(saleItemDTO -> (saleItemDTO.productId()) + " x" + saleItemDTO.quantity()).collect(Collectors.joining(", "));
         return actionHandler(action) + " salg " + saleItems;
