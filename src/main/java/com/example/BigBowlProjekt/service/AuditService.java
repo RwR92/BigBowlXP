@@ -68,16 +68,12 @@ public class AuditService {
     }
 
     public String saleDescriptionMaker(SaleRequestDTO saleRequestDTO, String action) {
-        String saleItems = saleRequestDTO.saleItems().stream().map(saleItemDTO -> String.valueOf(saleItemDTO.productId()) + " x" + saleItemDTO.quantity()).collect(Collectors.joining(", "));
+        String saleItems = saleRequestDTO.saleItems().stream().map(saleItemDTO -> (saleItemDTO.productId()) + " x" + saleItemDTO.quantity()).collect(Collectors.joining(", "));
         return actionHandler(action) + " salg " + saleItems;
     }
 
     public void logHandler(HttpSession session, String action, ReservationDTO reservationDTO) {
         saveLog(userGrabber(session), actionHandler(action), reservationDescriptionMaker(reservationDTO, action));
-    }
-
-    public void logHandler(HttpSession session, String action, WorkingShiftDTO workingShiftDTO) {
-        saveLog(userGrabber(session), actionHandler(action), shiftDescriptionMaker(workingShiftDTO, action));
     }
 
     public void logHandler(HttpSession session, String action, SaleRequestDTO saleRequestDTO) {
