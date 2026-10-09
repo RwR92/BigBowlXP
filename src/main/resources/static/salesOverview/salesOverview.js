@@ -1,6 +1,7 @@
-document.addEventListener("DOMContentLoaded", initApp);
+document.addEventListener("DOMContentLoaded", initSaleOverviewApp);
 
-import { getAllSalesFromSpecificMonth, getAllSalesWithinLastMonth } from "./salesOverviewAPI.js";
+import {getAllSalesFromSpecificMonth, getAllSalesWithinLastMonth} from "./salesOverviewAPI.js";
+import {initApp} from "../app.js"
 
 const salesUl = document.querySelector(".sales-list");
 const monthForm = document.querySelector(".specific-month-form");
@@ -13,11 +14,11 @@ const drawerSales = document.querySelector(".drawer-sales");
 
 let salesGroupedByDate = {};
 
-async function initApp() {
+async function initSaleOverviewApp() {
+    await initApp();
     monthForm.addEventListener("submit", displaySpecificMonthsSale)
     salesUl.addEventListener("click", handleListClick);
     drawerCloseButton.addEventListener("click", closeDrawer);
-
     await displaySales();
 }
 

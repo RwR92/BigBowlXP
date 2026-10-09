@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", initApp);
-let count = 0;
 async function initApp() {
      await authUser(document.body.dataset.role);
-    console.log(sessionStorage.getItem("user"))
 }
 export async function authUser(dataRole){
     const response = await fetch("/api/auth", {
@@ -19,9 +17,6 @@ export async function authUser(dataRole){
     }
 }
 async function handleRoute(dataRole,userType) {
-    count ++;
-    console.log("Vi kom ind i handleRoute: "+count+" gange");
-
     if (!userType) {
         if (dataRole) {
             window.location.replace("/login/login.html");
@@ -30,9 +25,9 @@ async function handleRoute(dataRole,userType) {
 
     if (userType !== dataRole) {
         if (userType === "admin") {
-            window.location.replace("admin-home-page.html");
+            window.location.replace("/admin-home-page.html");
         } else if (userType === "employee") {
-            window.location.replace("employee-home-page.html");
+            window.location.replace("/employee-home-page.html");
         }
     }
 }

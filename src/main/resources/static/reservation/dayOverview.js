@@ -1,5 +1,5 @@
 
-
+import {initApp} from "../app.js"
     const API_URL = "/api/admin/reservation";
     const OPEN_HOUR = 10;
     const CLOSE_HOUR = 23;
@@ -16,7 +16,7 @@
 }
 
     async function loadDay() {
-
+        await initApp();
     const date = document.getElementById("date").value;
 
     if (!date) {
