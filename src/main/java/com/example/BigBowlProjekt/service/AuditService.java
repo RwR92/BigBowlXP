@@ -3,15 +3,12 @@ package com.example.BigBowlProjekt.service;
 import com.example.BigBowlProjekt.dto.ReservationDTO;
 import com.example.BigBowlProjekt.dto.SaleRequestDTO;
 import com.example.BigBowlProjekt.dto.UserTypeDTO;
-import com.example.BigBowlProjekt.dto.WorkingShiftDTO;
 import com.example.BigBowlProjekt.model.AuditLog;
 import com.example.BigBowlProjekt.repository.AuditLogRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
